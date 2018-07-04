@@ -1,19 +1,6 @@
 //app.js
 App({
   onLaunch: function () {
-    const requestTask = wx.request({
-      url: 'http://localhost:4000/test', //仅为示例，并非真实的接口地址
-      data: {
-        x: '',
-        y: ''
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
 
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

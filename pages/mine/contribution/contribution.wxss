@@ -1,0 +1,29 @@
+/* pages/mine/contribution/contribution.wxss */
+
+.item-container {
+  align-items: flex-start;
+}
+
+.item-main {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.item-footer {
+  padding-top: 25rpx;
+}
+
+.item-line {
+  width: 100%;
+  height: 25rpx;
+}
+
+/*投稿图标  */
+.add-image{
+  width:90rpx;
+  height:90rpx;
+  border-radius: 45rpx;
+  position: fixed;
+  right:70rpx;
+  bottom: 60rpx;
+}

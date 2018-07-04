@@ -1,0 +1,20 @@
+/* pages/mine/jokeAdd/jokeAdd.wxss */
+
+/*投稿图标  */
+
+.publish-image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+  position: fixed;
+  right: 70rpx;
+  bottom: 60rpx;
+}
+
+.joke-content {
+  width: 100%;
+  min-height: 250rpx;
+  background-color: white;
+    word-break: break-all;
+  word-wrap: break-word;
+}

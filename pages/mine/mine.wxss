@@ -1,0 +1,38 @@
+/* pages/mine/mine.wxss */
+.user-content{
+  width:100%;
+  height:300rpx;
+  padding:55rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background-color:#1d7f0a;
+}
+
+.user-image {
+  width:130rpx;
+  height:130rpx;
+  border-radius: 65rpx;
+}
+
+/*tempalte-mine-item模板  */
+
+.mine-item-content{
+  height:100rpx;
+  background-color: #FFF;
+  padding: 0 35rpx;
+}
+
+.mine-item-content-image{
+  width:30rpx;
+  height:30rpx;
+  margin-right: 25rpx;
+}
+
+
+.mine-item-line{
+  width:100%;
+  height:25rpx;
+}

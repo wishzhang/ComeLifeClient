@@ -1,10 +1,37 @@
 /**app.wxss**/
-.container {
+
+/*垂直排列佈局 */
+
+.container-col {
+  width:100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
   box-sizing: border-box;
-} 
+  background-color: #fff;
+}
+
+/*水平排列佈局  */
+
+.container-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/*定義整個窗口 背景顏色  */
+
+page {
+  background-color: #F4F4F4;
+}
+
+.app-bgcolor{
+  background-color:#F4F4F4;
+}
+
+/*内容区到边界的距离  */
+.app-content-padding{
+  padding: 25rpx 35rpx ;
+}

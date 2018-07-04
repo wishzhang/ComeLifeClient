@@ -1,0 +1,15 @@
+<!--pages/mine/contribution/contribution.wxml-->
+<view class="container-col">
+  <block wx:for="{{jokes}}" wx:key="{{item.jokeID}}">
+    <view class="container-col item-container app-content-padding">
+      <view class="item-main">
+        <text>{{item.jokeContent}}</text>
+      </view>
+      <view class="item-footer">
+        <text>{{item.publishTime}}</text>
+      </view>
+    </view>
+    <view class="item-line app-bgcolor"></view>
+  </block>
+  <image class="add-image" src="./mine.png" bindtap="turnToAddPage"></image>
+</view>
