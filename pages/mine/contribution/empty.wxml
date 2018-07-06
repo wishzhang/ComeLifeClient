@@ -1,0 +1,6 @@
+<template name="empty">
+  <view class="empty-container">
+    <image class="empty-image" src="./mine.png"></image>
+    <text>{{warn.warnMsg}}</text>
+  </view>
+</template>

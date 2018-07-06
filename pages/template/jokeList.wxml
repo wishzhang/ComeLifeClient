@@ -1,4 +1,5 @@
-<!--pages/mine/contribution/contribution.wxml-->
+<!--pages/template/jokeList.wxml-->
+<!--该template为展示jokes列表，data传入jokes数组  -->
 <view class="container-col  home-container app-content-padding">
   <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
     <view class="container-col home-item">
@@ -15,7 +16,6 @@
     </view>
     <view class="item-line app-bgcolor" />
   </block>
-   <image class="add-image" src="./mine.png" bindtap="turnToAddPage"></image>
 </view>
 <import src="./empty.wxml" />
 <view style="display:{{warn.canSee}}">

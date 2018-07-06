@@ -1,20 +1,31 @@
 <!--pages/mine/mine.wxml-->
 <import src="template-mine-item.wxml" />
 
-<!--我的頭像  -->
+
 <view class="container-col">
-  <view class="user-content">
-    <image class="user-image" src="./mine.png" mode="aspectFill" lazy-load="true" binderror='' bindload=''></image>
-    <text>仰望星空</text>
+  <!--我的頭像  -->
+  <view wx:if="{{isAuthorized}}" class="user-content">
+    <!-- <image class="user-image" src="./mine.png" mode="aspectFill" lazy-load="true" binderror='' bindload=''></image> -->
+    <view class="user-image">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view>
+      <open-data type="userNickName"></open-data>
+    </view>
+  </view>
+<!-- 需要使用 button 来授权登录 -->
+  <view wx:else class="user-authorize">
+    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <view wx:else>请升级微信版本</view>
   </view>
 
-<!--我的投稿  -->
+  <!--我的投稿  -->
   <view class="mine-item-line app-bgcolor"></view>
   <view class="container-row mine-item-content" bindtap="bindTapToContribution">
     <image class="mine-item-content-image" src="{{items[0].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[0].name}}</text>
   </view>
-<!--我的設置  -->
+  <!--我的設置  -->
   <view class="mine-item-line app-bgcolor"></view>
   <view class="container-row mine-item-content" bindtap="bindTapToSetting">
     <image class="mine-item-content-image" src="{{items[1].iconPath}}"></image>

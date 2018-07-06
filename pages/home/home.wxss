@@ -1,11 +1,58 @@
 /* pages/home/home.wxss */
-.test{
-  display: block;
-  height:100%;
-  background-color: blue;
+.home-container {
+  background-color: #f4f4f4;
+  padding-bottom: 0;
 }
 
-.word{
-  display: block;
-  height:100rpx;
+.home-item {
+  justify-content: space-between;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+/*item header  */
+.header {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+
+.header .header-headshot {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin-right: 15rpx;
+}
+/*item main  */
+.main{
+  width:100%;
+  display: flex;
+  padding: 15rpx 0;
+}
+/*item footer  */
+.footer {
+  width: 100%;
+  height: 45rpx;
+  display: flex;
+  align-items: center;
+}
+
+.item-line{
+  width:100%;
+  height:25rpx;
+}
+
+/*empty 模板 css  */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top:250rpx;
+}
+
+.empty-image {
+  width: 100rpx;
+  height: 100rpx;
 }

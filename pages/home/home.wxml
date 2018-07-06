@@ -1,2 +1,27 @@
 <!--pages/home/home.wxml-->
-<view>nothing</view>
+
+<view class="container-col  home-container app-content-padding">
+  <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
+    <view class="container-col home-item">
+      <view class="header">
+        <image class="header-headshot" src="{{item.iconPath}}"></image>
+        <text class="header-username">{{item.userName}}</text>
+      </view>
+      <view class="main">
+        <text>{{item.jokeContent}}</text>
+      </view>
+      <view class="footer">
+        <text class="app-fontsize-note">{{item.publishTime}}</text>
+      </view>
+    </view>
+    <view class="item-line app-bgcolor" />
+  </block>
+  <block wx:if="{{noMore}}">
+    <text>没有更多咯~</text>
+    <view class="item-line app-bgcolor" />
+  </block>
+</view>
+<import src="./empty.wxml" />
+<view style="display:{{warn.canSee}}">
+  <template is="empty" data="{{warn}}" />
+</view>

@@ -5,7 +5,8 @@
     "pages/mine/mine",
     "pages/logs/logs",
     "pages/mine/setting/setting",
-    "pages/mine/jokeAdd/jokeAdd"
+    "pages/mine/jokeAdd/jokeAdd",
+    "pages/template/jokeList"
   ],
   "window": {
     "backgroundTextStyle": "light",
