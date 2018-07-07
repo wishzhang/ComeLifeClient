@@ -1,3 +1,6 @@
 {
-  "enablePullDownRefresh":true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "joke": "../../component/jokeList/jokeList"
+  }
 }

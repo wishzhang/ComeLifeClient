@@ -29,7 +29,7 @@
   background-color:#1d7f0a; 
 }
 
-/*tempalte-mine-item模板  */
+/*item */
 
 .mine-item-content{
   height:100rpx;

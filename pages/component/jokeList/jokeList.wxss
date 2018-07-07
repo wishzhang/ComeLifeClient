@@ -1,0 +1,111 @@
+
+/**app.wxss**/
+
+/*垂直排列佈局 */
+
+.container-col {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/*定義整個窗口 背景顏色  */
+
+ page {
+  background-color: #f4f4f4;
+} 
+
+.app-bgcolor {
+  background-color: #f4f4f4;
+}
+
+
+/*内容区到边界的距离  */
+
+.app-content-padding {
+  padding: 10rpx 27rpx;
+}
+
+/*字体颜色 大小  */
+.app-fontcolor-main{
+  color:#2c2c2c
+}
+.app-fontcolor-note{
+  color:#8a8a8a
+}
+.app-fontsize-note {
+  font-size: 24rpx;
+}
+
+  /* 局部 */
+.home-container {
+  background-color: #f4f4f4;
+  padding-bottom: 0;
+}
+
+.home-item {
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+/*item header  */
+.header {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+
+.header .header-headshot {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin-right: 15rpx;
+}
+/*item main  */
+.main{
+  width:100%;
+  display: flex;
+  padding: 20rpx 0;
+  padding-left: 85rpx;
+  box-sizing: border-box;
+}
+/*item footer  */
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 85rpx;
+}
+
+.item-line{
+  width:100%;
+  height:1px;
+background:-webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,0),rgba(138,138,138,1))
+}
+
+/*empty 模板 css  */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top:250rpx;
+}
+
+.empty-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+/*nomore  */
+.nomore{
+  padding: 15rpx 0;
+}
+

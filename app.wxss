@@ -23,9 +23,9 @@
 
 /*定義整個窗口 背景顏色  */
 
-page {
+ page {
   background-color: #f4f4f4;
-}
+} 
 
 .app-bgcolor {
   background-color: #f4f4f4;
@@ -55,11 +55,19 @@ page {
   font-size: 24rpx;
 }
 
-textarea,text{
+/*字体颜色  */
+.app-fontcolor-main{
+  color:#2c2c2c
+}
+.app-fontcolor-note{
+  color:#8a8a8a
+}
+
+ textarea,text{
   font-size:30rpx;
 }
 
 /*可以滚动，但隐藏滚动条  */
-::-webkit-scrollbar{
+ ::-webkit-scrollbar{
   display: none;
-}
+}  

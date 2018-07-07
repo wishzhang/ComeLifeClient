@@ -23,7 +23,9 @@ App({
       }
     })
   },
+  //一定要先在这里定义了，才能用，否则[object Undefined]
   globalData: {
+    token:'',
     userInfo: null,
     isAuthorized:false,
     domain:'http://172.27.35.1:3000'

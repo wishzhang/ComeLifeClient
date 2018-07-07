@@ -1,0 +1,32 @@
+<!--component/jokeList/test.wxml-->
+<!--contribution页面对应的view  -->
+<block>
+  <slot name="contribution-publish-btn"></slot>
+</block>
+<view class="container-col  home-container">
+  <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
+    <view class="container-col home-item app-content-padding">
+      <view class="header">
+        <image class="header-headshot" src="{{item.iconPath}}"></image>
+        <text class="header-username app-fontcolor-title">{{item.userName}}</text>
+      </view>
+      <view class="main">
+        <text class="app-fontcolor-title">{{item.jokeContent}}</text>
+      </view>
+      <view class="footer">
+        <text class="app-fontcolor-note app-fontsize-note">{{item.publishTime}}</text>
+      </view>
+    </view>
+    <hr class="item-line"/>
+    <!-- <view class="item-line app-bgcolor" /> -->
+  </block>
+  <block wx:if="{{noMore}}">
+    <text class="app-fontcolor-note nomore">没有更多咯~</text>
+    <!-- <view class="item-line app-bgcolor" /> -->
+  </block>
+</view>
+<import src="./empty.wxml" />
+<view style="display:{{warn.canSee}}">
+  <template is="empty" data="{{warn}}" />
+</view>
+<!--注意：由于需处理onReachBottom回调函数，尽量不在末尾添加元素  -->

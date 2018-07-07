@@ -27,6 +27,5 @@ const jokesConvertTime=jokes=>{
 }
 
 module.exports = {
-  formatTime: formatTime,
   jokesConvertTime: jokesConvertTime
 }

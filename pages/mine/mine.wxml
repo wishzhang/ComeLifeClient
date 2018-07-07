@@ -1,7 +1,6 @@
 <!--pages/mine/mine.wxml-->
 <import src="template-mine-item.wxml" />
-
-
+  
 <view class="container-col">
   <!--我的頭像  -->
   <view wx:if="{{isAuthorized}}" class="user-content">
