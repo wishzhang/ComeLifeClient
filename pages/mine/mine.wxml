@@ -1,10 +1,8 @@
 <!--pages/mine/mine.wxml-->
-<import src="template-mine-item.wxml" />
   
 <view class="container-col">
   <!--我的頭像  -->
   <view wx:if="{{isAuthorized}}" class="user-content">
-    <!-- <image class="user-image" src="./mine.png" mode="aspectFill" lazy-load="true" binderror='' bindload=''></image> -->
     <view class="user-image">
       <open-data type="userAvatarUrl"></open-data>
     </view>

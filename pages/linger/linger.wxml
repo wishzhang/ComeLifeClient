@@ -1,0 +1,19 @@
+<!--pages/linger/linger.wxml-->
+<view class="container">
+  <view class="row">
+    <view class="col" bindtap='turnToTalkPage'>
+      <text>言语</text>
+    </view>
+    <view class="col">
+      <text>轨迹</text>
+    </view>
+  </view>
+  <view class="row">
+    <view class="col">
+      <text>青果</text>
+    </view>
+    <view class="col">
+      <text>不懂</text>
+    </view>
+  </view>
+</view>

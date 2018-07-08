@@ -12,5 +12,5 @@ Page({
   //获取子组件对象jokeList
   fetchChild: function (e) {
     child = e.detail;
-  },
+  }
 })

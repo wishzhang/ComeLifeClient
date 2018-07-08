@@ -1,0 +1,22 @@
+<!--pages/linger/talk/talk.wxml-->
+<view class="container">
+  <view class="content-box">
+    <view class="content-item-box" wx:for="{{talk}}">
+      <view class="content-item-left-box" wx:if="{{item.roleType==0}}">
+        <image class="role-image" src="{{item.iconPath}}"></image>
+        <text class="role-text">{{item.values.text}}</text>
+      </view>
+      <view class="content-item-right-box" wx:else>
+        <text class="role-text">{{item.values.text}}</text>
+        <image class="role-image" src="{{item.iconPath}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <hr class="item-line" />
+    <view class="send-box">
+      <textarea class="send-textarea" bindinput="relativeTextareaValue" auto-height="true" maxlength="300" show-confirm-bar="{{false}}" value="{{value}}"></textarea>
+      <button class="send-btn" size="mini" type="primary" bindtap="start">发送</button>
+    </view>
+  </view>
+</view>

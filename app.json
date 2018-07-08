@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/linger/talk/talk",
+    "pages/linger/linger",
     "pages/mine/contribution/contribution",
     "pages/mine/mine",
     "pages/logs/logs",
@@ -24,6 +26,12 @@
         "text": "首页",
         "iconPath": "pages/home/home_unselected.png",
         "selectedIconPath": "pages/home/home_selected.png"
+      },
+      {
+        "pagePath": "pages/linger/linger",
+        "text": "逗留",
+        "iconPath": "pages/mine/mine_unselected.png",
+        "selectedIconPath": "pages/mine/mine_selected.png"
       },
       {
         "pagePath": "pages/mine/mine",
