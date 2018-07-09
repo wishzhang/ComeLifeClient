@@ -31,6 +31,10 @@
   background-color: #f4f4f4;
 }
 
+.app-headercolor{
+  background-color: #303030;
+}
+
 /*内容区到边界的距离  */
 
 .app-content-padding {

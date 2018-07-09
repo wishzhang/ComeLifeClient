@@ -11,13 +11,13 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#F8F8F8",
-    "navigationBarBackgroundColor": "#1d7f0a",
+    "backgroundColor": "#cdcdcd",
+    "navigationBarBackgroundColor": "#303030",
     "navigationBarTitleText": "望梅止渴",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "black",
+    "color": "#cdcdcd",
     "selectedColor": "#1d7f0a",
     "backgroundColor": "#FFF",
     "list": [
@@ -30,8 +30,8 @@
       {
         "pagePath": "pages/linger/linger",
         "text": "逗留",
-        "iconPath": "pages/mine/mine_unselected.png",
-        "selectedIconPath": "pages/mine/mine_selected.png"
+        "iconPath": "pages/linger/smile_unselected.png",
+        "selectedIconPath": "pages/linger/smile_selected.png"
       },
       {
         "pagePath": "pages/mine/mine",

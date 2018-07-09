@@ -1,7 +1,7 @@
 <!--pages/linger/talk/talk.wxml-->
 <view class="container">
   <view class="content-box">
-    <view class="content-item-box" wx:for="{{talk}}">
+    <view class="content-item-box" wx:for="{{talk}}" wx:key="{{item.values.text}}">
       <view class="content-item-left-box" wx:if="{{item.roleType==0}}">
         <image class="role-image" src="{{item.iconPath}}"></image>
         <text class="role-text">{{item.values.text}}</text>

@@ -1,4 +1,3 @@
-
 /**app.wxss**/
 
 /*垂直排列佈局 */
@@ -15,14 +14,13 @@
 
 /*定義整個窗口 背景顏色  */
 
- page {
+page {
   background-color: #f4f4f4;
-} 
+}
 
 .app-bgcolor {
   background-color: #f4f4f4;
 }
-
 
 /*内容区到边界的距离  */
 
@@ -31,17 +29,25 @@
 }
 
 /*字体颜色 大小  */
-.app-fontcolor-main{
-  color:#2c2c2c
+
+.app-fontcolor-main {
+  color: #2c2c2c;
 }
-.app-fontcolor-note{
-  color:#8a8a8a
+
+.app-fontcolor-note {
+  color: #8a8a8a;
 }
+
+.app-fontsize-main {
+  font-size: 30rpx;
+}
+
 .app-fontsize-note {
   font-size: 24rpx;
 }
 
-  /* 局部 */
+/* 局部 */
+
 .home-container {
   background-color: #f4f4f4;
   padding-bottom: 0;
@@ -55,6 +61,7 @@
 }
 
 /*item header  */
+
 .header {
   width: 100%;
   height: 70rpx;
@@ -68,15 +75,19 @@
   border-radius: 35rpx;
   margin-right: 15rpx;
 }
+
 /*item main  */
-.main{
-  width:100%;
+
+.main {
+  width: 100%;
   display: flex;
   padding: 20rpx 0;
   padding-left: 85rpx;
   box-sizing: border-box;
 }
+
 /*item footer  */
+
 .footer {
   width: 100%;
   display: flex;
@@ -85,27 +96,29 @@
   padding-left: 85rpx;
 }
 
-.item-line{
-  width:100%;
-  height:1px;
-background:-webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,0),rgba(138,138,138,1));
+.item-line {
+  width: 100%;
+  height: 1px;
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
 }
 
 /*empty 模板 css  */
+
 .empty-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top:250rpx;
+  margin-top: 250rpx;
 }
 
 .empty-image {
-  width: 100rpx;
-  height: 100rpx;
-}
-/*nomore  */
-.nomore{
-  padding: 15rpx 0;
+  width: 250rpx;
+  height: 250rpx;
 }
 
+/*nomore  */
+
+.nomore {
+  padding: 15rpx 0;
+}

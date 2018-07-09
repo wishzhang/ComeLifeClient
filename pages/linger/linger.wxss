@@ -20,9 +20,15 @@ page{
 .col{
   width:150rpx;
   height:150rpx;
-  border:1px solid red;
+  border:1px solid #1d7f0a;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/*item  */
+.item-image{
+  width:90rpx;
+  height:90rpx;
 }

@@ -122,4 +122,29 @@ git,github
 -列表点击事件还是没解决...  
 -发布段子jokeAdd页面的textarea,bug:文字不转行  
 -兩邊固定像素，中間撐滿的佈局  
-+flex佈局，若width不固定，justify-content:space-between設置不了?可以滴
++flex佈局，若width不固定，justify-content:space-between設置不了?可以滴  
+  
+-网络请求数据导致页面加载过慢，并且出现白页。  
+这里应该采用二级缓存：本地外存查找，若有则显示，接着进行网络请求数据，将响应的记录和本地记录比较，新的记录显示出来，最后也把本地存储更新一下。
+(每条记录有key)  
+设计：采用全局变量的方式(也可以单例)  
+//url为一类记录，url+keyValue为一条记录
+app.FetchData={
+	key:'',
+	setKeyName:function(keyName){
+		this.key=keyName;
+	},
+	get:function(host,params){
+		var url=convertToUrl(host,params);
+			
+	},
+	convertToUrl:function(host,params){
+		host+='?';
+		for(var item in params){
+			if(params.hasOwnProperty(item)){
+				host+=item+'='+params[item]+'&';
+			}
+		}
+		
+	}
+}

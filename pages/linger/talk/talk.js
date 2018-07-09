@@ -1,7 +1,7 @@
 // pages/linger/talk/talk.js
 /**
  * bug:<hr>,输入框
- * 
+ * 聊天界面：通过请求图灵机器人API接口实现
  */
 var app = getApp();
 Page({
@@ -110,9 +110,7 @@ Page({
     this.obj.yourTalk.params.perception.inputText.text = e.detail.value;
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //obj对象用来管理其他对象
   onLoad: function(options) {
     this.obj.myTalk=this.myTalk();
     this.obj.yourTalk=this.yourTalk();
