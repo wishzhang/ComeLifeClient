@@ -21,6 +21,7 @@ const formatNumber = n => {
  * xxxx-xx-xx xx:xx
  */
 const jokesConvertTime = jokes => {
+  if(!jokes)return;
   return jokes.map(function(e) {
     var date = new Date(e.publishTime);
     e.publishTime = formatTime(date);;
@@ -61,6 +62,7 @@ const jokesConvertTime = jokes => {
 //抽象程度：只要知道对象的职责和接口，其他的隐藏
 const request = {
   ignoreParams:[],
+
   //公开getData
   getData: function(obj) {
     this.setIgnoreParams(['page']);
@@ -69,6 +71,7 @@ const request = {
     return res;
   },
   getFromRemote: function(obj) {
+    var _this=this;
     var url = this.convertToUrl(obj.host, obj.params);
     wx.request({
       url: obj.host,
@@ -78,6 +81,7 @@ const request = {
       },
       success: function(res) {
         app.globalData.token = res.header.token;
+        // res.data.data = res.data.data.sort(_this.compare('publishTime'));
         res.data.data = jokesConvertTime(res.data.data);
         obj.success(res.data);
         //将本地缓存更新

@@ -34,7 +34,7 @@
 .mine-item-content{
   height:100rpx;
   background-color: #FFF;
-  padding: 0 35rpx;
+  padding: 0 27rpx;
 }
 
 .mine-item-content-image{

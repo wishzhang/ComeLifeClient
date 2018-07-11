@@ -18,6 +18,14 @@ Page({
       iconPath: './mine.png'
     }]
   },
+  turnToMsgPage:function(){
+    wx.navigateTo({
+      url: './msg/msg',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   bindGetUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo;
     if(e.detail.userInfo){
