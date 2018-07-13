@@ -1,4 +1,4 @@
-var app=getApp();
+var app = getApp();
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -21,7 +21,7 @@ const formatNumber = n => {
  * xxxx-xx-xx xx:xx
  */
 const jokesConvertTime = jokes => {
-  if(!jokes)return;
+  if (!jokes) return;
   return jokes.map(function(e) {
     var date = new Date(e.publishTime);
     e.publishTime = formatTime(date);;
@@ -29,13 +29,51 @@ const jokesConvertTime = jokes => {
   });
 };
 
+const deepCopy = function(src, dest) { 
+  for (var p in src) {  
+    if (Array.isArray(src[p]) || src[p] instanceof Object) {   
+      dest[p] = Array.isArray(src[p]) ? [] : {};   
+      arguments.callee(dest[p], src[p]);  
+    } else {   
+      dest[p] = src[p];  
+    } 
+  }
+  return dest;
+}
+
+//扩展
+wx.myRequest = function (obj) {
+  obj.complete=obj.complete||function(){};
+  obj.fail=obj.fail||function(){};
+  var token = wx.getStorageSync('token');
+  console.log('token:', token);
+  wx.request({
+    url: obj.url,
+    data: obj.data,
+    method: obj.method,
+    header: {
+      token: token
+    },
+    success: function (res) {
+      wx.setStorageSync('token', res.header.token)
+      obj.success(res);
+    },
+    fail: function () {
+      obj.fail();
+    },
+    complete: function () {
+      obj.complete();
+    }
+  })
+};
 /**
- * 职责：get方式网络请求,具有本地缓存效果
+ * 职责：网络请求,具有本地缓存效果
  * 例子：
  * var util=require('');
  * var res=util.request.getData({
  *    host:'',
  *    params:{},
+ *    method:'GET',
  *    success:function(res){
  *      console.log(res);
  *    },
@@ -61,34 +99,60 @@ const jokesConvertTime = jokes => {
  */
 //抽象程度：只要知道对象的职责和接口，其他的隐藏
 const request = {
-  ignoreParams:[],
-
+  ignoreParams: [],
+  dataHandler: function(data) { //响应的对象
+    var users = data.data;
+    var arr = [];
+    for (var i = 0; i < users.length; i++) {
+      var user = users[i];
+      var r = user.jokes;
+      for (var j = 0; j < r.length; j++) {
+        var joke = r[j];
+        joke.uid=user.uid;
+        joke.nickName = user.nickName;
+        joke.gender = user.gender;
+        joke.city = user.city;
+        joke.province = user.province;
+        joke.country = user.country;
+        joke.avatarUrl = user.avatarUrl;
+        joke.isFavorite = false;
+        var collector = joke.collectors;
+        var user_id = app.globalData.userInfo._id;
+        for (var k = 0; k < collector.length; k++) {
+          if (user_id === collector[k]) {
+            joke.isFavorite = true;
+            break;
+          }
+        }
+        arr.push(joke);
+      }
+    }
+    return arr;
+  },
   //公开getData
   getData: function(obj) {
     this.setIgnoreParams(['page']);
     var res = this.getFromLocalStorage(obj);
     this.getFromRemote(obj);
-    return res;
+    return [];
   },
   getFromRemote: function(obj) {
-    var _this=this;
+    var _this = this;
     var url = this.convertToUrl(obj.host, obj.params);
-    wx.request({
+    wx.myRequest({
       url: obj.host,
       data: obj.params,
-      header: {
-        token: app.globalData.token
-      },
+      method: obj.method || 'GET',
       success: function(res) {
-        app.globalData.token = res.header.token;
-        // res.data.data = res.data.data.sort(_this.compare('publishTime'));
+        //处理响应数据，以符合接口
+        res.data.data = _this.dataHandler(res.data);
         res.data.data = jokesConvertTime(res.data.data);
         obj.success(res.data);
         //将本地缓存更新
         if (res.data.code === 0) {
           for (var i = 0; i < res.data.data.length; i++) {
             //完整的url作为key
-            wx.setStorageSync(url+res.data.data[i]._id,res.data.data[i]);
+            wx.setStorageSync(url + res.data.data[i]._id, res.data.data[i]);
           }
         }
       },
@@ -109,7 +173,7 @@ const request = {
     var res = wx.getStorageInfoSync();
     var keys = res.keys;
     //取得符合url的keys
-    var urlKeys = this.filterUrlKeys(keys,obj);
+    var urlKeys = this.filterUrlKeys(keys, obj);
     //取得符合 urlKeys 的所有对象，并放到 data 
     var data = [];
     for (var i = 0; i < urlKeys.length; i++) {
@@ -132,48 +196,50 @@ const request = {
     }
     return host.slice(0, host.length - 1);
   },
-  setIgnoreParams:function(params){
-    this.ignoreParams=this.ignoreParams.concat(params);
+  setIgnoreParams: function(params) {
+    this.ignoreParams = this.ignoreParams.concat(params);
   },
-  filterUrlKeys:function(keys,obj){
-    var host=obj.host;
-    var params=obj.params;
+  filterUrlKeys: function(keys, obj) {
+    var host = obj.host;
+    var params = obj.params;
     //得到需匹配的参数
-    var formalParams={};
-    for(var k in params){
-      var flag=true;
-      for (var index = 0; index < this.ignoreParams.length;index++){
-        if(k==this.ignoreParams[index]){
-          flag=false;
+    var formalParams = {};
+    for (var k in params) {
+      var flag = true;
+      for (var index = 0; index < this.ignoreParams.length; index++) {
+        if (k == this.ignoreParams[index]) {
+          flag = false;
           break;
         }
       }
-      if (flag) formalParams[k]=params[k];
+      if (flag) formalParams[k] = params[k];
     }
     //若 host 和 formalParams 都匹配，则匹配成功
-    var formalKeys=[];
-    for(var i=0;i<keys.length;i++){
-        var flag1,flag2;
-        flag1=false;flag2=true;
-        if(keys[i].indexOf(host)!==-1){
-          flag1=true;
+    var formalKeys = [];
+    for (var i = 0; i < keys.length; i++) {
+      var flag1, flag2;
+      flag1 = false;
+      flag2 = true;
+      if (keys[i].indexOf(host) !== -1) {
+        flag1 = true;
+      }
+      for (var j in formalParams) {
+        var temp = j + '=' + formalParams[j];
+        if (keys[i].indexOf(temp) === -1) {
+          flag2 = false;
+          break;
         }
-        for(var j in formalParams){
-          var temp=j+'='+formalParams[j];
-          if(keys[i].indexOf(temp)===-1){
-            flag2=false;
-            break;
-          }
-        }
-        if(flag1&&flag2){
-          formalKeys.push(keys[i]);
-        }
+      }
+      if (flag1 && flag2) {
+        formalKeys.push(keys[i]);
+      }
     }
     return formalKeys;
   }
 };
 
+
 module.exports = {
   jokesConvertTime: jokesConvertTime,
-  request:request
+  request: request
 }

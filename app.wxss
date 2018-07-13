@@ -21,7 +21,7 @@
   box-sizing: border-box;
 }
 
-/*定義整個窗口 背景顏色  */
+/* 背景顏色  */
 
  page {
   background-color: #f4f4f4;
@@ -45,7 +45,7 @@
   margin: 25rpx 30rpx;
 }
 
-/*字体大小 预先所有标签的字体大小设置为:.app-fontsize-main 大小 */
+/*字体大小*/
 
 .app-fontsize-title {
   font-size: 32rpx;
@@ -67,6 +67,7 @@
   color:#8a8a8a
 }
 
+/*默认字体大小  */
  textarea,text{
   font-size:30rpx;
 }

@@ -17,6 +17,10 @@
   border-radius: 65rpx;
   overflow: hidden;
 }
+
+.user-image-text{
+  color:white;
+}
 /*授权登录  */
 .user-authorize{
   width:100%;
@@ -26,7 +30,7 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  background-color:#1d7f0a; 
+   background-color:#303030;
 }
 
 /*item */

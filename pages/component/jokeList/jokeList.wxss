@@ -1,5 +1,3 @@
-/**app.wxss**/
-
 /*垂直排列佈局 */
 
 .container-col {
@@ -94,6 +92,15 @@ page {
   align-items: center;
   box-sizing: border-box;
   padding-left: 85rpx;
+  justify-content: space-between;
+}
+
+.favorite-image {
+  width: 35rpx;
+  height: 35rpx;
+  padding-top:10rpx;
+  padding-left:10rpx;
+  padding-right:10rpx;
 }
 
 .item-line {

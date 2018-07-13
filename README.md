@@ -39,6 +39,7 @@ app文件
 - talk 言语
 - msg 个人信息
 - collection 我的收藏
+	- 页面描述：在‘主页’浏览，点击心型图标收藏，将收藏内容以列表形式展示
 
 
 #### 页面功能
@@ -67,7 +68,13 @@ app文件
 	- 不懂：初次实现管理用户遗留的问题，暂不提供解答。
 	- 青果：初次实现管理用户的打算，日周月和长远的事情
 
-#### 接口文档(分开较好)
+- 我的收藏
+	- 思路：每个收藏品有它唯一_id,将_id放进用户信息的收藏集合中，通过collectionadd接口向后端添加；展示时看其_id是否存在于用户收藏集里。
+	- 微信坑人的框架啊*_*，一定要好好搞Vue才行。data的数据设置。
+- 用户身份标志
+	- 思路：采用服务器端分配token保存在数据库，客户端保存在缓存中，所以用户身份和文件相对应（但文件是用户相隔离的）。由于缓存可能被清楚，每次请求都响应和保存token.(虽然不安全)
+
+#### 接口文档(根据Postman工具维护)
 <table>
 <tr>
 <th>请求方法</th>
@@ -75,7 +82,7 @@ app文件
 <th>参数</th>
 <th>响应例子</th>
 <th>描述</th>
-<td>使用</td>
+<td>可用</td>
 </tr>
 
 <tr>
@@ -84,7 +91,7 @@ app文件
 <td>userID,jokeContent</td>
 <td>成功：{code:0,msg:'success'}失败：{code:1,msg:'failed'}</td>
 <td>提交段子</td>
-<td>是</td>
+<td>否</td>
 </tr>
 
 <tr>
@@ -111,11 +118,66 @@ app文件
 <td>userID&isALL=1&page=1</td>
 <td>成功：{code:0,msg:'success',data:[{userID:'ZW',...是数据库里的段子记录}]}</td>
 <td>根据参数，获取对应的段子，</td>
+<td>否</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/userJokeAdd</td>
+<td></td>
+<td></td>
+<td>添加段子</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/allUserJoke</td>
+<td></td>
+<td></td>
+<td>获取所有段子</td>
+<td>是</td>
+</tr>
+
+
+<tr>
+<td>post</td>
+<td>/oneUserJoke</td>
+<td></td>
+<td></td>
+<td>获取个人发布的段子</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/jokeCollectorAdd</td>
+<td></td>
+<td></td>
+<td>添加到我的收藏</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/jokeCollectorRemove</td>
+<td></td>
+<td></td>
+<td>从我的收藏删除</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/getUserCollections</td>
+<td></td>
+<td></td>
+<td>获取我收藏的所有段子</td>
 <td>是</td>
 </tr>
 </table>
 
-#### 問題解決（未解決:- 已解決：+）
+#### 問題解決（未解決:- 已解決：+ 微信bug:*）
 +tabBar的顯示，需要調用switchTab方法，通過百度搜索和查看文檔解決  
 
 -在view标签下放了水平弹性盒子，盒子内容竟然水平居中了，去掉view就回复正常  
@@ -129,4 +191,6 @@ app文件
 +flex佈局，若width不固定，justify-content:space-between設置不了?可以滴  
   
 -网络请求数据导致页面加载过慢，并且出现白页。  
-这里应该采用二级缓存：缓存查找，若有则显示，接着进行网络请求数据，将响应的记录和本地记录比较，新的记录显示出来，最后也把缓存更新一下。
+这里应该采用二级缓存：缓存查找，若有则显示，接着进行网络请求数据，将响应的记录和本地记录比较，新的记录显示出来，最后也把缓存更新一下。  
+
+*在列表循环中的item的bindtap事件e.target无效。

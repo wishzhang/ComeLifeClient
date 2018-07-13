@@ -1,2 +1,6 @@
 <!--pages/component/test/test.wxml-->
-<text>pages/component/test/test.wxml</text>
+
+
+<text wx:if="{{arr.indexOf(g)!=-1}}">true</text>
+
+<text wx:else>false</text>

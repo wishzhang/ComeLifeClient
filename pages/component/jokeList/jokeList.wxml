@@ -3,21 +3,25 @@
 <block>
   <slot name="contribution-publish-btn"></slot>
 </block>
-<view class="container-col  home-container">
+<view class="container-col  home-container" id='container'>
   <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
-    <view class="container-col home-item app-content-padding">
+    <view class="container-col home-item app-content-padding" id='{{item._id}}'>
       <view class="header">
-        <image class="header-headshot" src="{{item.iconPath}}"></image>
-        <text class="header-username app-fontcolor-title">{{item.userName}}</text>
+        <image class="header-headshot" src="{{item.avatarUrl}}"></image>
+        <text class="header-username app-fontcolor-title">{{item.nickName}}</text>
       </view>
       <view class="main">
         <text class="app-fontcolor-title">{{item.jokeContent}}</text>
       </view>
       <view class="footer">
         <text class="app-fontcolor-note app-fontsize-note">{{item.publishTime}}</text>
+        <view wx:if="{{canuse}}">
+          <image wx:if="{{item.isFavorite}}" class="favorite-image" src='../../img/favorite_selected.png' bindtap="tapFavorite" data-item='{{item}}' id="{{item._id}}" data-index="{{index}}"></image>
+          <image wx:else src='../../img/favorite_unselected.png' bindtap="tapFavorite" class="favorite-image" data-item='{{item}}' id="{{item._id}}" data-index="{{index}}"></image>
+        </view>
       </view>
     </view>
-    <hr class="item-line"/>
+    <hr class="item-line" />
     <!-- <view class="item-line app-bgcolor" /> -->
   </block>
   <block wx:if="{{noMore}}">

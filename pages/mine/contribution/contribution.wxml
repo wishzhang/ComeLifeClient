@@ -1,5 +1,5 @@
 <!-- <test bindmyevent="fetchChild"></test>  -->
-<joke bind:childobj="fetchChild" isAll="0" userid="{{userid}}">
+<joke bind:childobj="fetchChild" canuse="{{false}}">
   <view slot="contribution-publish-btn" class="publish-image">
     <image  src="./contribution_edit.png" bindtap="turnToJokeAddPage" mode="scaleToFill" class="publish-image-content"></image>
   </view>

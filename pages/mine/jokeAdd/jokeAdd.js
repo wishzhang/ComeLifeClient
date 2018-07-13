@@ -1,33 +1,38 @@
 // pages/mine/jokeAdd/jokeAdd.js
-var app=getApp();
+const util = require('../../../utils/util.js');
+var app = getApp();
 Page({
-  relateData:function(e){
+  relateData: function(e) {
     this.setData({
-      jokeContent:e.detail.value
+      jokeContent: e.detail.value
     })
   },
-  postData:function(){
-    wx.request({
-      url: app.globalData.domain+'/jokeAdd',
-      data:this.data,
-      success:function(res){
-        console.log('res.data:'+res.data);
-        if(res.data.code===0){
+  fetchData:function() {
+    this.postData();
+  },
+  postData: function() {
+    wx.myRequest({
+      url: app.globalData.domain + '/userJokeAdd',
+      data: this.data,
+      method:'POST',
+      success: function(res) {
+        console.log('res.data:' + res.data);
+        if (res.data.code === 0) {
           wx.showToast({
             title: '发布成功',
             icon: 'none',
             duration: 2000
           })
           wx.navigateBack();
-        }else if(res.data.code===1){
+        } else if (res.data.code === 1) {
           wx.showToast({
             title: '发布失败，服务器内部错误',
-            icon:'none',
-            duration:2000
+            icon: 'none',
+            duration: 2000
           })
         }
       },
-      fail:function(){
+      fail: function() {
         wx.showToast({
           title: '发布失败，服务器内部错误',
           icon: 'none',
@@ -37,17 +42,24 @@ Page({
     })
   },
   data: {
-    userID:'',
-    userName:'',
-    jokeContent:'',
-    iconPath:''
+    nickName: '',
+    gender: '',
+    city: '',
+    province: '',
+    country: '',
+    avatarUrl: '',
+    jokeContent: ''
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     var userInfo = app.globalData.userInfo;
     this.setData({
-      userID: userInfo.nickName,
-      userName: userInfo.nickName,
-      iconPath: userInfo.avatarUrl
+      nickName: userInfo.nickName,
+      iconPath: userInfo.avatarUrl,
+      gender: userInfo.gender,
+      city: userInfo.city,
+      province: userInfo.province,
+      country: userInfo.country,
+      avatarUrl: userInfo.avatarUrl
     })
   }
 })

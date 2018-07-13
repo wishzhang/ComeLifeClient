@@ -1,2 +1,2 @@
 <!--pages/home/home.wxml-->
-<joke bindchildobj="fetchChild"></joke>
+<joke bindchildobj="fetchChild" canuse="{{canuse}}"></joke>

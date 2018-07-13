@@ -8,7 +8,8 @@
     "pages/logs/logs",
     "pages/mine/setting/setting",
     "pages/mine/jokeAdd/jokeAdd",
-    "pages/mine/msg/msg"
+    "pages/mine/msg/msg",
+    "pages/mine/collection/collection"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,6 +1,5 @@
 /**
  * 该组件为joke列表的展示
- * 父组件传入userid和isAll值来获取目标数据, isAll:1获取所有用户joke记录
  * 父组件监听childobj事件得到子组件实例
  * ->父组件在onLoad还没得到子组件实例，在onShow以后调用相关方法
  */
@@ -14,13 +13,9 @@ Component({
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
   properties: {
-    userid: {
-      type: String,
-      value: ''
-    },
-    isAll: {
-      type: Number,
-      value: 1
+    canuse:{
+      type:Boolean,
+      value:false
     }
   },
   data: {
@@ -32,34 +27,74 @@ Component({
     allJokes: []
   },
   methods: {
+    tapFavorite: function(e) {
+      var _this = this;
+      var dataset = e.currentTarget.dataset;
+      var index = dataset.index;
+      var item = dataset.item;
 
-    /**
-     * 拉取jokes数据：{code:0,data:[{},{}],...
-     */
-    fetchData: function (url, params) {
+      if (item.isFavorite) {
+        wx.myRequest({
+          url: app.globalData.domain + '/jokeCollectorRemove',
+          method: 'POST',
+          data: {
+            jokeId: item._id,
+            userId: app.globalData.userInfo._id
+          },
+          success: function(res) {
+            _this.data.allJokes[index].isFavorite = false;
+            _this.setData({
+              allJokes: _this.data.allJokes
+            })
+          },
+          fail: function() {},
+          complete: function() {}
+        })
+      } else {
+        wx.myRequest({
+          url: app.globalData.domain + '/jokeCollectorAdd',
+          method: 'POST',
+          data: {
+            jokeId: item._id,
+            userId: app.globalData.userInfo._id
+          },
+          success: function(res) {
+            _this.data.allJokes[index].isFavorite = true;
+            _this.setData({
+              allJokes: _this.data.allJokes
+            })
+          },
+          fail: function() {},
+          complete: function() {}
+        })
+      }
+    },
+    fetchData: function(url, params) {
       var _this = this;
       var localRes = util.request.getData({
         host: app.globalData.domain + url,
         params: params,
-        success: function (res) {
-          _this.dataHandler().success(res,localRes);
+        method: 'POST',
+        success: function(res) {
+          _this.dataHandler().success(res, localRes);
         },
-        fail: function () {
+        fail: function() {
           _this.dataHandler().fail(localRes);
         },
-        complete: function () {
+        complete: function() {
           wx.hideLoading();
           wx.stopPullDownRefresh();
         }
       });
     },
-    dataHandler: function () {
+    dataHandler: function() {
       var _this = this;
       //比较器，从大到小
-      var compare=function (prop) {
-        return function (obj1, obj2) {
+      var compare = function(prop) {
+        return function(obj1, obj2) {
           var val1 = obj1[prop];
-          var val2 = obj2[prop]; if (val1 > val2) {
+          var val2 = obj2[prop];
+          if (val1 > val2) {
             return -1;
           } else if (val1 < val2) {
             return 1;
@@ -69,8 +104,8 @@ Component({
         }
       };
 
-      var setSuccessData={
-        code0: function (jokes) {
+      var setSuccessData = {
+        code0: function(jokes) {
           //在展示前时刻，将data排序
           jokes.sort(compare('publishTime'));
           _this.setData({
@@ -80,7 +115,7 @@ Component({
             allJokes: jokes
           })
         },
-        code1:function(){
+        code1: function() {
           if (_this.data.allJokes.length === 0) {
             _this.setData({
               warn: {
@@ -88,13 +123,13 @@ Component({
                 warnMsg: WARN_EMPTY
               }
             })
-          }else{
+          } else {
             wx.showToast({
               title: '无新纪录~',
             })
           }
         },
-        code2:function(){
+        code2: function() {
           if (_this.data.allJokes.length !== 0) {
             wx.showToast({
               title: '连接服务器出错~',
@@ -102,7 +137,7 @@ Component({
           } else {
             wx.showModal({
               content: '连接服务器出错,重新加载？',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   _this.fetchData(url, params);
                 } else {
@@ -117,13 +152,13 @@ Component({
             })
           }
         },
-        code3:function(){
+        code3: function() {
           _this.setData({
             noMore: true
           })
         }
       };
-      var setFailData=function(localRes){
+      var setFailData = function(localRes) {
         if (localRes.data.length !== 0) {
           //若网络请求，则启用缓存，注意：缓存数据也需分页展示！
           setSuccessData.code0(localRes.data);
@@ -133,7 +168,7 @@ Component({
         } else {
           wx.showModal({
             content: '连接服务器出错,重新加载？',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 _this.fetchData(url, params);
               } else {
@@ -149,26 +184,10 @@ Component({
         }
       };
 
-      var success = function (res) {
+      var success = function(res) {
         console.log(res);
         if (res.code === 0) {
-          //过滤掉本地缓存已存在的记录，得到新增的记录
-          var incJokes = [];
-          for (var i = 0; i < res.data.length; i++) {
-            var flag = true;
-            for (var j = 0; j < _this.data.allJokes.length; j++) {
-              if (_this.data.allJokes[j]._id === res.data[i]._id) {
-                flag = false;
-                break;
-              }
-            }
-            if (flag) {
-              incJokes.push(res.data[i]);
-            }
-          }
-          _this.data.allJokes = _this.data.allJokes.concat(incJokes);
-          
-          setSuccessData.code0(_this.data.allJokes);
+          setSuccessData.code0(res.data);
         } else if (res.code === 1) { //無記錄
           setSuccessData.code1();
         } else if (res.code === 3) { //无更多
@@ -178,54 +197,79 @@ Component({
         }
       };
 
-      var fail = function (localRes){
+      var fail = function(localRes) {
         setFailData(localRes);
       };
 
-      return{
-        success:success,
-        fail:fail,
+      return {
+        success: success,
+        fail: fail,
         setSuccessData: setSuccessData
       }
     },
-
-    //仅负责获取第一页数据并刷新
-    fetchFirstPage() {
+    /**
+     * 最新接口
+     */
+    refreshAllData: function() {
+      this.fetchData('/allUserJoke');
+    },
+    refreshOneUserData: function() {
+      this.fetchData('/oneUserJoke');
+    },
+    refreshCollectionData: function() {
       var _this = this;
-      this.setData({
-        noMore: false
+      var dataHandler = function(data) {
+        var users = data.data;
+        var arr = [];
+        for (var i = 0; i < users.length; i++) {
+          var user = users[i];
+          var r = user.collections;
+          for (var j = 0; j < r.length; j++) {
+            var collection = r[j];
+            collection.nickName = user.nickName;
+            collection.gender = user.gender;
+            collection.city = user.city;
+            collection.province = user.province;
+            collection.country = user.country;
+            collection.avatarUrl = user.avatarUrl;
+            collection.isFavorite = false;
+            var collector = collection.collectors;
+            var user_id = app.globalData.userInfo._id;
+            for (var k = 0; k < collector.length; k++) {
+              if (user_id === collector[k]) {
+                collection.isFavorite = true;
+                break;
+              }
+            }
+            arr.push(collection);
+          }
+        }
+        return arr;
+      }
+      wx.myRequest({
+        url: app.globalData.domain + '/getUserCollections',
+        data: {
+          _id: app.globalData.userInfo._id
+        },
+        method: 'POST',
+        success: function(res) {
+          var jokes = dataHandler(res.data);
+          _this.setData({
+            allJokes: jokes
+          })
+        },
+        fail: function() {
+          wx.showToast({
+            title: 'fail'
+          })
+        },
+        complete: function() {
+
+        }
       })
-      this.data.allJokes = [];
-      //page:1表示只获取第一页数据并刷新页面
-      this.fetchData('/getJokesByPage', {
-        page: 1,
-        userID: this.data.userid,
-        isAll: this.data.isAll
-      });
-    },
-    //提供以下3个给父组件调用的方法
-    refreshFirstPageByAuto: function () {
-      wx.showLoading({
-        title: '加载中...'
-      });
-      this.fetchFirstPage();
-    },
-    refreshFirstPageByPull: function () {
-      this.fetchFirstPage();
-    },
-    refreshNextPage: function () {
-      wx.showLoading({
-        title: '加载中...'
-      });
-      //page:0表示获取下一页数据
-      this.fetchData('/getJokesByPage', {
-        page: 0,
-        userID: this.data.userid,
-        isAll: this.data.isAll
-      });
     }
   },
-  attached: function () {
+  attached: function() {
     this.triggerEvent('childobj', this, {});
   }
 })
