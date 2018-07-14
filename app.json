@@ -1,20 +1,21 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/linger/talk/talk",
+    "pages/mine/setting/setting",
     "pages/linger/linger",
+    "pages/linger/talk/talk",
     "pages/mine/contribution/contribution",
     "pages/mine/mine",
     "pages/logs/logs",
-    "pages/mine/setting/setting",
     "pages/mine/jokeAdd/jokeAdd",
     "pages/mine/msg/msg",
-    "pages/mine/collection/collection"
+    "pages/mine/collection/collection",
+    "pages/mine/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#cdcdcd",
-    "navigationBarBackgroundColor": "#303030",
+
     "navigationBarTitleText": "望梅止渴",
     "navigationBarTextStyle": "white"
   },

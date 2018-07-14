@@ -68,7 +68,7 @@
 }
 
 /*默认字体大小  */
- textarea,text{
+ input,textarea,text{
   font-size:30rpx;
 }
 

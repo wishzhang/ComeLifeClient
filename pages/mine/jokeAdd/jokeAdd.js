@@ -61,5 +61,8 @@ Page({
       country: userInfo.country,
       avatarUrl: userInfo.avatarUrl
     })
+  },
+  onShow:function(){
+    util.setNavigationBarColor();
   }
 })

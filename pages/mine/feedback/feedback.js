@@ -1,44 +1,43 @@
-// pages/linger/linger.js
-const util=require('../../utils/util.js')
-const app=getApp();
+// pages/mine/feedback/feedback.js
+const util = require('../../../utils/util.js');
+var app=getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    sentences:[{
-      _id:'1',
-      content:'我是天空里的一片云',
-      author:'徐志摩'
-    },{
-      _id: '2',
-      content: '我是天空里的一片云',
-      author: '徐志摩'
-    }]
+  
   },
-  fetchSentences:function(){
-    var _this=this;
+
+  formSubmit:function(e){
+    var data=e.detail.value;
+    data.user_id=app.globalData.userInfo._id;
+    console.log('form-data:'+JSON.stringify(data));
     wx.myRequest({
-      url:app.globalData.domain+'/getSentences',
+      url:app.globalData.domain+'/addFeedback',
+      data:data,
       method:'POST',
       success:function(res){
         var r=res.data;
         if(r.code===0){
-          _this.setData({
-            sentences:r.data
-          })
-        }else{
           wx.showToast({
-            title: '服务器响应失败',
-            icon:'none'
+            title: '提交成功',
+            success:function(){
+              wx.navigateBack();
+            }
+          })
+        }else if(r.code===1){
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none'
           })
         }
       },
       fail:function(){
         wx.showToast({
-          title: '服务器响应失败',
-          icon: 'none'
+          title: '提交失败',
+          icon:'none'
         })
       },
       complete:function(){
@@ -46,23 +45,19 @@ Page({
       }
     })
   },
-  turnToTalkPage:function(){
-    wx.navigateTo({
-      url: 'talk/talk',
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+  
   },
 
   /**
@@ -70,7 +65,6 @@ Page({
    */
   onShow: function () {
     util.setNavigationBarColor();
-    this.fetchSentences();
   },
 
   /**
@@ -91,7 +85,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.fetchSentences();
+  
   },
 
   /**

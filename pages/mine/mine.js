@@ -1,26 +1,33 @@
 // pages/mine/mine.js
 var app=getApp();
-
+const util = require('../../utils/util.js');
 Page({
+  init:function(){
+    util.setNavigationBarColor();
+    this.setData({
+      navigationBarColor: util.getNavigationBarColor()
+    })
+  },
   /**
    * 页面的初始数据
    */
   data: {
+    navigationBarColor: util.getNavigationBarColor(),
     canuse:false,
     isAuthorized: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [{
-      id: 1,
       name: '我的投稿',
       iconPath: './contribution.png'
     },{
-      id: 2,
       name: '我的收藏',
       iconPath: './collection.png'
     }, {
-      id: 3,
       name: '我的設置',
       iconPath: './setting.png'
+    }, {
+      name: '投诉与建议',
+      iconPath: './feedback.png'
     }]
   },
   turnToMsgPage:function(e){
@@ -90,6 +97,15 @@ Page({
       url: './setting/setting'
     });
   },
+  bindTapToFeedback:function(e){
+    if (!this.data.canuse) {
+      this.showErrorToast();
+      return;
+    }
+    wx.navigateTo({
+      url: './feedback/feedback'
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -99,5 +115,8 @@ Page({
       isAuthorized: app.globalData.isAuthorized,
       canuse: app.globalData.canuse
     })
+  },
+  onShow:function(){
+    this.init();
   }
 })

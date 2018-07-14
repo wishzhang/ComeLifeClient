@@ -34,12 +34,15 @@ app文件
 
 - linger 逗留
 	- 页面描述：提供温度
-	- 展示内容：言语，轨迹，不懂，青果，功能入口。田字格先放着。
+	- 展示内容：言语，轨迹，不懂，青果，功能入口。并以列表形式展示句子迷。
 
 - talk 言语
 - msg 个人信息
 - collection 我的收藏
 	- 页面描述：在‘主页’浏览，点击心型图标收藏，将收藏内容以列表形式展示
+- feedback 反馈与建议
+	- 页面描述：入口在‘我的’，页面包含：反馈文本，邮箱信息。
+
 
 
 #### 页面功能
@@ -177,6 +180,34 @@ app文件
 </tr>
 </table>
 
+<tr>
+<td>post</td>
+<td>/addFeedback</td>
+<td></td>
+<td></td>
+<td>提交投诉与建议</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/addSentence</td>
+<td></td>
+<td></td>
+<td>提交句子</td>
+<td>是</td>
+
+<tr>
+<td>post</td>
+<td>/getSentences</td>
+<td></td>
+<td></td>
+<td>获取所有句子</td>
+<td>是</td>
+</tr>
+
+</table>
+
 #### 問題解決（未解決:- 已解決：+ 微信bug:*）
 +tabBar的顯示，需要調用switchTab方法，通過百度搜索和查看文檔解決  
 
@@ -193,4 +224,8 @@ app文件
 -网络请求数据导致页面加载过慢，并且出现白页。  
 这里应该采用二级缓存：缓存查找，若有则显示，接着进行网络请求数据，将响应的记录和本地记录比较，新的记录显示出来，最后也把缓存更新一下。  
 
-*在列表循环中的item的bindtap事件e.target无效。
+*在列表循环中的item的bindtap事件e.target无效。  
++代码加载机制：从App({})开始，创建app实例，并根据app.json文件加载各个page代码执行。  
+-wx.setNavigationBarColor只对当前页面有效，有两种办法：  
+1.动态改变app.json配置文件  
+2.每个页面加载一份初始化代码（能重写Page么？？？），这条错了，要在onShow才行啊。。。

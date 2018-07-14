@@ -9,8 +9,6 @@
       <image class="item-image" src="./load_entry.png"></image>
       <text>轨迹</text>
     </view>
-  </view>
-  <view class="row">
     <view class="col">
       <image class="item-image" src="./aim_entry.png"></image>
       <text>青果</text>
@@ -18,6 +16,27 @@
     <view class="col">
       <image class="item-image" src="./question_entry.png"></image>
       <text>不懂</text>
+    </view>
+  </view>
+
+  <view class="main">
+    <view class="subtitle">
+      <text class="app-fontsize-title">句子迷</text>
+    </view>
+    <hr class="title-line" />
+    <view class="content">
+      <block wx:for="{{sentences}}">
+        <view class="content-item">
+          <view class="item-main">
+            <text class="sentence">{{item.content}}</text>
+          </view>
+          <view class="item-footer">
+            <text>—</text>
+            <text class="author">{{item.author}}</text>
+          </view>
+        </view>
+        <hr class="item-line" />
+      </block>
     </view>
   </view>
 </view>

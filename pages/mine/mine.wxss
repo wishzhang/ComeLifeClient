@@ -52,3 +52,6 @@
   width:100%;
   height:25rpx;
 }
+.feedback-item-line{
+  height:55rpx;
+}

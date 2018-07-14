@@ -1,1 +1,27 @@
 /* pages/mine/setting/setting.wxss */
+.container{
+  width:100%;
+}
+
+.row{
+  width:100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.col{
+  width:20%;
+  height:150rpx;
+  box-sizing: border-box;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-text{
+  width:70rpx;
+  height:70rpx;
+  background-color: red;
+  border-radius:35rpx;
+}

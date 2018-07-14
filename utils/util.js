@@ -1,5 +1,20 @@
 var app = getApp();
 
+const setNavigationBarColor = () => {
+  var navigationBarColor = wx.getStorageSync('navigationBarColor');
+  if (navigationBarColor) {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: navigationBarColor
+    })
+  }
+};
+
+const getNavigationBarColor=()=>{
+  var navigationBarColor = wx.getStorageSync('navigationBarColor');
+  return navigationBarColor;
+};
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -241,5 +256,7 @@ const request = {
 
 module.exports = {
   jokesConvertTime: jokesConvertTime,
-  request: request
+  request: request,
+  setNavigationBarColor: setNavigationBarColor,
+  getNavigationBarColor: getNavigationBarColor
 }

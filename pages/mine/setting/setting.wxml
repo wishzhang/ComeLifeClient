@@ -1,2 +1,10 @@
 <!--pages/mine/setting/setting.wxml-->
-<text>pages/mine/setting/setting.wxml</text>
+<view class='container'>
+  <view class='row'  bindtap='setNavigationBarColor'>
+    <block wx:for="{{colors}}">
+      <view class='col'>
+        <text data-item='{{item}}' data-index="{{index}}" class='color-text' bindtap='setRed' style="background-color:{{item.color}}"></text>
+      </view>
+    </block>
+  </view>
+</view>

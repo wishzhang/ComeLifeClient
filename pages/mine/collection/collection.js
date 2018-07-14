@@ -1,4 +1,5 @@
 // pages/mine/collection/collection.js
+const util=require('../../../utils/util.js');
 var child = null;
 var app = getApp();
 Page({
@@ -7,6 +8,7 @@ Page({
   onLoad: function () {
   },
   onShow: function () {
+    util.setNavigationBarColor();
     child.refreshCollectionData();
   },
   onPullDownRefresh() {

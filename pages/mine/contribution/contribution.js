@@ -1,9 +1,10 @@
+const util = require('../../../utils/util.js');
 var child=null;
 Page({
   data: {
   },
   onLoad:function(){
-
+    util.setNavigationBarColor();
   },
   turnToJokeAddPage:function(){
     wx.navigateTo({
@@ -11,6 +12,7 @@ Page({
     })
   },
   onShow:function(){
+    util.setNavigationBarColor();
     child.refreshOneUserData();
   },
   onPullDownRefresh() {

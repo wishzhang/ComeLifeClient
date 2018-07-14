@@ -3,6 +3,7 @@
  * bug:<hr>,输入框
  * 聊天界面：通过请求图灵机器人API接口实现
  */
+const util=require('../../../utils/util.js');
 var app = getApp();
 Page({
   data: {
@@ -115,6 +116,9 @@ Page({
     this.obj.myTalk=this.myTalk();
     this.obj.yourTalk=this.yourTalk();
     this.obj.session=this.session();
+  },
+  onShow:function(){
+    util.setNavigationBarColor();
   },
   start:function(){
     this.obj.session.start.apply(this);

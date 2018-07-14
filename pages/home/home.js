@@ -1,10 +1,11 @@
+
 var child = null;
 var app = getApp();
-require('../../utils/util.js');
+var util=require('../../utils/util.js');
 //不授权无法继续使用
 Page({
-  data:{
-    canuse:false
+  data: {
+    canuse: false
   },
   onLoad: function() {
     var _this = this;
@@ -24,7 +25,9 @@ Page({
                   if (res.data.code === 0) {
                     app.globalData.userInfo = res.data.data[0];
                     app.globalData.canuse = true;
-                    _this.setData({canuse:true});
+                    _this.setData({
+                      canuse: true
+                    });
                     app.globalData.isAuthorized = true;
                     child.refreshAllData();
                   }
@@ -40,10 +43,11 @@ Page({
     })
   },
   onShow: function() {
+    util.setNavigationBarColor();
     this.setData({
-      canuse:app.globalData.canuse
+      canuse: app.globalData.canuse
     })
-    if(app.globalData.canuse){
+    if (app.globalData.canuse) {
       child.refreshAllData();
     }
   },

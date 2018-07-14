@@ -2,7 +2,7 @@
 
 <view class="container-col">
   <!--我的頭像  -->
-  <view wx:if="{{isAuthorized}}" class="user-content" bindtap="turnToMsgPage">
+  <view wx:if="{{isAuthorized}}" class="user-content" bindtap="turnToMsgPage" style="background-color:{{navigationBarColor}}">
     <view class="user-image">
       <open-data type="userAvatarUrl"></open-data>
     </view>
@@ -11,7 +11,7 @@
     </view>
   </view>
   <!-- 需要使用 button 来授权登录 -->
-  <view wx:else class="user-authorize">
+  <view wx:else class="user-authorize" style="background-color:{{navigationBarColor}}">
     <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
     <view wx:else>请升级微信版本</view>
   </view>
@@ -33,5 +33,11 @@
   <view class="container-row mine-item-content" bindtap="bindTapToSetting" id='setting'>
     <image class="mine-item-content-image" src="{{items[2].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[2].name}}</text>
+  </view>
+    <!--投诉与建议  -->
+      <view class="mine-item-line app-bgcolor feedback-item-line"></view>
+  <view class="container-row mine-item-content" bindtap="bindTapToFeedback" id='feedback'>
+    <image class="mine-item-content-image" src="{{items[3].iconPath}}"></image>
+    <text class="mine-item-content-text">{{items[3].name}}</text>
   </view>
 </view>
