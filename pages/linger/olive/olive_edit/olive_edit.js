@@ -1,20 +1,20 @@
-// pages/mine/jokeAdd/jokeAdd.js
-const util = require('../../../utils/util.js');
+// pages/mine/oliveAdd/oliveAdd.js
+const util = require('../../../../utils/util.js');
 var app = getApp();
 Page({
   relateData: function(e) {
     this.setData({
-      jokeContent: e.detail.value
+      oliveContent: e.detail.value
     })
   },
-  fetchData:function() {
+  fetchData: function() {
     this.postData();
   },
   postData: function() {
     wx.myRequest({
-      url: app.globalData.domain + '/userJokeAdd',
+      url: app.globalData.domain + '/editOlive',
       data: this.data,
-      method:'POST',
+      method: 'POST',
       success: function(res) {
         console.log('res.data:' + res.data);
         if (res.data.code === 0) {
@@ -42,29 +42,17 @@ Page({
     })
   },
   data: {
-    user_id:'',
-    nickName: '',
-    gender: '',
-    city: '',
-    province: '',
-    country: '',
-    avatarUrl: '',
-    jokeContent: ''
+    oliveContent: '',
+    olive_id: ''
   },
   onLoad: function(options) {
-    var userInfo = app.globalData.userInfo;
+    console.log('options:' + JSON.stringify(options));
     this.setData({
-      user_id: userInfo._id,
-      nickName: userInfo.nickName,
-      iconPath: userInfo.avatarUrl,
-      gender: userInfo.gender,
-      city: userInfo.city,
-      province: userInfo.province,
-      country: userInfo.country,
-      avatarUrl: userInfo.avatarUrl
+      olive_id: options.olive_id,
+      oliveContent: options.content
     })
   },
-  onShow:function(){
+  onShow: function() {
     util.setNavigationBarColor();
   }
 })

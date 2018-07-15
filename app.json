@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/linger/olive/olive",
     "pages/mine/setting/setting",
     "pages/linger/linger",
     "pages/linger/talk/talk",
@@ -8,14 +9,14 @@
     "pages/mine/mine",
     "pages/logs/logs",
     "pages/mine/jokeAdd/jokeAdd",
-    "pages/mine/msg/msg",
     "pages/mine/collection/collection",
-    "pages/mine/feedback/feedback"
+    "pages/mine/feedback/feedback",
+    "pages/linger/olive/olive_add/olive_add",
+    "pages/linger/olive/olive_edit/olive_edit"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#cdcdcd",
-
     "navigationBarTitleText": "望梅止渴",
     "navigationBarTextStyle": "white"
   },
@@ -43,5 +44,6 @@
         "selectedIconPath": "pages/mine/mine_selected.png"
       }
     ]
-  }
+  },
+  "debug": true
 }

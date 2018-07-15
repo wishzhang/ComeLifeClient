@@ -1,19 +1,19 @@
-
 var child = null;
 var app = getApp();
-var util=require('../../utils/util.js');
+var util = require('../../utils/util.js');
 //不授权无法继续使用
 Page({
   data: {
     canuse: false
   },
+  init: function() {
+    util.setNavigationBarColor();
+  },
   onLoad: function() {
     var _this = this;
-    // 查看是否授权，有的功能需要获取个人信息才可进行下去。
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
               app.globalData.userInfo = res.userInfo;
@@ -28,33 +28,43 @@ Page({
                     _this.setData({
                       canuse: true
                     });
-                    app.globalData.isAuthorized = true;
-                    child.refreshAllData();
+                  } else {
+                    _this.showVisitorToast();
                   }
+                },
+                fail: function() {
+                  _this.showVisitorToast();
                 },
                 complete: function() {
                   console.log('app.globalData:' + JSON.stringify(app.globalData));
                 }
               })
+            },
+            fail: function() {
+              _this.showVisitorToast();
             }
           })
         }
+      },
+      fail: function() {
+        _this.showVisitorToast();
       }
     })
   },
+  showVisitorToast: function() {
+    wx.showToast({
+      title: '您现在是游客身份哦~',
+    })
+  },
   onShow: function() {
-    util.setNavigationBarColor();
+    this.init();
     this.setData({
       canuse: app.globalData.canuse
     })
-    if (app.globalData.canuse) {
-      child.refreshAllData();
-    }
+    child.refreshAllData();
   },
   onPullDownRefresh() {
-    if (app.globalData.canuse) {
-      child.refreshAllData();
-    }
+    child.refreshAllData();
   },
   onReachBottom: function() {},
   //获取子组件对象jokeList

@@ -1,0 +1,56 @@
+/* pages/linger/olive/olive.wxss */
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 40rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+  padding-bottom: 15rpx;
+  background-color: white;
+}
+
+.item-content {
+  padding: 25rpx 0;
+}
+
+.item-footer{
+ display: flex;
+ justify-content: flex-end; 
+}
+
+.item-line {
+  width: 100%;
+  height: 1px;
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
+}
+
+/*投稿图标  */
+.publish-image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+  position: fixed;
+  right: 70rpx;
+  bottom: 60rpx;
+  background-color:#1d7f0a;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.publish-image-content{
+  width:50rpx;
+  height:50rpx;
+  padding-bottom: 6rpx;
+}

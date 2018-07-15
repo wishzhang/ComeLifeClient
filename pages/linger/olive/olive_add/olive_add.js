@@ -1,21 +1,21 @@
-// pages/mine/jokeAdd/jokeAdd.js
-const util = require('../../../utils/util.js');
+// pages/mine/oliveAdd/oliveAdd.js
+const util = require('../../../../utils/util.js');
 var app = getApp();
 Page({
-  relateData: function(e) {
+  relateData: function (e) {
     this.setData({
-      jokeContent: e.detail.value
+      oliveContent: e.detail.value
     })
   },
-  fetchData:function() {
+  fetchData: function () {
     this.postData();
   },
-  postData: function() {
+  postData: function () {
     wx.myRequest({
-      url: app.globalData.domain + '/userJokeAdd',
+      url: app.globalData.domain + '/addOlive',
       data: this.data,
-      method:'POST',
-      success: function(res) {
+      method: 'POST',
+      success: function (res) {
         console.log('res.data:' + res.data);
         if (res.data.code === 0) {
           wx.showToast({
@@ -32,7 +32,7 @@ Page({
           })
         }
       },
-      fail: function() {
+      fail: function () {
         wx.showToast({
           title: '发布失败，服务器内部错误',
           icon: 'none',
@@ -42,29 +42,15 @@ Page({
     })
   },
   data: {
-    user_id:'',
-    nickName: '',
-    gender: '',
-    city: '',
-    province: '',
-    country: '',
-    avatarUrl: '',
-    jokeContent: ''
+    oliveContent:'',
+    user_id:''
   },
-  onLoad: function(options) {
-    var userInfo = app.globalData.userInfo;
+  onLoad: function (options) {
     this.setData({
-      user_id: userInfo._id,
-      nickName: userInfo.nickName,
-      iconPath: userInfo.avatarUrl,
-      gender: userInfo.gender,
-      city: userInfo.city,
-      province: userInfo.province,
-      country: userInfo.country,
-      avatarUrl: userInfo.avatarUrl
+      user_id: app.globalData.userInfo._id
     })
   },
-  onShow:function(){
+  onShow: function () {
     util.setNavigationBarColor();
   }
 })

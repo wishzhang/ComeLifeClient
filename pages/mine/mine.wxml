@@ -2,7 +2,7 @@
 
 <view class="container-col">
   <!--我的頭像  -->
-  <view wx:if="{{isAuthorized}}" class="user-content" bindtap="turnToMsgPage" style="background-color:{{navigationBarColor}}">
+  <view wx:if="{{canuse}}" class="user-content" bindtap="turnToMsgPage" style="background-color:{{navigationBarColor}}">
     <view class="user-image">
       <open-data type="userAvatarUrl"></open-data>
     </view>

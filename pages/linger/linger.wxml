@@ -9,7 +9,7 @@
       <image class="item-image" src="./load_entry.png"></image>
       <text>轨迹</text>
     </view>
-    <view class="col">
+    <view class="col" bindtap='turnToOlivePage'>
       <image class="item-image" src="./aim_entry.png"></image>
       <text>青果</text>
     </view>

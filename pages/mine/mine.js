@@ -14,7 +14,6 @@ Page({
   data: {
     navigationBarColor: util.getNavigationBarColor(),
     canuse:false,
-    isAuthorized: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [{
       name: '我的投稿',
@@ -30,12 +29,6 @@ Page({
       iconPath: './feedback.png'
     }]
   },
-  turnToMsgPage:function(e){
-
-    wx.navigateTo({
-      url: './msg/msg'
-    })
-  },
   bindGetUserInfo: function (e) {
     var _this=this;
     var userInfo = e.detail.userInfo;
@@ -48,63 +41,60 @@ Page({
         success: function (res) {
           if (res.data.code === 0) {
             app.globalData.userInfo = res.data.data[0];
-             app.globalData.canuse = true;
-            _this.setData({ canuse:true });
-
-            app.globalData.isAuthorized = true;
+            app.globalData.canuse = true;
             _this.setData({
-              isAuthorized: true
-            })
+              canuse: true
+            });
+          } else {
+            _this.showVisitorToast();
           }
+        },
+        fail: function () {
+          _this.showVisitorToast();
         },
         complete: function () {
           console.log('app.globalData:' + JSON.stringify(app.globalData));
         }
       })
+    }else{
+      _this.showVisitorToast();
     }
+  },
+  showVisitorToast: function () {
+    wx.showToast({
+      title: ' 您现在是游客身份哦~ ',
+      icon:'none'
+    })
   },
   showErrorToast:function(){
     wx.showToast({
-      title: '获取个人信息失败',
+      title: '请先授权登录呀~',
       icon: 'none',
       duration: 2000
     })
   },
-  bindTapCollection:function(){
-    if(!this.data.canuse){
+  turnToPageCanuse:function(url){
+    if (!this.data.canuse) {
       this.showErrorToast();
       return;
     }
     wx.navigateTo({
-      url: './collection/collection'
+      url: url
     });
+  },
+  bindTapCollection:function(){
+    this.turnToPageCanuse('./collection/collection');
   },
   bindTapToContribution: function () {
-    if (!this.data.canuse) {
-      this.showErrorToast();
-      return;
-    }
-    wx.navigateTo({
-      url: './contribution/contribution'
-    });
+    this.turnToPageCanuse('./contribution/contribution');
   },
   bindTapToSetting: function (e) {
-    if (!this.data.canuse) {
-      this.showErrorToast();
-      return;
-    }
-    wx.navigateTo({
-      url: './setting/setting'
-    });
+    this.turnToPageCanuse('./setting/setting');
   },
   bindTapToFeedback:function(e){
-    if (!this.data.canuse) {
-      this.showErrorToast();
-      return;
-    }
     wx.navigateTo({
-      url: './feedback/feedback'
-    });
+      url:'./feedback/feedback'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -112,7 +102,6 @@ Page({
   onLoad: function(options) {
     //由于获取授权是异步的，所以这里需同步一下
     this.setData({
-      isAuthorized: app.globalData.isAuthorized,
       canuse: app.globalData.canuse
     })
   },

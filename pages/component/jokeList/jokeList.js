@@ -38,8 +38,8 @@ Component({
           url: app.globalData.domain + '/jokeCollectorRemove',
           method: 'POST',
           data: {
-            jokeId: item._id,
-            userId: app.globalData.userInfo._id
+            joke_id: item._id,
+            user_id: app.globalData.userInfo._id
           },
           success: function(res) {
             _this.data.allJokes[index].isFavorite = false;
@@ -55,8 +55,8 @@ Component({
           url: app.globalData.domain + '/jokeCollectorAdd',
           method: 'POST',
           data: {
-            jokeId: item._id,
-            userId: app.globalData.userInfo._id
+            joke_id: item._id,
+            user_id: app.globalData.userInfo._id
           },
           success: function(res) {
             _this.data.allJokes[index].isFavorite = true;
@@ -214,7 +214,7 @@ Component({
       this.fetchData('/allUserJoke');
     },
     refreshOneUserData: function() {
-      this.fetchData('/oneUserJoke');
+      this.fetchData('/oneUserJoke',{user_id:app.globalData.userInfo._id});
     },
     refreshCollectionData: function() {
       var _this = this;
@@ -249,7 +249,7 @@ Component({
       wx.myRequest({
         url: app.globalData.domain + '/getUserCollections',
         data: {
-          _id: app.globalData.userInfo._id
+          user_id: app.globalData.userInfo._id
         },
         method: 'POST',
         success: function(res) {
@@ -260,7 +260,7 @@ Component({
         },
         fail: function() {
           wx.showToast({
-            title: 'fail'
+            title: '服务器响应错误~'
           })
         },
         complete: function() {

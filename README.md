@@ -36,6 +36,11 @@ app文件
 	- 页面描述：提供温度
 	- 展示内容：言语，轨迹，不懂，青果，功能入口。并以列表形式展示句子迷。
 
+- olive 青果
+	- 页面描述：目的是目标管理，这里先实现日记，周记，月记
+	- 数据结构：日记实体包含内容，生成时间，和个人关联。其他类似。
+	- 页面展示：
+
 - talk 言语
 - msg 个人信息
 - collection 我的收藏
@@ -178,7 +183,6 @@ app文件
 <td>获取我收藏的所有段子</td>
 <td>是</td>
 </tr>
-</table>
 
 <tr>
 <td>post</td>
@@ -206,7 +210,54 @@ app文件
 <td>是</td>
 </tr>
 
+<tr>
+<td>post</td>
+<td>/addOlive</td>
+<td>user_id，oliveContent</td>
+<td></td>
+<td>添加青果</td>
+<td>是</td>
+</tr>
+
+
+<tr>
+<td>post</td>
+<td>/editOlive</td>
+<td>olive_id，oliveContent</td>
+<td></td>
+<td>编辑青果</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/deleteOlive</td>
+<td>olive_id</td>
+<td></td>
+<td>删除青果</td>
+<td>是</td>
+</tr>
+
+<tr>
+<td>post</td>
+<td>/getOlives</td>
+<td>user_id</td>
+<td></td>
+<td>获取所有青果</td>
+<td>是</td>
+</tr>
+
+
 </table>
+
+#### 软件控制(硬件和产品需求)
+- 硬件
+	- 以iPhone6作为视觉稿标准（rpx换算成px来适应，1rpx=0.5rpx,那么1rpx就可以为1物理像素了）
+	- 文件，数据缓存都有限
+
+- 需求
+	- 理念：一个有温度的程序，和你一起积极面对生活
+	- 关注点：1.问合理的问题（如关注优点)
 
 #### 問題解決（未解決:- 已解決：+ 微信bug:*）
 +tabBar的顯示，需要調用switchTab方法，通過百度搜索和查看文檔解決  

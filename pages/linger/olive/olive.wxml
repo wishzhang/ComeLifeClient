@@ -1,0 +1,16 @@
+<!--pages/linger/olive/olive.wxml-->
+<view class="container">
+  <block wx:for="{{olives}}">
+    <view class="item" data-item="{{item}}" data-index='{{index}}'  catchtap='turnToOliveEditPage'>
+      <text class="item-content">{{item.content}}</text>
+      <view class="item-footer">
+      <text class="item-publishTime .app-fontcolor-note">{{item.publishTime}}</text>
+      </view>
+    </view>
+    <hr class="item-line"/>
+  </block>
+
+  <view  class="publish-image">
+    <image  src="./olive_edit.png" bindtap="turnToOliveAddPage" mode="scaleToFill" class="publish-image-content"></image>
+  </view>
+</view>

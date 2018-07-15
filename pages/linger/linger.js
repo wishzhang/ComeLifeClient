@@ -7,15 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sentences:[{
-      _id:'1',
-      content:'我是天空里的一片云',
-      author:'徐志摩'
-    },{
-      _id: '2',
-      content: '我是天空里的一片云',
-      author: '徐志摩'
-    }]
+    sentences:[]
   },
   fetchSentences:function(){
     var _this=this;
@@ -30,25 +22,27 @@ Page({
           })
         }else{
           wx.showToast({
-            title: '服务器响应失败',
+            title: '服务器响应失败~',
             icon:'none'
           })
         }
       },
       fail:function(){
         wx.showToast({
-          title: '服务器响应失败',
+          title: '服务器响应失败~',
           icon: 'none'
         })
-      },
-      complete:function(){
-
       }
     })
   },
   turnToTalkPage:function(){
     wx.navigateTo({
       url: 'talk/talk',
+    })
+  },
+  turnToOlivePage:function(){
+    wx.navigateTo({
+      url: 'olive/olive',
     })
   },
 
