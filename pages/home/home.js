@@ -9,6 +9,7 @@ Page({
   init: function() {
     util.setNavigationBarColor();
   },
+  //登录并获取用户个人信息
   onLoad: function() {
     var _this = this;
     wx.getSetting({
@@ -54,6 +55,7 @@ Page({
   showVisitorToast: function() {
     wx.showToast({
       title: '您现在是游客身份哦~',
+      icon:'none'
     })
   },
   onShow: function() {
@@ -70,5 +72,8 @@ Page({
   //获取子组件对象jokeList
   fetchChild: function(e) {
     child = e.detail;
+  },
+  errHandler:function(e){
+    child.refreshAllData();
   }
 })

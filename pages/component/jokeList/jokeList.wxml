@@ -3,7 +3,7 @@
 <block>
   <slot name="contribution-publish-btn"></slot>
 </block>
-<view class="container-col  home-container" id='container'>
+<view wx:if="{{!errSee}}" class="container-col  home-container" id='container'>
   <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
     <view class="container-col home-item app-content-padding" id='{{item._id}}'>
       <view class="header">
@@ -29,8 +29,5 @@
     <!-- <view class="item-line app-bgcolor" /> -->
   </block>
 </view>
-<import src="./empty.wxml" />
-<view style="display:{{warn.canSee}}">
-  <template is="empty" data="{{warn}}" />
-</view>
+<err wx:else err="{{myError}}" binderrBtn="errHandler"></err>
 <!--注意：由于需处理onReachBottom回调函数，尽量不在末尾添加元素  -->

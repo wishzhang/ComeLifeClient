@@ -1,2 +1,2 @@
 <!--pages/home/home.wxml-->
-<joke bindchildobj="fetchChild" canuse="{{canuse}}"></joke>
+<joke bindchildobj="fetchChild" canuse="{{canuse}}" binderrBtn='errHandler' ></joke>

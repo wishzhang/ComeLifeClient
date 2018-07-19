@@ -2,6 +2,10 @@
 
 App({
   onLaunch: function () {
+    wx.showToast({
+      title: 'laile',
+      icon:'none'
+    })
   },
   //一定要先在这里定义了，才能用，否则[object Undefined]
   globalData: {

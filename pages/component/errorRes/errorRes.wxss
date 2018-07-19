@@ -1,0 +1,20 @@
+/* pages/component/errorRes/errorRes.wxss */
+
+/*empty 模板 css  */
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 250rpx;
+}
+
+.empty-image {
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.empty-button{
+  margin-top:10rpx;
+}

@@ -24,7 +24,7 @@
       <text class="app-fontsize-title">句子迷</text>
     </view>
     <hr class="title-line" />
-    <view class="content">
+    <view wx:if="{{!errSee}}" class="content">
       <block wx:for="{{sentences}}">
         <view class="content-item">
           <view class="item-main">
@@ -38,5 +38,6 @@
         <hr class="item-line" />
       </block>
     </view>
+    <err wx:else binderrBtn="errHandler" err="{{myError}}"></err>
   </view>
 </view>

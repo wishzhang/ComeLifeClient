@@ -1,0 +1,6 @@
+<!--pages/component/errorRes/errorRes.wxml-->
+  <view class="empty-container">
+    <image class="empty-image" src="{{err.img}}" mode="aspectFit"></image>
+    <text class="app-fontcolor-note app-fontsize-main">{{err.errText}}</text>
+    <button size="mini" class='empty-button app-fontsize-main' bindtap='errBtnTap'>{{err.btnText}}</button>
+  </view>

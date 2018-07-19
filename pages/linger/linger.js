@@ -2,38 +2,50 @@
 const util=require('../../utils/util.js')
 const app=getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    errSee:false,
+    myError: {},
     sentences:[]
   },
   fetchSentences:function(){
     var _this=this;
+    _this.setData({
+      errSee:false
+    })
     wx.myRequest({
       url:app.globalData.domain+'/getSentences',
       method:'POST',
       success:function(res){
         var r=res.data;
         if(r.code===0){
+          if(r.data.length===0){
+            _this.setData({
+              errSee:true,
+              myError: util.errMsg.empty
+            })
+            return;
+          }
           _this.setData({
-            sentences:r.data
+            sentences:r.data,
+            errSee:false
           })
         }else{
-          wx.showToast({
-            title: '服务器响应失败~',
-            icon:'none'
+          _this.setData({
+            errSee: true,
+            myError: util.errMsg.error
           })
         }
       },
       fail:function(){
-        wx.showToast({
-          title: '服务器响应失败~',
-          icon: 'none'
+        _this.setData({
+          errSee: true,
+          myError: util.errMsg.error
         })
       }
     })
+  },
+  errHandler:function(){
+    this.fetchSentences();
   },
   turnToTalkPage:function(){
     wx.navigateTo({
@@ -45,23 +57,11 @@ Page({
       url: 'olive/olive',
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     util.setNavigationBarColor();
     this.fetchSentences();

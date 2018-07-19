@@ -57,13 +57,17 @@ Page({
         }
       })
     }else{
-      _this.showVisitorToast();
+      wx.showToast({
+        title: '授权失败~',
+        icon:'none'
+      })
     }
   },
   showVisitorToast: function () {
     wx.showToast({
-      title: ' 您现在是游客身份哦~ ',
-      icon:'none'
+      title: '服务器响应出错，登录失败~',
+      icon:'none',
+      duration:3000
     })
   },
   showErrorToast:function(){

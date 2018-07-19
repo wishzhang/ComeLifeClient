@@ -3,8 +3,18 @@
  * 父组件监听childobj事件得到子组件实例
  * ->父组件在onLoad还没得到子组件实例，在onShow以后调用相关方法
  */
-const WARN_EMPTY = '空空如也，~';
-const WARN_ERROR = '数据响应失败~';
+var errMsg={
+  error: {
+    img: '../../img/sorry.png',
+    errText: '连接服务器出错~',
+    btnText: '点我，重新加载'
+  },
+  empty: {
+    img: '../../img/sorry.png',
+    errText: '空空如也~',
+    btnText: '点我，重新加载'
+  }
+}
 var app = getApp();
 var util = require('../../../utils/util.js');
 
@@ -20,10 +30,8 @@ Component({
   },
   data: {
     noMore: false,
-    warn: {
-      canSee: 'none',
-      warnMsg: ''
-    },
+    errSee:false,
+    myError: {},
     allJokes: []
   },
   methods: {
@@ -71,19 +79,15 @@ Component({
     },
     fetchData: function(url, params) {
       var _this = this;
-      var localRes = util.request.getData({
+      util.request.getData({
         host: app.globalData.domain + url,
         params: params,
         method: 'POST',
         success: function(res) {
-          _this.dataHandler().success(res, localRes);
+          _this.dataHandler().success(res);
         },
         fail: function() {
-          _this.dataHandler().fail(localRes);
-        },
-        complete: function() {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
+          _this.dataHandler().fail();
         }
       });
     },
@@ -106,99 +110,44 @@ Component({
 
       var setSuccessData = {
         code0: function(jokes) {
+          if(jokes.length===0){
+            _this.setData({
+              errSee:true,
+              myError:errMsg.empty
+            })
+            return;
+          }
           //在展示前时刻，将data排序
           jokes.sort(compare('publishTime'));
           _this.setData({
-            warn: {
-              canSee: 'none'
-            },
+            errSee:false,
             allJokes: jokes
           })
         },
         code1: function() {
-          if (_this.data.allJokes.length === 0) {
-            _this.setData({
-              warn: {
-                canSee: 'block',
-                warnMsg: WARN_EMPTY
-              }
-            })
-          } else {
-            wx.showToast({
-              title: '无新纪录~',
-            })
-          }
-        },
-        code2: function() {
-          if (_this.data.allJokes.length !== 0) {
-            wx.showToast({
-              title: '连接服务器出错~',
-            })
-          } else {
-            wx.showModal({
-              content: '连接服务器出错,重新加载？',
-              success: function(res) {
-                if (res.confirm) {
-                  _this.fetchData(url, params);
-                } else {
-                  _this.setData({
-                    warn: {
-                      canSee: 'block',
-                      warnMsg: WARN_ERROR
-                    }
-                  })
-                }
-              }
-            })
-          }
-        },
-        code3: function() {
           _this.setData({
-            noMore: true
+            errSee: true,
+            myError: errMsg.error
           })
         }
       };
       var setFailData = function(localRes) {
-        if (localRes.data.length !== 0) {
-          //若网络请求，则启用缓存，注意：缓存数据也需分页展示！
-          setSuccessData.code0(localRes.data);
-          wx.showToast({
-            title: '连接服务器出错~',
-          })
-        } else {
-          wx.showModal({
-            content: '连接服务器出错,重新加载？',
-            success: function(res) {
-              if (res.confirm) {
-                _this.fetchData(url, params);
-              } else {
-                _this.setData({
-                  warn: {
-                    canSee: 'block',
-                    warnMsg: WARN_ERROR
-                  }
-                })
-              }
-            }
-          })
-        }
+        _this.setData({
+          errSee: true,
+          myError: errMsg.error
+        })
       };
 
       var success = function(res) {
-        console.log(res);
         if (res.code === 0) {
           setSuccessData.code0(res.data);
-        } else if (res.code === 1) { //無記錄
+        } else if (res.code === 1) { //服务器错误
           setSuccessData.code1();
-        } else if (res.code === 3) { //无更多
-          setSuccessData.code3();
-        } else { //服务器返回错误 code===2或...
-          setFailData(localRes)
-        }
+        } 
       };
 
       var fail = function(localRes) {
-        setFailData(localRes);
+        setFailData();
       };
 
       return {
@@ -207,16 +156,28 @@ Component({
         setSuccessData: setSuccessData
       }
     },
+    errHandler:function(e){
+      this.triggerEvent('errBtn',e);
+    },
     /**
      * 最新接口
      */
     refreshAllData: function() {
+      this.setData({
+        myError: {}
+      })
       this.fetchData('/allUserJoke');
     },
     refreshOneUserData: function() {
+      this.setData({
+        myError:{}
+      })
       this.fetchData('/oneUserJoke',{user_id:app.globalData.userInfo._id});
     },
     refreshCollectionData: function() {
+      this.setData({
+        myError: {}
+      })
       var _this = this;
       var dataHandler = function(data) {
         var users = data.data;
@@ -253,14 +214,26 @@ Component({
         },
         method: 'POST',
         success: function(res) {
-          var jokes = dataHandler(res.data);
-          _this.setData({
-            allJokes: jokes
-          })
+          var r=res.data;
+          if(r.code===0){
+            var jokes = dataHandler(res.data);
+            if(jokes.length===0){
+              _this.setData({
+                errSee: true,
+                myError:errMsg.empty
+              })
+            }else{
+              _this.setData({
+                errSee: false,
+                allJokes: jokes
+              })
+            }
+          }
         },
         fail: function() {
-          wx.showToast({
-            title: '服务器响应错误~'
+          _this.setData({
+            errSee:true,
+            myError:errMsg.error
           })
         },
         complete: function() {

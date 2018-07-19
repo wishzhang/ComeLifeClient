@@ -57,7 +57,6 @@ Page({
     }]
   },
   setNavigationBarColor: function(e) {
-    console.log(e);
     var dataset = e.target.dataset;
     var index = dataset.index;
     var item = dataset.item;

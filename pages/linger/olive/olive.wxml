@@ -1,16 +1,17 @@
 <!--pages/linger/olive/olive.wxml-->
-<view class="container">
+
+<view wx:if="{{!errSee}}" class="container">
   <block wx:for="{{olives}}">
-    <view class="item" data-item="{{item}}" data-index='{{index}}'  catchtap='turnToOliveEditPage'>
+    <view class="item" data-item="{{item}}" data-index='{{index}}' catchtap='turnToOliveEditPage'>
       <text class="item-content">{{item.content}}</text>
       <view class="item-footer">
-      <text class="item-publishTime .app-fontcolor-note">{{item.publishTime}}</text>
+        <text class="item-publishTime .app-fontcolor-note">{{item.publishTime}}</text>
       </view>
     </view>
-    <hr class="item-line"/>
+    <hr class="item-line" />
   </block>
-
-  <view  class="publish-image">
-    <image  src="./olive_edit.png" bindtap="turnToOliveAddPage" mode="scaleToFill" class="publish-image-content"></image>
-  </view>
+</view>
+<error wx:else binderrBtn="errHandler" err="{{myError}}"></error>
+<view class="publish-image">
+  <image src="./olive_edit.png" bindtap="turnToOliveAddPage" mode="scaleToFill" class="publish-image-content"></image>
 </view>

@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/component/test/test",
+    "pages/component/errorRes/errorRes",
     "pages/linger/olive/olive",
     "pages/mine/setting/setting",
     "pages/linger/linger",

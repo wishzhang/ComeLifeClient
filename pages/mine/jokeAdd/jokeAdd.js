@@ -18,11 +18,6 @@ Page({
       success: function(res) {
         console.log('res.data:' + res.data);
         if (res.data.code === 0) {
-          wx.showToast({
-            title: '发布成功',
-            icon: 'none',
-            duration: 2000
-          })
           wx.navigateBack();
         } else if (res.data.code === 1) {
           wx.showToast({

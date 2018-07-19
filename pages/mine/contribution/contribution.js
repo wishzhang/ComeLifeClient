@@ -24,4 +24,7 @@ Page({
   fetchChild:function(e){
     child=e.detail;
   },
+  errHandler:function(){
+    child.refreshOneUserData();
+  }
 })

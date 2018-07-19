@@ -1,4 +1,4 @@
 <!--pages/mine/collection/collection.wxml-->
 
-<joke bind:childobj="fetchChild" canuse="{{true}}">
+<joke bind:childobj="fetchChild" canuse="{{true}}" binderrBtn="errHandler">
 </joke>

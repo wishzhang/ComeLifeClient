@@ -1,5 +1,7 @@
 {
   "component": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "err":"../errorRes/errorRes"
+  },
   "enablePullDownRefresh": true
 }

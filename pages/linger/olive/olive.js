@@ -2,19 +2,14 @@
 const util=require('../../../utils/util.js');
 const app=getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    olives:[{
-      content:'第一条日记',
-      publishTime:'2017-07-15'
-    }, {
-      content: '第二条日记',
-      publishTime: '2017-07-15'
-    }],
-    user_id:''
+    olives:[],
+    user_id:'',
+    errSee:false,
+    myError:{}
+  },
+  errHandler:function(){
+    this.fetchOlives();
   },
   turnToOliveEditPage:function(e){
     console.log('e:'+JSON.stringify(e));
@@ -61,6 +56,9 @@ Page({
     })
   },
   fetchOlives:function(){
+    this.setData({
+      errSee: false
+    })
     var _this=this;
     wx.myRequest({
       url: app.globalData.domain +'/getOlives',
@@ -71,20 +69,28 @@ Page({
       success:function(res){
         var r=res.data;
         if(r.code===0){
+          if(r.data.length===0){
+            _this.setData({
+              errSee:true,
+              myError: util.errMsg.empty
+            })
+            return;
+          }
           _this.setData({
+            errSee:false,
             olives:r.data
           })
         }else if(r.code===1){
-          wx.showToast({
-            title: '获取失败',
-            icon:'none'
+          _this.setData({
+            errSee: true,
+            myError: util.errMsg.error
           })
         } 
       },
       fail:function(){
-        wx.showToast({
-          title: '获取失败',
-          icon: 'none'
+        _this.setData({
+          errSee: true,
+          myError: util.errMsg.error
         })
       }
     })
@@ -94,24 +100,12 @@ Page({
       url: 'olive_add/olive_add',
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
   
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     this.setData({
       user_id: app.globalData.userInfo._id

@@ -1,6 +1,4 @@
 <!--pages/component/test/test.wxml-->
 
 
-<text wx:if="{{arr.indexOf(g)!=-1}}">true</text>
-
-<text wx:else>false</text>
+<err binderrBtn="errHandler" err="{{myError}}"></err>

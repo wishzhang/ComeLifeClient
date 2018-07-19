@@ -1,5 +1,8 @@
 var app = getApp();
 
+/**
+ * 设置和获取当前页面的导航栏颜色
+ */
 const setNavigationBarColor = () => {
   var navigationBarColor = wx.getStorageSync('navigationBarColor');
   if (navigationBarColor) {
@@ -9,7 +12,6 @@ const setNavigationBarColor = () => {
     })
   }
 };
-
 const getNavigationBarColor=()=>{
   var navigationBarColor = wx.getStorageSync('navigationBarColor');
   return navigationBarColor;
@@ -44,22 +46,18 @@ const jokesConvertTime = jokes => {
   });
 };
 
-const deepCopy = function(src, dest) { 
-  for (var p in src) {  
-    if (Array.isArray(src[p]) || src[p] instanceof Object) {   
-      dest[p] = Array.isArray(src[p]) ? [] : {};   
-      arguments.callee(dest[p], src[p]);  
-    } else {   
-      dest[p] = src[p];  
-    } 
-  }
-  return dest;
-}
-
-//扩展
+//适应所有请求
 wx.myRequest = function (obj) {
   obj.complete=obj.complete||function(){};
-  obj.fail=obj.fail||function(){};
+  obj.fail=obj.fail||function(){
+    wx.showToast({
+      title: '服务器响应错误~',
+      icon:'none'
+    })
+  };
+  wx.showLoading({
+    title: '加载中...'
+ })
   var token = wx.getStorageSync('token');
   console.log('token:', token);
   wx.request({
@@ -76,13 +74,15 @@ wx.myRequest = function (obj) {
     fail: function () {
       obj.fail();
     },
-    complete: function () {
+    complete: function(){
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
       obj.complete();
     }
   })
 };
 /**
- * 职责：网络请求,具有本地缓存效果
+ * 职责：jokeList专属的网络请求,具有本地缓存效果
  * 例子：
  * var util=require('');
  * var res=util.request.getData({
@@ -144,12 +144,12 @@ const request = {
     }
     return arr;
   },
-  //公开getData
+  //公开getData，组件jokeList专属的请求方法
   getData: function(obj) {
     this.setIgnoreParams(['page']);
     var res = this.getFromLocalStorage(obj);
     this.getFromRemote(obj);
-    return [];
+    return {data:[]};
   },
   getFromRemote: function(obj) {
     var _this = this;
@@ -171,12 +171,8 @@ const request = {
           }
         }
       },
-      fail: function() {
-        obj.fail();
-      },
-      complete: function() {
-        obj.complete();
-      }
+      fail: obj.fail,
+      complete: obj.complete
     })
   },
   getFromLocalStorage: function(obj) {
@@ -253,10 +249,24 @@ const request = {
   }
 };
 
+//组件errorRes的响应错误信息对象
+var errMsg = {
+  error: {
+    img: '../../img/sorry.png',
+    errText: '连接服务器出错~',
+    btnText: '点我，重新加载'
+  },
+  empty: {
+    img: '../../img/sorry.png',
+    errText: '空空如也~',
+    btnText: '点我，重新加载'
+  }
+}
 
 module.exports = {
   jokesConvertTime: jokesConvertTime,
   request: request,
   setNavigationBarColor: setNavigationBarColor,
-  getNavigationBarColor: getNavigationBarColor
+  getNavigationBarColor: getNavigationBarColor,
+  errMsg: errMsg
 }

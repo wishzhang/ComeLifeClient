@@ -23,20 +23,18 @@ Page({
         if(r.code===0){
           wx.showToast({
             title: '提交成功',
-            success:function(){
-              wx.navigateBack();
-            }
+            duration:3000
           })
         }else if(r.code===1){
           wx.showToast({
-            title: '提交失败',
+            title: '提交失败~',
             icon: 'none'
           })
         }
       },
       fail:function(){
         wx.showToast({
-          title: '提交失败',
+          title: '提交失败~',
           icon:'none'
         })
       },
