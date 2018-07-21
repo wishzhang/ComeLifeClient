@@ -49,12 +49,38 @@ Page({
   },
   turnToTalkPage:function(){
     wx.navigateTo({
-      url: 'talk/talk',
+      url: '/pages/linger/talk/talk',
     })
   },
   turnToOlivePage:function(){
+    if(!app.globalData.canuse){
+      wx.switchTab({
+        url: '/pages/mine/mine',
+        complete:function(){
+          wx.showToast({
+            title: '请先授权登录^_^',
+            icon: 'none'
+          })
+        }
+      })
+      return;
+    }
     wx.navigateTo({
-      url: 'olive/olive',
+      url: '/pages/linger/olive/olive',
+    })
+  },
+  turnToTrackPage:function(){
+    wx.showToast({
+      title: '小Z在开发中^_^...',
+      icon:'none',
+      duration:3000
+    })
+  },
+  turnToDoubtPage:function(){
+    wx.showToast({
+      title: '小Z在开发中^_^...',
+      icon: 'none',
+      duration: 3000
     })
   },
   onLoad: function (options) {

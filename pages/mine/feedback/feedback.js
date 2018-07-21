@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    navigateBarColor: util.getNavigationBarColor()
   },
 
   formSubmit:function(e){
@@ -63,6 +63,9 @@ Page({
    */
   onShow: function () {
     util.setNavigationBarColor();
+    this.setData({
+      navigateBarColor: util.getNavigationBarColor()
+    })
   },
 
   /**

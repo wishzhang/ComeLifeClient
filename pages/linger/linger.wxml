@@ -5,7 +5,7 @@
       <image class="item-image" src="./talk_entry.png"></image>
       <text>言语</text>
     </view>
-    <view class="col">
+    <view class="col" bindtap='turnToTrackPage'>
       <image class="item-image" src="./load_entry.png"></image>
       <text>轨迹</text>
     </view>
@@ -13,7 +13,7 @@
       <image class="item-image" src="./aim_entry.png"></image>
       <text>青果</text>
     </view>
-    <view class="col">
+    <view class="col" bindtap='turnToDoubtPage'>
       <image class="item-image" src="./question_entry.png"></image>
       <text>不懂</text>
     </view>

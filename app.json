@@ -14,12 +14,14 @@
     "pages/mine/collection/collection",
     "pages/mine/feedback/feedback",
     "pages/linger/olive/olive_add/olive_add",
-    "pages/linger/olive/olive_edit/olive_edit"
+    "pages/linger/olive/olive_edit/olive_edit",
+    "pages/linger/track/track",
+    "pages/linger/doubt/doubt"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#cdcdcd",
-    "navigationBarTitleText": "望梅止渴",
+    "navigationBarTitleText": "荧幕星光",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

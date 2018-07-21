@@ -8,7 +8,8 @@ var app = getApp();
 Page({
   data: {
     value:'',
-    talk: []
+    talk: [],
+    navigateBarColor: util.getNavigationBarColor()
   },
   obj:{},
   yourTalk: function() {
@@ -46,13 +47,25 @@ Page({
     var updateYourTalk=function(){
       var _this=this;
       wx.request({
-        url: app.globalData.talkInfo.host,
-        data: _this.obj.yourTalk.params,
+        url: app.globalData.domain+'/talk',
+        data: {
+          text: _this.obj.yourTalk.params.perception.inputText.text
+        },
         method: 'POST',
         success: function (res) {
-          var value = res.data.results[0].values.text;
-          setYourTalk.call(_this,value);
-          _this.relativeTextareaValue.apply(_this);
+          var r=res.data;
+          console.log(JSON.stringify(r));
+          if(r.code===0){
+            var value = r.data.results[0].values.text;
+            setYourTalk.call(_this, value);
+            _this.relativeTextareaValue.apply(_this);
+          }else if(r.code===1){
+            wx.showToast({
+              title: '服务器内部出错',
+              icon: 'fail',
+              duration: 3000
+            })
+          }
         },
         fail: function () {
           wx.showToast({
@@ -119,6 +132,9 @@ Page({
   },
   onShow:function(){
     util.setNavigationBarColor();
+    this.setData({
+      navigateBarColor: util.getNavigationBarColor()
+    })
   },
   start:function(){
     this.obj.session.start.apply(this);

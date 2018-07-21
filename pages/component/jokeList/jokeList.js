@@ -140,6 +140,7 @@ Component({
 
       var success = function(res) {
         if (res.code === 0) {
+          console.log(res.data);
           setSuccessData.code0(res.data);
         } else if (res.code === 1) { //服务器错误
           setSuccessData.code1();
@@ -172,7 +173,7 @@ Component({
       this.setData({
         myError:{}
       })
-      this.fetchData('/oneUserJoke',{user_id:app.globalData.userInfo._id});
+      this.fetchData('/oneUserJoke',{_id:app.globalData.userInfo._id});
     },
     refreshCollectionData: function() {
       this.setData({

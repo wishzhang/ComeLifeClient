@@ -16,7 +16,7 @@
     <hr class="item-line" />
     <view class="send-box">
       <textarea class="send-textarea" bindinput="relativeTextareaValue" auto-height="true" maxlength="300" show-confirm-bar="{{false}}" value="{{value}}"></textarea>
-      <button class="send-btn" size="mini" type="primary" bindtap="start">发送</button>
+      <button class="send-btn" size="mini" type="primary" bindtap="start" style='background-color:{{navigateBarColor}}'>发送</button>
     </view>
   </view>
 </view>

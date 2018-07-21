@@ -1,5 +1,12 @@
 var app = getApp();
+//存储user_id
+const setUserID = user_id => {
+  wx.setStorageSync('user_id', user_id);
+}
 
+const getUserID = () => {
+  return wx.getStorageSync('user_id');
+}
 /**
  * 设置和获取当前页面的导航栏颜色
  */
@@ -132,7 +139,7 @@ const request = {
         joke.avatarUrl = user.avatarUrl;
         joke.isFavorite = false;
         var collector = joke.collectors;
-        var user_id = app.globalData.userInfo._id;
+        var user_id = getUserID();
         for (var k = 0; k < collector.length; k++) {
           if (user_id === collector[k]) {
             joke.isFavorite = true;
@@ -268,5 +275,8 @@ module.exports = {
   request: request,
   setNavigationBarColor: setNavigationBarColor,
   getNavigationBarColor: getNavigationBarColor,
-  errMsg: errMsg
+  errMsg: errMsg,
+  setUserID:setUserID,
+  getUserID:getUserID,
+  formatTime: formatTime
 }

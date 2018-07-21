@@ -34,6 +34,10 @@ Page({
     var userInfo = e.detail.userInfo;
     if(userInfo){
       app.globalData.userInfo=userInfo;
+      var user_id=util.getUserID();
+      if(user_id){
+        app.globalData.userInfo._id=user_id;
+      }
       wx.myRequest({
         url: app.globalData.domain + '/oneUserJoke',
         method: 'POST',
@@ -45,6 +49,7 @@ Page({
             _this.setData({
               canuse: true
             });
+            util.setUserID(app.globalData.userInfo._id);
           } else {
             _this.showVisitorToast();
           }

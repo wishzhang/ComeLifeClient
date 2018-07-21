@@ -76,6 +76,7 @@ Page({
             })
             return;
           }
+          r.data = util.jokesConvertTime(r.data);
           _this.setData({
             errSee:false,
             olives:r.data

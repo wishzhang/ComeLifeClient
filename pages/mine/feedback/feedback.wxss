@@ -39,6 +39,6 @@ page{
   margin: 0 25rpx;
 }
 
-.submit button[size=mini]{
-  padding: 15rpx 0;
+button[size=mini]{
+  padding: 10rpx 0;
 }
