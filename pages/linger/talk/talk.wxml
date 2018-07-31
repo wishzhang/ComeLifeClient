@@ -1,22 +1,33 @@
 <!--pages/linger/talk/talk.wxml-->
 <view class="container">
-  <view class="content-box">
-    <view class="content-item-box" wx:for="{{talk}}" wx:key="{{item.values.text}}">
-      <view class="content-item-left-box" wx:if="{{item.roleType==0}}">
-        <image class="role-image" src="{{item.iconPath}}"></image>
-        <text class="role-text">{{item.values.text}}</text>
+  <scroll-view class="content-box" style='height:{{contentHeight}}rpx;background:url({{talkBg}}); background-size:cover;'
+    scroll-y
+    scroll-into-view='{{scrollIntoView}}'
+    >
+    <view class='content-box-time' wx:for="{{talk}}" wx:key="{{talk.time}}">
+      <view class='time-container'>
+        <text class='app-fontsize-note time'>{{item.time}}</text>
       </view>
-      <view class="content-item-right-box" wx:else>
-        <text class="role-text">{{item.values.text}}</text>
-        <image class="role-image" src="{{item.iconPath}}"></image>
+      <view class="content-item-box" wx:for='{{item.contents}}' wx:key="{{item.values.text}}">
+        <view class="content-item-left-box" wx:if="{{item.roleType==0}}">
+          <image class="role-image" src="{{item.iconPath}}"></image>
+          <text class="role-text">{{item.values.text}}</text>
+        </view>
+        <view class="content-item-right-box" wx:else>
+          <text class="role-text">{{item.values.text}}</text>
+          <image class="role-image" src="{{item.iconPath}}"></image>
+        </view>
       </view>
     </view>
-  </view>
+    <view id='scrollToHere' style='width:100%;height:36rpx;'></view>
+  </scroll-view>
+
   <view class="footer">
     <hr class="item-line" />
     <view class="send-box">
-      <textarea class="send-textarea" bindinput="relativeTextareaValue" auto-height="true" maxlength="300" show-confirm-bar="{{false}}" value="{{value}}"></textarea>
-      <button class="send-btn" size="mini" type="primary" bindtap="start" style='background-color:{{navigateBarColor}}'>发送</button>
+      <textarea class="send-textarea" bindinput="relativeTextareaValue" maxlength="30" auto-height='{{true}}'     show-confirm-bar="{{false}}" value="{{value}}" cursor-spacing="{{cursorSpacing}}" bindlinechange='linechangeHandler' focus='{{textAreaFocus}}' auto-focus='{{true}}'>
+      </textarea>
+      <button class="send-btn" size="mini" type="primary" bindtap="tapStart" style='background-color:{{navigateBarColor}}'>发送</button>
     </view>
   </view>
 </view>

@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/linger/linger",
+    "pages/linger/talk/talk",
     "pages/home/home",
     "pages/component/test/test",
     "pages/component/errorRes/errorRes",
     "pages/linger/olive/olive",
     "pages/mine/setting/setting",
-    "pages/linger/linger",
-    "pages/linger/talk/talk",
+
     "pages/mine/contribution/contribution",
     "pages/mine/mine",
     "pages/logs/logs",

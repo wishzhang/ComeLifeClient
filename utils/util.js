@@ -270,6 +270,27 @@ var errMsg = {
   }
 }
 
+/**
+ * 本地存取
+ */
+
+const setCache=(name,obj)=>{
+  try {
+    wx.setStorageSync(name,obj)
+  } catch (e) {
+    throw 'error'
+  }
+}
+
+const getCache=(name)=>{
+  try {
+    var value = wx.getStorageSync(name)
+    return value
+  } catch (e) {
+    // Do something when catch error
+  }
+}
+
 module.exports = {
   jokesConvertTime: jokesConvertTime,
   request: request,
@@ -278,5 +299,7 @@ module.exports = {
   errMsg: errMsg,
   setUserID:setUserID,
   getUserID:getUserID,
-  formatTime: formatTime
+  formatTime: formatTime,
+  setCache:setCache,
+  getCache:getCache
 }
