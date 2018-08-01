@@ -24,8 +24,7 @@ page {
 .content-box {
   padding-left: 27rpx;
   padding-right: 27rpx;
-  height:calc(100% - 101rpx);
-  overflow: auto;
+  min-height:calc(100% - 101rpx);
   box-sizing: border-box;
 }
 
@@ -33,6 +32,7 @@ page {
   margin-top:36rpx;
   width: 100%;
   height:auto;
+  overflow: hidden;
 }
 
 .time-container{

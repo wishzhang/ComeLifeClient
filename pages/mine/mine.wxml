@@ -17,17 +17,17 @@
   </view>
 
   <!--我的投稿  -->
-  <view class="mine-item-line app-bgcolor"></view>
+  <!-- <view class="mine-item-line app-bgcolor"></view>
   <view class="container-row mine-item-content" bindtap="bindTapToContribution">
     <image class="mine-item-content-image" src="{{items[0].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[0].name}}</text>
-  </view>
+  </view> -->
   <!--我的收藏  -->
-  <view class="mine-item-line app-bgcolor"></view>
+  <!-- <view class="mine-item-line app-bgcolor"></view>
   <view class="container-row mine-item-content" bindtap="bindTapCollection">
     <image class="mine-item-content-image" src="{{items[1].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[1].name}}</text>
-  </view>
+  </view> -->
   <!--我的設置  -->
   <view class="mine-item-line app-bgcolor"></view>
   <view class="container-row mine-item-content" bindtap="bindTapToSetting" id='setting'>
@@ -35,9 +35,9 @@
     <text class="mine-item-content-text">{{items[2].name}}</text>
   </view>
     <!--投诉与建议  -->
-      <view class="mine-item-line app-bgcolor feedback-item-line"></view>
+      <!-- <view class="mine-item-line app-bgcolor feedback-item-line"></view>
   <view class="container-row mine-item-content" bindtap="bindTapToFeedback" id='feedback'>
     <image class="mine-item-content-image" src="{{items[3].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[3].name}}</text>
-  </view>
+  </view> -->
 </view>

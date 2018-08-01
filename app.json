@@ -2,22 +2,9 @@
   "pages": [
     "pages/linger/linger",
     "pages/linger/talk/talk",
-    "pages/home/home",
-    "pages/component/test/test",
     "pages/component/errorRes/errorRes",
-    "pages/linger/olive/olive",
     "pages/mine/setting/setting",
-
-    "pages/mine/contribution/contribution",
-    "pages/mine/mine",
-    "pages/logs/logs",
-    "pages/mine/jokeAdd/jokeAdd",
-    "pages/mine/collection/collection",
-    "pages/mine/feedback/feedback",
-    "pages/linger/olive/olive_add/olive_add",
-    "pages/linger/olive/olive_edit/olive_edit",
-    "pages/linger/track/track",
-    "pages/linger/doubt/doubt"
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,12 +17,6 @@
     "selectedColor": "#1d7f0a",
     "backgroundColor": "#FFF",
     "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "首页",
-        "iconPath": "pages/home/home_unselected.png",
-        "selectedIconPath": "pages/home/home_selected.png"
-      },
       {
         "pagePath": "pages/linger/linger",
         "text": "逗留",
