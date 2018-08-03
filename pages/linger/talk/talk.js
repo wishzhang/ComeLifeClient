@@ -161,11 +161,9 @@ Page({
         talk: talkCache
       })
     }else{
-      this.setData({
-        talk:[{
-          time: util.formatTime(new Date()),
-          contents: []
-        }]
+      this.data.talk.push({
+        time: util.formatTime(new Date()),
+        contents: []
       })
     }
   },
@@ -209,7 +207,7 @@ Page({
       })
     }
   },
-  //计算对话框高度,这个貌似不起作用啊
+  //计算对话框高度
   calContentHeight: function() {
     var talks = this.data.talk;
     var l=0;
@@ -219,8 +217,6 @@ Page({
       var cl = contents.length * 130;
       l += cl;
     }
-
-    //当计算小于除footer外的高度时，另height填充
     return l;
   }
 })
