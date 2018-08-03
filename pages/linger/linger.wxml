@@ -1,5 +1,5 @@
 <!--pages/linger/linger.wxml-->
-<view class="container">
+<view class="container-y">
    <view class="row">
      <view class="col" bindtap='turnToTalkPage'>
       <image class="item-image" src="./talk_entry.png"></image>
@@ -25,18 +25,18 @@
     </view>
     <hr class="title-line" />
     <view wx:if="{{!errSee}}" class="content">
-      <block wx:for="{{sentences}}">
-        <view class="content-item">
-          <view class="item-main">
-            <text class="sentence">{{item.content}}</text>
+      <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}' hover-class='click-effect' hover-start-time='{{0}}' class='container-y'>
+        <view class="container-y content-item">
+          <view class="container-y">
+            <text>{{item.content}}</text>
           </view>
           <view class="item-footer">
-            <text>—</text>
+            <text>--</text>
             <text class="author">{{item.author}}</text>
           </view>
         </view>
         <hr class="item-line" />
-      </block>
+      </view>
     </view>
     <err wx:else binderrBtn="errHandler" err="{{myError}}"></err>
   </view>

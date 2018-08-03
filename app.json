@@ -4,7 +4,8 @@
     "pages/linger/talk/talk",
     "pages/component/errorRes/errorRes",
     "pages/mine/setting/setting",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/linger/sentenceDetail/sentenceDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -44,6 +44,20 @@ Page({
       }
     })
   },
+  tapToSentenceDetail:function(e){
+    var item=e.currentTarget.dataset.item;
+    var params='';
+    for(var key in item){
+      if(item.hasOwnProperty(key)){
+        params+=key+'='+item[key];
+      }
+      params+='&';
+    }
+    params=params.substr(0,params.length-1);
+    wx.navigateTo({
+      url: 'sentenceDetail/sentenceDetail?'+params,
+    })
+  },
   errHandler:function(){
     this.fetchSentences();
   },

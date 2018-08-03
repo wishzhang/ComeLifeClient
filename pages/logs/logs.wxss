@@ -6,3 +6,8 @@
 .log-item {
   margin: 10rpx;
 }
+
+.container{
+  width:200px;
+  height:200px;
+}

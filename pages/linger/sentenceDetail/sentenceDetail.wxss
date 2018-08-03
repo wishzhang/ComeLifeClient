@@ -1,0 +1,17 @@
+/* pages/linger/sentenceDetail/sentenceDetail.wxss */
+.container{
+  background-color:white;
+}
+
+.main{
+  min-height: 150rpx;
+  width:100%;
+  display: flex;
+}
+
+.footer{
+  display: flex;
+  justify-content: flex-end;
+  height: 50rpx;
+  align-items: center;
+}

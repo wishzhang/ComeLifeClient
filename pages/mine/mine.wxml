@@ -1,6 +1,6 @@
 <!--pages/mine/mine.wxml-->
 
-<view class="container-col">
+<view class="container-y">
   <!--我的頭像  -->
   <view wx:if="{{canuse}}" class="user-content" bindtap="turnToMsgPage" style="background-color:{{navigationBarColor}}">
     <view class="user-image">
@@ -29,8 +29,7 @@
     <text class="mine-item-content-text">{{items[1].name}}</text>
   </view> -->
   <!--我的設置  -->
-  <view class="mine-item-line app-bgcolor"></view>
-  <view class="container-row mine-item-content" bindtap="bindTapToSetting" id='setting'>
+  <view class="mine-item-content app-content-padding" bindtap="bindTapToSetting" id='setting'>
     <image class="mine-item-content-image" src="{{items[2].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[2].name}}</text>
   </view>

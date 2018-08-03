@@ -1,12 +1,3 @@
-/* pages/linger/linger.wxss */
-
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .row {
   width: 100%;
   display: flex;
@@ -69,6 +60,7 @@
   background-color: white;
 }
 
+/* item */
 .content-item {
   padding-left: 27rpx;
   padding-top: 35rpx;
@@ -76,8 +68,8 @@
   padding-right: 27rpx;
 }
 
-.item-main {
-  width: 100%;
+.click-effect{
+  background:#f4f4f4;
 }
 
 .item-footer {
