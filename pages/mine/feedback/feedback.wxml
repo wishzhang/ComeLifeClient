@@ -1,8 +1,8 @@
 <!--pages/mine/feedback/feedback.wxml-->
 <view class='container'>
   <form bindsubmit='formSubmit' class='form'>
-    <textarea placeholder='请输入您的建议，不超过300字' maxlength='300' focus='{{true}}' show-confirm-bar='{{false}}' name='content' class='content' required></textarea>
-    <input type='text' placeholder='请输入您的邮箱' maxlength='30' name='email' class='email' required></input>
+    <textarea placeholder='请输入您的建议，不超过300字' maxlength='300' auto-focus='{{true}}' show-confirm-bar='{{false}}' name='content' class='content' required></textarea>
+    <input type='text' placeholder='您的邮箱或其它联系方式' maxlength='30' name='email' class='email' required></input>
     <view class='button-container'>
       <button size='mini' type='primary' form-type='submit' class='submit' style='background-color:{{navigateBarColor}}'>提交</button>
     </view>

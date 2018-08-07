@@ -1,4 +1,26 @@
 var app = getApp();
+//showToast
+
+wx.showMyToast = function(obj){
+  if (!obj.title) {
+    throw "title error"
+  }
+  obj.icon = obj.icon || 'none'
+  obj.duration = obj.duration || 3000
+
+  setTimeout(() => {
+    wx.showToast({
+      title: obj.title,
+      icon: obj.icon,
+      duration: obj.duration
+    });
+    setTimeout(() => {
+      wx.hideToast();
+    }, 3000)
+  }, 0);
+}
+
+
 //存储user_id
 const setUserID = user_id => {
   wx.setStorageSync('user_id', user_id);
@@ -17,9 +39,11 @@ const setNavigationBarColor = () => {
       frontColor: '#ffffff',
       backgroundColor: navigationBarColor
     })
+  } else {
+    wx.setStorageSync('navigationBarColor', '#1d7f0a');
   }
 };
-const getNavigationBarColor=()=>{
+const getNavigationBarColor = () => {
   var navigationBarColor = wx.getStorageSync('navigationBarColor');
   return navigationBarColor;
 };
@@ -54,17 +78,17 @@ const jokesConvertTime = jokes => {
 };
 
 //适应所有请求
-wx.myRequest = function (obj) {
-  obj.complete=obj.complete||function(){};
-  obj.fail=obj.fail||function(){
+wx.myRequest = function(obj) {
+  obj.complete = obj.complete || function() {};
+  obj.fail = obj.fail || function() {
     wx.showToast({
       title: '服务器响应错误~',
-      icon:'none'
+      icon: 'none'
     })
   };
   wx.showLoading({
     title: '加载中...'
- })
+  })
   var token = wx.getStorageSync('token');
   console.log('token:', token);
   wx.request({
@@ -74,14 +98,14 @@ wx.myRequest = function (obj) {
     header: {
       token: token
     },
-    success: function (res) {
+    success: function(res) {
       wx.setStorageSync('token', res.header.token)
       obj.success(res);
     },
-    fail: function () {
+    fail: function() {
       obj.fail();
     },
-    complete: function(){
+    complete: function() {
       wx.hideLoading();
       wx.stopPullDownRefresh();
       obj.complete();
@@ -130,7 +154,7 @@ const request = {
       var r = user.jokes;
       for (var j = 0; j < r.length; j++) {
         var joke = r[j];
-        joke.uid=user.uid;
+        joke.uid = user.uid;
         joke.nickName = user.nickName;
         joke.gender = user.gender;
         joke.city = user.city;
@@ -156,7 +180,9 @@ const request = {
     this.setIgnoreParams(['page']);
     var res = this.getFromLocalStorage(obj);
     this.getFromRemote(obj);
-    return {data:[]};
+    return {
+      data: []
+    };
   },
   getFromRemote: function(obj) {
     var _this = this;
@@ -274,15 +300,15 @@ var errMsg = {
  * 本地存取
  */
 
-const setCache=(name,obj)=>{
+const setCache = (name, obj) => {
   try {
-    wx.setStorageSync(name,obj)
+    wx.setStorageSync(name, obj)
   } catch (e) {
     throw 'error'
   }
 }
 
-const getCache=(name)=>{
+const getCache = (name) => {
   try {
     var value = wx.getStorageSync(name)
     return value
@@ -297,9 +323,9 @@ module.exports = {
   setNavigationBarColor: setNavigationBarColor,
   getNavigationBarColor: getNavigationBarColor,
   errMsg: errMsg,
-  setUserID:setUserID,
-  getUserID:getUserID,
+  setUserID: setUserID,
+  getUserID: getUserID,
   formatTime: formatTime,
-  setCache:setCache,
-  getCache:getCache
+  setCache: setCache,
+  getCache: getCache
 }

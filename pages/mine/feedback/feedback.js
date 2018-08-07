@@ -13,7 +13,14 @@ Page({
   formSubmit:function(e){
     var data=e.detail.value;
     data.user_id=app.globalData.userInfo._id;
-    console.log('form-data:'+JSON.stringify(data));
+    if(data.content.trim()<=0){
+      wx.showToast({
+        title: '请输入您的建议~',
+        icon:'none',
+        duration: 3000
+      })
+      return;
+    }
     wx.myRequest({
       url:app.globalData.domain+'/addFeedback',
       data:data,
@@ -21,9 +28,9 @@ Page({
       success:function(res){
         var r=res.data;
         if(r.code===0){
-          wx.showToast({
-            title: '提交成功',
-            duration:3000
+          wx.showMyToast({
+            title:'提交成功',
+            icon:'success'
           })
         }else if(r.code===1){
           wx.showToast({

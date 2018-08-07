@@ -245,3 +245,21 @@ app文件，组件
 -wx.setNavigationBarColor只对当前页面有效，有两种办法：  
 1.动态改变app.json配置文件  
 2.每个页面加载一份初始化代码（能重写Page么？？？），这条错了，要在onShow才行啊。。。
+
++
+>     <view class="item-footer">
+>       <text space="{{true}}">-- </text>
+>       <text class="author">{{item.author}}</text>
+>     </view>
+>     /*item-footer原采用,结果文字末尾自动转行了*/
+>     .item-footer{
+>       width:100%;
+>       padding-top:27rpx;
+>       display:flex;
+>       justify-content:flex-end;
+>     }
+>     .item-footer {
+>       width: 100%;
+>       padding-top: 27rpx;
+>       text-align: right;
+>     }

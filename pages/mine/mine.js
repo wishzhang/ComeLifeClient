@@ -25,7 +25,7 @@ Page({
       name: '我的設置',
       iconPath: './setting.png'
     }, {
-      name: '投诉与建议',
+      name: '反馈与建议',
       iconPath: './feedback.png'
     }]
   },

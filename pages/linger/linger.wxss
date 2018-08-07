@@ -75,8 +75,7 @@
 .item-footer {
   width: 100%;
   padding-top: 27rpx;
-  display: flex;
-  justify-content: flex-end;
+  text-align: right;
 }
 
 .item-line {

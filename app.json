@@ -5,13 +5,15 @@
     "pages/component/errorRes/errorRes",
     "pages/mine/setting/setting",
     "pages/mine/mine",
-    "pages/linger/sentenceDetail/sentenceDetail"
+    "pages/linger/sentenceDetail/sentenceDetail",
+    "pages/mine/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#cdcdcd",
     "navigationBarTitleText": "荧幕星光",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor":"1d7f0a"
   },
   "tabBar": {
     "color": "#cdcdcd",

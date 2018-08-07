@@ -12,7 +12,7 @@
   </view>
   <!-- 需要使用 button 来授权登录 -->
   <view wx:else class="user-authorize" style="background-color:{{navigationBarColor}}">
-    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <button class="app-fontsize-title " wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
     <view wx:else>请升级微信版本</view>
   </view>
 
@@ -33,10 +33,10 @@
     <image class="mine-item-content-image" src="{{items[2].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[2].name}}</text>
   </view>
-    <!--投诉与建议  -->
-      <!-- <view class="mine-item-line app-bgcolor feedback-item-line"></view>
-  <view class="container-row mine-item-content" bindtap="bindTapToFeedback" id='feedback'>
+  <!--反馈与建议  -->
+  <view class="mine-item-line app-bgcolor feedback-item-line"></view>
+  <view class="mine-item-content app-content-padding" bindtap="bindTapToFeedback" id='feedback'>
     <image class="mine-item-content-image" src="{{items[3].iconPath}}"></image>
     <text class="mine-item-content-text">{{items[3].name}}</text>
-  </view> -->
+  </view>
 </view>

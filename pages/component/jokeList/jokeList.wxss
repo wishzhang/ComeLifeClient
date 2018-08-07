@@ -1,39 +1,52 @@
+
 /*垂直排列佈局 */
 
-.container-col {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: #fff;
-}
-
-/*定義整個窗口 背景顏色  */
-
-page {
+page{
+  width:100%;
+  height:100%;
   background-color: #f4f4f4;
 }
+
+.container-y{
+     width:100%;
+     display:flex;
+     flex-direction:column;
+     box-sizing:border-box;
+     overflow-x: hidden;
+}
+
+/*内容区到边界的距离  */
+.app-content-padding {
+  padding-top: 25rpx;
+  padding-bottom:25rpx;
+  padding-left: 27rpx;
+  padding-right:27rpx;
+} 
+
+.app-content-margin {
+  margin: 25rpx 27rpx;
+}
+
+
+/* 背景顏色  */
 
 .app-bgcolor {
   background-color: #f4f4f4;
 }
 
-/*内容区到边界的距离  */
-
-.app-content-padding {
-  padding: 10rpx 27rpx;
+.app-headercolor{
+  background-color: #303030;
 }
 
-/*字体颜色 大小  */
+/*字体大小*/
 
-.app-fontcolor-main {
-  color: #2c2c2c;
+/*默认字体大小  */
+ input,textarea,text{
+  font-size:30rpx;
 }
 
-.app-fontcolor-note {
-  color: #8a8a8a;
+.app-fontsize-title {
+  font-size: 32rpx;
 }
 
 .app-fontsize-main {
@@ -44,22 +57,15 @@ page {
   font-size: 24rpx;
 }
 
-/* 局部 */
-
-.home-container {
-  background-color: #f4f4f4;
-  padding-bottom: 0;
+/*字体颜色  */
+.app-fontcolor-main{
+  color:#2c2c2c
 }
-
-.home-item {
-  justify-content: space-between;
-  overflow: hidden;
-  background-color: white;
-  box-sizing: border-box;
+.app-fontcolor-note{
+  color:#8a8a8a
 }
 
 /*item header  */
-
 .header {
   width: 100%;
   height: 70rpx;
@@ -104,6 +110,7 @@ page {
 }
 
 .item-line {
+  display: flex;
   width: 100%;
   height: 1px;
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));

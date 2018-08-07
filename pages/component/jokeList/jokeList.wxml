@@ -3,9 +3,9 @@
 <block>
   <slot name="contribution-publish-btn"></slot>
 </block>
-<view wx:if="{{!errSee}}" class="container-col  home-container" id='container'>
-  <block wx:for="{{allJokes}}" wx:key="{{item._id}}">
-    <view class="container-col home-item app-content-padding" id='{{item._id}}'>
+<view wx:if="{{!errSee}}" class="container-y " id='container'>
+  <view class='container-y ' wx:for="{{allJokes}}" wx:key="{{item._id}}">
+    <view class="app-content-padding  container-y " id='{{item._id}}'>
       <view class="header">
         <image class="header-headshot" src="{{item.avatarUrl}}"></image>
         <text class="header-username app-fontcolor-title">{{item.nickName}}</text>
@@ -22,11 +22,9 @@
       </view>
     </view>
     <hr class="item-line" />
-    <!-- <view class="item-line app-bgcolor" /> -->
-  </block>
+  </view>
   <block wx:if="{{noMore}}">
     <text class="app-fontcolor-note nomore">没有更多咯~</text>
-    <!-- <view class="item-line app-bgcolor" /> -->
   </block>
 </view>
 <err wx:else err="{{myError}}" binderrBtn="errHandler"></err>

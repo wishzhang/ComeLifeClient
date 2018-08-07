@@ -31,7 +31,7 @@
             <text>{{item.content}}</text>
           </view>
           <view class="item-footer">
-            <text>--</text>
+            <text space="{{true}}">-- </text>
             <text class="author">{{item.author}}</text>
           </view>
         </view>
