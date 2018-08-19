@@ -1,17 +1,17 @@
 <!--pages/linger/olive/olive.wxml-->
 
 <view wx:if="{{!errSee}}" class="container">
-  <block wx:for="{{olives}}">
-    <view class="item" data-item="{{item}}" data-index='{{index}}' catchtap='turnToOliveEditPage'>
+  <view class='container' wx:for="{{olives}}" hover-class='click-effect' hover-start-time='{{0}}' >
+    <view  class="item" data-item="{{item}}" data-index='{{index}}' catchtap='turnToOliveEditPage'>
       <text class="item-content">{{item.content}}</text>
       <view class="item-footer">
         <text class="item-publishTime .app-fontcolor-note">{{item.publishTime}}</text>
       </view>
     </view>
     <hr class="item-line" />
-  </block>
+  </view>
 </view>
 <error wx:else binderrBtn="errHandler" err="{{myError}}"></error>
-<view class="publish-image">
+<view class="publish-image" style='background-color:{{bgColor}}'>
   <image src="./olive_edit.png" bindtap="turnToOliveAddPage" mode="scaleToFill" class="publish-image-content"></image>
 </view>

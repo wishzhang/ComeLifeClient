@@ -1,6 +1,7 @@
 // pages/linger/linger.js
 const util=require('../../utils/util.js')
 const app=getApp();
+const login=require('../../common/login.js')
 Page({
   data: {
     errSee:false,
@@ -13,7 +14,7 @@ Page({
       errSee:false
     })
     wx.myRequest({
-      url:app.globalData.domain+'/getSentences',
+      url: app.globalData.domain + app.globalData.api.lingerSentence,
       method:'POST',
       success:function(res){
         var r=res.data;
@@ -54,91 +55,30 @@ Page({
       params+='&';
     }
     params=params.substr(0,params.length-1);
-    wx.navigateTo({
-      url: 'sentenceDetail/sentenceDetail?'+params,
-    })
+    util.pageJump.toCommonPage('sentenceDetail/sentenceDetail?' + params)
   },
   errHandler:function(){
     this.fetchSentences();
   },
   turnToTalkPage:function(){
-    wx.navigateTo({
-      url: '/pages/linger/talk/talk',
-    })
+    util.pageJump.toCommonPage('/pages/linger/talk/talk')
   },
   turnToOlivePage:function(){
-    if(!app.globalData.canuse){
-      wx.switchTab({
-        url: '/pages/mine/mine',
-        complete:function(){
-          wx.showToast({
-            title: '请先授权登录^_^',
-            icon: 'none'
-          })
-        }
-      })
-      return;
-    }
-    wx.navigateTo({
-      url: '/pages/linger/olive/olive',
-    })
-  },
-  turnToTrackPage:function(){
-    wx.showToast({
-      title: '小Z在开发中^_^...',
-      icon:'none',
-      duration:3000
-    })
-  },
-  turnToDoubtPage:function(){
-    wx.showToast({
-      title: '小Z在开发中^_^...',
-      icon: 'none',
-      duration: 3000
-    })
+    util.pageJump.toOwnPage('/pages/linger/olive/olive')
   },
   onLoad: function (options) {
-
-  },
-  onReady: function () {
+    login.start();
   },
   onShow: function () {
     util.setNavigationBarColor();
     this.fetchSentences();
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function () {
     this.fetchSentences();
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    wx.showMyToast({
+      title:'没有更多句子了~'
+    })
   }
 })

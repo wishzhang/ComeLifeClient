@@ -11,6 +11,8 @@ Page({
   },
   //登录并获取用户个人信息
   onLoad: function() {
+
+    
     var _this = this;
     wx.getSetting({
       success: function(res) {

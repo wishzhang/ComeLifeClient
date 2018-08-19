@@ -1,11 +1,7 @@
-// pages/mine/feedback/feedback.js
+
 const util = require('../../../utils/util.js');
 var app=getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     navigateBarColor: util.getNavigationBarColor()
   },
@@ -13,16 +9,14 @@ Page({
   formSubmit:function(e){
     var data=e.detail.value;
     data.user_id=app.globalData.userInfo._id;
-    if(data.content.trim()<=0){
-      wx.showToast({
-        title: '请输入您的建议~',
-        icon:'none',
-        duration: 3000
+    if(data.content.trim()==''){
+      wx.showMyToast({
+        title: '请输入您的建议~'
       })
       return;
     }
     wx.myRequest({
-      url:app.globalData.domain+'/addFeedback',
+      url:app.globalData.domain+app.globalData.api.feedbackAdd,
       data:data,
       method:'POST',
       success:function(res){
@@ -34,15 +28,13 @@ Page({
           })
         }else if(r.code===1){
           wx.showToast({
-            title: '提交失败~',
-            icon: 'none'
+            title: '提交失败~'
           })
         }
       },
       fail:function(){
-        wx.showToast({
-          title: '提交失败~',
-          icon:'none'
+        wx.showMyToast({
+          title: '提交失败~'
         })
       },
       complete:function(){
@@ -50,63 +42,10 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     util.setNavigationBarColor();
     this.setData({
       navigateBarColor: util.getNavigationBarColor()
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

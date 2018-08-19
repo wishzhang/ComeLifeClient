@@ -17,6 +17,14 @@ App({
     canuse:false,
     key:{
       TALK:'talk'
+    },
+    api:{
+      login:'/oneUserJoke',
+      lingerSentence:'/getSentences',
+      feedbackAdd: '/addFeedback',
+      getOlives: '/getOlives',
+      editOlive:'/editOlive',
+      addOlive:'/addOlive'
     }
   }
 })

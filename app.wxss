@@ -70,3 +70,8 @@ page{
  ::-webkit-scrollbar{
   display: none;
 }  
+
+/*view 点击效果 */
+.click-effect{
+  background:#f4f4f4;
+}

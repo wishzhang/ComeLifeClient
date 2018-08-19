@@ -2,5 +2,6 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "error": "../../component/errorRes/errorRes"
-  }
+  },
+  "navigationBarTitleText": "青果"
 }

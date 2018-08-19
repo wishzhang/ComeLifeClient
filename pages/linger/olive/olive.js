@@ -1,40 +1,46 @@
-// pages/linger/olive/olive.js
-const util=require('../../../utils/util.js');
-const app=getApp();
+
+const util = require('../../../utils/util.js');
+const app = getApp();
 Page({
   data: {
-    olives:[],
-    user_id:'',
-    errSee:false,
-    myError:{}
+    bgColor: util.getNavigationBarColor(),
+    olives: [],
+    user_id: '',
+    errSee: false,
+    myError: {}
   },
-  errHandler:function(){
-    this.fetchOlives();
-  },
-  turnToOliveEditPage:function(e){
-    console.log('e:'+JSON.stringify(e));
-    var dataset=e.currentTarget.dataset;
-    var item=dataset.item;
-    var olive_id=item._id;
-    var oliveContent=item.content;
-    wx.navigateTo({
-      url: './olive_edit/olive_edit?olive_id=' +olive_id+'&content='+oliveContent
+  init: function () {
+    this.setData({
+      bgColor: util.getNavigationBarColor()
     })
   },
-  deleteOlive:function(e){
+  errHandler: function() {
+    this.fetchOlives();
+  },
+  turnToOliveEditPage: function(e) {
+    var dataset = e.currentTarget.dataset;
+    var item = dataset.item;
+    var olive_id = item._id;
+    var oliveContent = item.content;
+    var url = './olive_edit/olive_edit?olive_id=' + olive_id + '&content=' + oliveContent;
+    util.pageJump.toOwnPage(url);
+  },
+  deleteOlive: function(e) {
 
   },
 
-  del:function(){
+  del: function() {
     var _this = this;
     var dataset = e.currentTarget.dataset;
     var item = dataset.item;
     var olive_id = item._id;
     wx.myRequest({
       url: app.globalData.domain + '/deleteOlive',
-      data: { olive_id: olive_id },
+      data: {
+        olive_id: olive_id
+      },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         var r = res.data;
         if (r.code === 0) {
           _this.setData({
@@ -47,7 +53,7 @@ Page({
           })
         }
       },
-      fail: function () {
+      fail: function() {
         wx.showToast({
           title: '响应失败',
           icon: 'none'
@@ -55,40 +61,41 @@ Page({
       }
     })
   },
-  fetchOlives:function(){
+  fetchOlives: function() {
     this.setData({
       errSee: false
     })
-    var _this=this;
+    var _this = this;
     wx.myRequest({
-      url: app.globalData.domain +'/getOlives',
-      data:{
-        user_id:this.data.user_id
+      url: app.globalData.domain + app.globalData.api.getOlives,
+      data: {
+        user_id: this.data.user_id
       },
-      method:'POST',
-      success:function(res){
-        var r=res.data;
-        if(r.code===0){
-          if(r.data.length===0){
+      method: 'POST',
+      success: function(res) {
+        var r = res.data;
+        if (r.code === 0) {
+          if (r.data.length === 0) {
             _this.setData({
-              errSee:true,
+              errSee: true,
               myError: util.errMsg.empty
             })
             return;
           }
+          _this.dataHandler(r.data);
           r.data = util.jokesConvertTime(r.data);
           _this.setData({
-            errSee:false,
-            olives:r.data
+            errSee: false,
+            olives: r.data
           })
-        }else if(r.code===1){
+        } else if (r.code === 1) {
           _this.setData({
             errSee: true,
             myError: util.errMsg.error
           })
-        } 
+        }
       },
-      fail:function(){
+      fail: function() {
         _this.setData({
           errSee: true,
           myError: util.errMsg.error
@@ -96,57 +103,32 @@ Page({
       }
     })
   },
-  turnToOliveAddPage:function(){
-    wx.navigateTo({
-      url: 'olive_add/olive_add',
-    })
+  dataHandler: function(arrs) {
+    const mySort = function(objA, objB) {
+      var a = new Date(objA.publishTime);
+      var b = new Date(objB.publishTime);
+      return b - a;
+    }
+    arrs.sort(mySort);
   },
-  onLoad: function (options) {
 
+  turnToOliveAddPage: function() {
+    util.pageJump.toOwnPage('olive_add/olive_add')
   },
-  onReady: function () {
-  
+  onLoad: function(options) {
+    this.init();
   },
-  onShow: function () {
+  onShow: function() {
     this.setData({
       user_id: app.globalData.userInfo._id
     })
     this.fetchOlives();
     util.setNavigationBarColor();
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.fetchOlives();
   },
+  onReachBottom: function() {
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

@@ -317,6 +317,31 @@ const getCache = (name) => {
   }
 }
 
+//管理页面跳转
+const pageJump={
+  toOwnPage:function(url){
+    if (!app.globalData.canuse) {
+      wx.switchTab({
+        url: '/pages/mine/mine',
+        complete: function () {
+          wx.showMyToast({
+            title: '请先授权登录^_^'
+          })
+        }
+      })
+      return;
+    }
+    wx.navigateTo({
+      url:url,
+    })
+  },
+  toCommonPage:function(url){
+    wx.navigateTo({
+      url: url,
+    })
+  }
+}
+
 module.exports = {
   jokesConvertTime: jokesConvertTime,
   request: request,
@@ -327,5 +352,6 @@ module.exports = {
   getUserID: getUserID,
   formatTime: formatTime,
   setCache: setCache,
-  getCache: getCache
+  getCache: getCache,
+  pageJump
 }

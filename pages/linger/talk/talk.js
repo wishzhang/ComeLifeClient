@@ -16,6 +16,11 @@ Page({
     talk: [],
     navigateBarColor: util.getNavigationBarColor()
   },
+  init:function(){
+    this.setData({
+      navigateBarColor: util.getNavigationBarColor()
+    })
+  },
   obj: {},
   yourTalk: function() {
     var _this = this;
@@ -145,6 +150,8 @@ Page({
 
   //obj对象用来管理其他对象
   onLoad: function(options) {
+    this.init();
+
     this.obj.myTalk = this.myTalk();
     this.obj.yourTalk = this.yourTalk();
     this.obj.session = this.session();

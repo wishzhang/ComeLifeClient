@@ -2,5 +2,6 @@
   "enablePullDownRefresh":true,
   "usingComponents":{
     "err":"../component/errorRes/errorRes"
-  }
+  },
+  "navigationBarTitleText":"逗留"
 }

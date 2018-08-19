@@ -6,7 +6,10 @@
     "pages/mine/setting/setting",
     "pages/mine/mine",
     "pages/linger/sentenceDetail/sentenceDetail",
-    "pages/mine/feedback/feedback"
+    "pages/mine/feedback/feedback",
+    "pages/linger/olive/olive_edit/olive_edit",
+    "pages/linger/olive/olive_add/olive_add",
+    "pages/linger/olive/olive"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,5 +37,5 @@
       }
     ]
   },
-  "debug": true
+  "debug":true
 }

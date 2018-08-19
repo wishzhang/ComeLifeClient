@@ -1,18 +1,20 @@
 <!--pages/linger/linger.wxml-->
 <view class="container-y">
-   <view class="row">
-     <view class="col" bindtap='turnToTalkPage'>
+  <view class="row">
+    <view class="col" bindtap='turnToTalkPage'>
       <image class="item-image" src="./talk_entry.png"></image>
       <text>言语</text>
     </view>
-   <!--   <view class="col" bindtap='turnToTrackPage'>
-      <image class="item-image" src="./load_entry.png"></image>
-      <text>轨迹</text>
-    </view>
+
     <view class="col" bindtap='turnToOlivePage'>
       <image class="item-image" src="./aim_entry.png"></image>
       <text>青果</text>
     </view>
+    <!--   <view class="col" bindtap='turnToTrackPage'>
+      <image class="item-image" src="./load_entry.png"></image>
+      <text>轨迹</text>
+    </view>
+
     <view class="col" bindtap='turnToDoubtPage'>
       <image class="item-image" src="./question_entry.png"></image>
       <text>不懂</text>

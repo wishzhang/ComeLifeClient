@@ -1,6 +1,6 @@
-<view class="container-col app-content-padding">
-  <textarea class="olive-content" value="{{oliveContent}}" placeholder="分享你的啥,300字以内哈" maxlength="300" auto-focus="true" auto-height="true" bindinput="relateData" bindconfirm="postData"></textarea>
-  <view  class="publish-image" >
+<view class="container-col">
+  <textarea class="olive-content app-content-padding" value="{{oliveContent}}" placeholder="分享你的啥,300字以内哈" maxlength="300" auto-focus="{{true}}" auto-height="true" bindinput="relateData" bindconfirm="postData"></textarea>
+  <view  class="publish-image" style='background-color:{{bgColor}}'>
     <image class="publish-image-content"  src="./oliveEdit_success.png" bindtap="fetchData" ></image>
   </view>
 </view>

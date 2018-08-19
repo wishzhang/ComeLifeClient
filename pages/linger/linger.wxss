@@ -68,10 +68,6 @@
   padding-right: 27rpx;
 }
 
-.click-effect{
-  background:#f4f4f4;
-}
-
 .item-footer {
   width: 100%;
   padding-top: 27rpx;

@@ -1,7 +1,17 @@
-// pages/mine/oliveAdd/oliveAdd.js
+
 const util = require('../../../../utils/util.js');
 var app = getApp();
 Page({
+  data: {
+    bgColor: util.getNavigationBarColor(),
+    oliveContent: '',
+    olive_id: ''
+  },
+  init: function () {
+    this.setData({
+      bgColor: util.getNavigationBarColor()
+    })
+  },
   relateData: function(e) {
     this.setData({
       oliveContent: e.detail.value
@@ -11,37 +21,34 @@ Page({
     this.postData();
   },
   postData: function() {
+    if (!this.data.oliveContent.trim()) {
+      wx.showMyToast({
+        title: '请写点啥~'
+      })
+      return;
+    }
     wx.myRequest({
-      url: app.globalData.domain + '/editOlive',
+      url: app.globalData.domain + app.globalData.api.editOlive,
       data: this.data,
       method: 'POST',
       success: function(res) {
-        console.log('res.data:' + res.data);
         if (res.data.code === 0) {
           wx.navigateBack();
         } else if (res.data.code === 1) {
-          wx.showToast({
-            title: '失败，服务器出错~',
-            icon: 'none',
-            duration: 2000
+          wx.showMyToast({
+            title: '失败，服务器出错~'
           })
         }
       },
       fail: function() {
         wx.showToast({
-          title: '失败，服务器出错~',
-          icon: 'none',
-          duration: 2000
+          title: '失败，服务器出错~'
         })
       }
     })
   },
-  data: {
-    oliveContent: '',
-    olive_id: ''
-  },
   onLoad: function(options) {
-    console.log('options:' + JSON.stringify(options));
+    this.init();
     this.setData({
       olive_id: options.olive_id,
       oliveContent: options.content
