@@ -1,9 +1,92 @@
 var app = getApp();
-//showToast
+/**
+ * 说明：
+ * 1. 面向对象思想
+ */
 
-wx.showMyToast = function(obj){
+/**
+ * 16进制颜色转为rgba格式，默认透明度0.05
+ * */
+var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+String.prototype.colorRgb = function (opacity) {
+  var opacity=opacity||0.15;
+  var sColor = this.toLowerCase();
+  if (sColor && reg.test(sColor)) {
+    if (sColor.length === 4) {
+      var sColorNew = "#";
+      for (var i = 1; i < 4; i += 1) {
+        sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
+      }
+      sColor = sColorNew;
+    }
+    //处理六位的颜色值
+    var sColorChange = [];
+    for (var i = 1; i < 7; i += 2) {
+      sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
+    }
+    sColorChange.push(opacity);
+    return "rgba(" + sColorChange.join(",") + ")";
+  } else {
+    return sColor;
+  }
+};
+
+/**
+ * 本地存取对象
+ */
+
+const setCache = (name, obj) => {
+  try {
+    wx.setStorageSync(name, obj)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const getCache = (name) => {
+  try {
+    var obj = wx.getStorageSync(name)
+    return obj
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+/**
+ *  管理页面跳转
+ */
+const pageJump = {
+  //跳到需要授权才能使用的页面
+  toOwnPage: function (url) {
+    if (!app.globalData.canuse) {
+      wx.switchTab({
+        url: '/pages/mine/mine',
+        complete: function () {
+          wx.showMyToast({
+            title: '请先授权登录^_^'
+          })
+        }
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: url,
+    })
+  },
+  //跳到不需要授权就能使用的页面
+  toCommonPage: function (url) {
+    wx.navigateTo({
+      url: url,
+    })
+  }
+}
+
+/**
+ * 优先使用该toast方法
+ */
+wx.showMyToast = function(obj) {
   if (!obj.title) {
-    throw "title error"
+    throw "must set title property!"
   }
   obj.icon = obj.icon || 'none'
   obj.duration = obj.duration || 3000
@@ -16,7 +99,7 @@ wx.showMyToast = function(obj){
     });
     setTimeout(() => {
       wx.hideToast();
-    }, 3000)
+    }, obj.duration)
   }, 0);
 }
 
@@ -48,6 +131,9 @@ const getNavigationBarColor = () => {
   return navigationBarColor;
 };
 
+/**
+ * 将Date对象转换成 年-月-日 时-分 字符串的格式
+ */
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -65,6 +151,46 @@ const formatNumber = n => {
 }
 
 /**
+ * 优先使用wx.myRequest，而不是wx.request
+ */
+wx.myRequest = function (obj) {
+  obj.complete = obj.complete || function () { }
+  obj.success = obj.success || function () { }
+  obj.fail = obj.fail || function () { }
+  wx.showLoading({
+    title: '加载中...'
+  })
+  //没应用token
+  var token = wx.getStorageSync('token')
+  console.log('本地存储的token:', token)
+  wx.request({
+    url: obj.url,
+    data: obj.data,
+    method: obj.method,
+    header: {
+      token: token
+    },
+    success: function (res) {
+      wx.setStorageSync('token', res.header.token)
+      obj.success(res)
+    },
+    fail: function () {
+      wx.showMyToast({
+        title: '连接服务器出错~'
+      })
+      obj.fail()
+    },
+    complete: function () {
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
+      obj.complete()
+    }
+  })
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
  * 将jokes数组的对象的publishTime属性值（为时间戳字符串）转换为
  * xxxx-xx-xx xx:xx
  */
@@ -77,41 +203,6 @@ const jokesConvertTime = jokes => {
   });
 };
 
-//适应所有请求
-wx.myRequest = function(obj) {
-  obj.complete = obj.complete || function() {};
-  obj.fail = obj.fail || function() {
-    wx.showToast({
-      title: '服务器响应错误~',
-      icon: 'none'
-    })
-  };
-  wx.showLoading({
-    title: '加载中...'
-  })
-  var token = wx.getStorageSync('token');
-  console.log('token:', token);
-  wx.request({
-    url: obj.url,
-    data: obj.data,
-    method: obj.method,
-    header: {
-      token: token
-    },
-    success: function(res) {
-      wx.setStorageSync('token', res.header.token)
-      obj.success(res);
-    },
-    fail: function() {
-      obj.fail();
-    },
-    complete: function() {
-      wx.hideLoading();
-      wx.stopPullDownRefresh();
-      obj.complete();
-    }
-  })
-};
 /**
  * 职责：jokeList专属的网络请求,具有本地缓存效果
  * 例子：
@@ -283,7 +374,7 @@ const request = {
 };
 
 //组件errorRes的响应错误信息对象
-var errMsg = {
+const errMsg = {
   error: {
     img: '../../img/sorry.png',
     errText: '连接服务器出错~',
@@ -296,62 +387,16 @@ var errMsg = {
   }
 }
 
-/**
- * 本地存取
- */
-
-const setCache = (name, obj) => {
-  try {
-    wx.setStorageSync(name, obj)
-  } catch (e) {
-    throw 'error'
-  }
-}
-
-const getCache = (name) => {
-  try {
-    var value = wx.getStorageSync(name)
-    return value
-  } catch (e) {
-    // Do something when catch error
-  }
-}
-
-//管理页面跳转
-const pageJump={
-  toOwnPage:function(url){
-    if (!app.globalData.canuse) {
-      wx.switchTab({
-        url: '/pages/mine/mine',
-        complete: function () {
-          wx.showMyToast({
-            title: '请先授权登录^_^'
-          })
-        }
-      })
-      return;
-    }
-    wx.navigateTo({
-      url:url,
-    })
-  },
-  toCommonPage:function(url){
-    wx.navigateTo({
-      url: url,
-    })
-  }
-}
-
 module.exports = {
-  jokesConvertTime: jokesConvertTime,
-  request: request,
-  setNavigationBarColor: setNavigationBarColor,
-  getNavigationBarColor: getNavigationBarColor,
-  errMsg: errMsg,
-  setUserID: setUserID,
-  getUserID: getUserID,
-  formatTime: formatTime,
-  setCache: setCache,
-  getCache: getCache,
+  jokesConvertTime,
+  request,
+  setNavigationBarColor,
+  getNavigationBarColor,
+  errMsg,
+  setUserID,
+  getUserID,
+  formatTime,
+  setCache,
+  getCache,
   pageJump
 }

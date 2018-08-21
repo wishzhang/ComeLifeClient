@@ -7,9 +7,9 @@ const util = require('../../../utils/util.js');
 var app = getApp();
 Page({
   data: {
+    talkBgColor: util.getNavigationBarColor().colorRgb(),
     talkBg: app.globalData.domain +'/images/talk_bg.png',
     scrollIntoView:'scrollToHere',
-    contentHeight:0,
     textAreaFocus: true,
     cursorSpacing: 10,
     value: '',
@@ -17,8 +17,11 @@ Page({
     navigateBarColor: util.getNavigationBarColor()
   },
   init:function(){
+    util.setNavigationBarColor();
     this.setData({
-      navigateBarColor: util.getNavigationBarColor()
+      navigateBarColor: util.getNavigationBarColor(),
+      talkBgColor: util.getNavigationBarColor().colorRgb(),
+      scrollIntoView: 'scrollToHere'
     })
   },
   obj: {},
@@ -45,7 +48,7 @@ Page({
       var t = _this.data.talk
       t[t.length - 1].contents.push({
         roleType: 0,
-        iconPath: './tuling.png',
+        iconPath: './beauty.png',
         values: {
           text: v
         }
@@ -173,6 +176,9 @@ Page({
         contents: []
       })
     }
+    if(this.data.talk.length<=1){
+      this.obj.yourTalk.setYourTalk('嗨，原来你也在这里~')
+    }
   },
   onUnload: function() {
     //存储缓存
@@ -181,20 +187,7 @@ Page({
     }
   },
   onShow: function() {
-    util.setNavigationBarColor();
-    this.setData({
-      navigateBarColor: util.getNavigationBarColor()
-    })
-
-    console.log('contentHeight:'+this.calContentHeight())
-    var _this=this;
-    this.setData({
-      contentHeight:this.calContentHeight(),
-    },function(){
-      _this.setData({
-        scrollIntoView: 'scrollToHere'
-      })
-    })
+    this.init();
   },
   tapStart: function() {
     this.obj.session.start.apply(this);
@@ -213,17 +206,5 @@ Page({
         cursorSpacing: 0
       })
     }
-  },
-  //计算对话框高度
-  calContentHeight: function() {
-    var talks = this.data.talk;
-    var l=0;
-    l+=76*talks.length;
-    for (var i = 0; i < talks.length; i++) {
-      var contents = talks[i].contents;
-      var cl = contents.length * 130;
-      l += cl;
-    }
-    return l;
   }
 })

@@ -1,63 +1,40 @@
-/*
-  scroll-view需要固定高度-_-
-  计算：
-  .content-box-time margin-top:36rpx;
-  .time 40rpx
-  ..content-item-box margin 上25+下25=50rpx height 80rpx  注意margin重合
-
-  得到 n1*(76+n2*130)
-*/
-page {
-  height: 100%;
+.container-talk {
+  height: calc(100% - 101rpx);
 }
-
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-/*聊天内容布局  */
-
+/* 内容 */
 .content-box {
+  height: 100%;
   padding-left: 27rpx;
   padding-right: 27rpx;
-  min-height:calc(100% - 101rpx);
-  box-sizing: border-box;
 }
 
-.content-box-time{
-  margin-top:36rpx;
+.content-box-time {
+  margin-top: 36rpx;
+}
+
+.time-container {
   width: 100%;
-  height:auto;
-  overflow: hidden;
-}
-
-.time-container{
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.time{
+.time {
   padding: 0 15px;
-  background-color:rgba(194, 188, 188, 0.3);
+  background-color: rgba(194, 188, 188, 0.3);
   border-radius: 3px;
   text-align: center;
-  height:40rpx;
+  height: 40rpx;
   line-height: 40rpx;
   box-sizing: border-box;
 }
-
+/* 对话框 */
 .content-item-box {
   width: 100%;
-  margin: 25rpx 0;
-  box-sizing: border-box;
-  height:80rpx;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+  margin: 20rpx 0;
 }
 
 .content-item-left-box {
@@ -73,49 +50,50 @@ page {
 }
 
 .role-image {
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   border-radius: 45rpx;
 }
 
 .role-text {
-  max-width:calc(100% - 170rpx);
+  max-width: calc(100% - 170rpx);
+  box-sizing: border-box;
   background-color: white;
   padding: 20rpx;
-  margin-left:20rpx;
+  margin-left: 20rpx;
   margin-right: 20rpx;
   border-radius: 10rpx;
-  box-sizing: border-box;
   word-break: break-all;
   word-wrap: break-word;
 }
 
 /*footer  */
-.footer{
-  width:100%;
-  min-height:101rpx;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+
+.footer {
+  width: 100%;
+  height: 101rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
-.item-line{
-  width:100%;
-  height:1px;
-background:-webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,0),rgba(135,135,135,1));
+.item-line {
+  width: 100%;
+  height: 1px;
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(135, 135, 135, 1));
 }
+
 /*发送布局  */
 
 .send-box {
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   box-sizing: border-box;
   overflow: hidden;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }
 
 .send-textarea {
@@ -130,14 +108,15 @@ background:-webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,0),r
 .send-btn {
   width: 25%;
   height: 65rpx;
-  padding: 0 0;
   padding-left: 0;
   padding-right: 0;
   margin-right: 27rpx;
   margin-left: 0;
   align-self: flex-end;
 }
+
 /*以下属性在这里才生效  */
+
 button[size=mini] {
   padding: 0 0;
   line-height: 65rpx;

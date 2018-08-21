@@ -3,7 +3,7 @@
   <view class="row">
     <view class="col" bindtap='turnToTalkPage'>
       <image class="item-image" src="./talk_entry.png"></image>
-      <text>言语</text>
+      <text>聊天</text>
     </view>
 
     <view class="col" bindtap='turnToOlivePage'>
