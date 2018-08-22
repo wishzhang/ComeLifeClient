@@ -1,7 +1,9 @@
 .container-talk {
   height: calc(100% - 101rpx);
 }
+
 /* 内容 */
+
 .content-box {
   height: 100%;
   padding-left: 27rpx;
@@ -28,7 +30,9 @@
   line-height: 40rpx;
   box-sizing: border-box;
 }
+
 /* 对话框 */
+
 .content-item-box {
   width: 100%;
   display: flex;
@@ -83,7 +87,9 @@
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(135, 135, 135, 1));
 }
 
-/*发送布局  */
+/*发送布局
+  注意这里的一些属性为hack
+  */
 
 .send-box {
   width: 100%;
@@ -98,11 +104,17 @@
 
 .send-textarea {
   width: 100%;
-  border-bottom: 1px solid gray;
+  height: 65rpx;
   box-sizing: border-box;
+ 
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  line-height: 45rpx;
+
+  padding-left: 20rpx;
   margin-right: 20rpx;
   margin-left: 107rpx;
-  padding-left: 20rpx;
+  border-bottom: 1px solid gray;
 }
 
 .send-btn {

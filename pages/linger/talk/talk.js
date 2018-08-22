@@ -1,49 +1,43 @@
-// pages/linger/talk/talk.js
 /**
- * bug:<hr>,输入框
  * 聊天界面：通过请求图灵机器人API接口实现
+ * 
+ * 单例模式采用全局变量 session;
+ * 
  */
+var session;
 const util = require('../../../utils/util.js');
 var app = getApp();
 Page({
   data: {
     talkBgColor: util.getNavigationBarColor().colorRgb(),
-    talkBg: app.globalData.domain +'/images/talk_bg.png',
-    scrollIntoView:'scrollToHere',
-    textAreaFocus: true,
-    cursorSpacing: 10,
-    value: '',
-    talk: [],
+    scrollIntoView: 'scrollToHere',
+    textAreaFocus: false,
+    cursorSpacing: 10,//解决键盘与textarea之间的间隔问题
+    value: '', //输入框内容
+    talk: [], //对话内容
     navigateBarColor: util.getNavigationBarColor()
   },
-  init:function(){
+  onLoad: function (options) {
+    this.init();
+  },
+  onReady() {
+    //如果初始页面textarea聚焦因过早调用失效了，这里重新调用
+    this.readyInput();
+  },
+  onUnload: function () {
+    this.saveToCache();
+  },
+  init: function() {
+    this.updateFromCache();
     util.setNavigationBarColor();
     this.setData({
       navigateBarColor: util.getNavigationBarColor(),
-      talkBgColor: util.getNavigationBarColor().colorRgb(),
-      scrollIntoView: 'scrollToHere'
+      talkBgColor: util.getNavigationBarColor().colorRgb()
     })
+    session = this.session();
   },
-  obj: {},
   yourTalk: function() {
     var _this = this;
-    var params = {
-      "perception": {
-        "inputText": {
-          "text": '^_^'
-        },
-        "selfInfo": {
-          "location": {
-            "city": app.globalData.userInfo.city,
-            "province": app.globalData.userInfo.province
-          }
-        }
-      },
-      "userInfo": {
-        "apiKey": app.globalData.talkInfo.apiKey,
-        "userId": '123456'
-      }
-    };
     var setYourTalk = function(v) {
       var t = _this.data.talk
       t[t.length - 1].contents.push({
@@ -57,65 +51,50 @@ Page({
         value: '',
         talk: _this.data.talk
       })
-      _this.setData({
-        scrollIntoView: 'scrollToHere'
-      })
+      _this.scrollToBottom();
     };
     var updateYourTalk = function() {
-      var _this = this;
-      wx.request({
+      wx.myRequest({
         url: app.globalData.domain + '/talk',
         data: {
-          text: _this.obj.yourTalk.params.perception.inputText.text
+          text: _this.data.value
         },
         method: 'POST',
         success: function(res) {
           var r = res.data;
-          console.log(JSON.stringify(r));
           if (r.code === 0) {
             var value = r.data.results[0].values.text;
             setYourTalk.call(_this, value);
-            _this.relativeTextareaValue.apply(_this);
           } else if (r.code === 1) {
-            wx.showToast({
-              title: '服务器内部出错',
-              icon: 'none',
-              duration: 3000
+            wx.showMyToast({
+              title: '服务器内部出错'
             })
           }
-        },
-        fail: function() {
-          wx.showToast({
-            title: '连接服务器出错',
-            icon: 'none',
-            duration: 3000
-          })
         }
       })
     };
     return {
-      params: params,
       setYourTalk: setYourTalk,
       updateYourTalk: updateYourTalk
     }
   },
   myTalk: function() {
     var _this = this;
-    var setMyTalk = function() {
+    var setMyTalk = function(value) {
+      value = value || '^_^'
       var t = _this.data.talk
       t[t.length - 1].contents.push({
         roleType: 1,
         iconPath: app.globalData.userInfo.avatarUrl || './portrait.png',
         values: {
-          text: _this.obj.yourTalk.params.perception.inputText.text
+          text: value
         }
       });
       _this.setData({
+        value: value,
         talk: _this.data.talk
       })
-      _this.setData({
-        scrollIntoView: 'scrollToHere'
-      })
+      _this.scrollToBottom();
     }
     return {
       setMyTalk: setMyTalk
@@ -123,15 +102,17 @@ Page({
   },
   session: function() {
     var _this = this;
+    //当isStart为true则保存本次对话记录到本地
     var isStart = false;
     var hasStart = function() {
       return isStart;
     }
+
     var start = function() {
-      var myTalk = _this.obj.myTalk;
-      var yourTalk = _this.obj.yourTalk;
-      myTalk.setMyTalk.apply(_this);
-      yourTalk.updateYourTalk.apply(_this);
+      var myTalk = _this.myTalk();
+      var yourTalk = _this.yourTalk();
+      myTalk.setMyTalk(_this.data.value);
+      yourTalk.updateYourTalk();
       isStart = true;
     };
     return {
@@ -139,63 +120,68 @@ Page({
       hasStart: hasStart
     }
   },
-  relativeTextareaValue: function(e) {
-    if (!e) {
-      this.obj.yourTalk.params.perception.inputText.text = '^_^';
-      return;
-    }
-    if (e.detail.value == '') {
-      this.obj.yourTalk.params.perception.inputText.text = '^_^';
-      return;
-    }
-    this.obj.yourTalk.params.perception.inputText.text = e.detail.value;
+  readyInput(){
+    this.setData({
+      scrollIntoView: 'scrollToHere',
+      textAreaFocus: true
+    })
   },
-
-  //obj对象用来管理其他对象
-  onLoad: function(options) {
-    this.init();
-
-    this.obj.myTalk = this.myTalk();
-    this.obj.yourTalk = this.yourTalk();
-    this.obj.session = this.session();
-
-    //读取缓存
+  scrollToBottom() {
+    this.setData({
+      scrollIntoView: 'scrollToHere'
+    })
+  },
+  pullKeyBoard() {
+    this.setData({
+      textAreaFocus: true
+    })
+  },
+  updateFromCache() {
+    var self = this;
     var talkCache = util.getCache(app.globalData.key.TALK);
+    //TODO: 提高页面流畅度，最好按需加载显示，这里采取的是只显示talk数组的后15条数据。
+    talkCache = talkCache.slice(-10);
     if (talkCache) {
-      //每次进来为一次会话
       talkCache.push({
         time: util.formatTime(new Date()),
         contents: []
       })
       this.setData({
         talk: talkCache
+      }, function () {
+        self.readyInput();
       })
-    }else{
-      this.data.talk.push({
-        time: util.formatTime(new Date()),
-        contents: []
+    } else {
+      this.setData({
+        talk: [{
+          time: util.formatTime(new Date()),
+          contents: [{
+            roleType: 0,
+            iconPath: './beauty.png',
+            values: {
+              text: '嗨，原来你也在这里~'
+            }
+          }]
+        }]
       })
-    }
-    if(this.data.talk.length<=1){
-      this.obj.yourTalk.setYourTalk('嗨，原来你也在这里~')
     }
   },
-  onUnload: function() {
-    //存储缓存
-    if (this.obj.session.hasStart()) {
+  saveToCache() {
+    if (session.hasStart()) {
       util.setCache(app.globalData.key.TALK, this.data.talk)
     }
   },
-  onShow: function() {
-    this.init();
+  //监听事件
+  tapStart: function (e) {
+    session.start();
+    this.readyInput();
   },
-  tapStart: function() {
-    this.obj.session.start.apply(this);
+  bindInput: function(e) {
     this.setData({
-      textAreaFocus: true
+      value: e.detail.value
     })
   },
-  linechangeHandler: function(e) {
+  linechangeHandler: function (e) {
     var count = e.detail.lineCount;
     if (count < 3) {
       this.setData({

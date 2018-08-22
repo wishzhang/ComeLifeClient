@@ -23,7 +23,7 @@
   <view class="footer container-y">
     <hr class="item-line" />
     <view class="send-box">
-      <textarea style='border-bottom:1px solid {{navigateBarColor}}' class="send-textarea" bindinput="relativeTextareaValue" maxlength="30" auto-height='{{true}}'     show-confirm-bar="{{false}}" value="{{value}}" cursor-spacing="{{cursorSpacing}}" bindlinechange='linechangeHandler' focus='{{textAreaFocus}}' auto-focus='{{true}}'>
+      <textarea bindinput='bindInput' style='border-bottom:1px solid {{navigateBarColor}}' class="send-textarea"  show-confirm-bar="{{false}}" value="{{value}}" cursor-spacing="{{cursorSpacing}}" bindlinechange='linechangeHandler' focus='{{textAreaFocus}}'>
       </textarea>
       <button class="send-btn" size="mini" type="primary" bindtap="tapStart" style='background-color:{{navigateBarColor}}'>发送</button>
     </view>
