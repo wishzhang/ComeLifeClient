@@ -20,24 +20,27 @@
       <text>不懂</text>
     </view> -->
   </view>
-
+  <!-- 句子迷 -->
   <view class="main">
+    <!-- 句子迷标题 -->
     <view class="subtitle">
       <text class="app-fontsize-title">句子迷</text>
     </view>
     <hr class="title-line" />
     <view wx:if="{{!errSee}}" class="content">
-      <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}' hover-class='click-effect' hover-start-time='{{0}}' class='container-y'>
-        <view class="container-y content-item">
-          <view class="container-y">
-            <text>{{item.content}}</text>
-          </view>
-          <view class="item-footer">
-            <text space="{{true}}">-- </text>
-            <text class="author">{{item.author}}</text>
+      <!-- 句子迷子项 -->
+      <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}'  class='container-y'>
+        <view class="container-y content-item ">
+          <view class='item-wrap' hover-class='click-effect' hover-start-time='{{0}}'>
+            <view class="container-y">
+              <text class='content-sentences'>{{item.content}}</text>
+            </view>
+            <view class="item-footer">
+              <text space="{{true}}">-- </text>
+              <text class="author">{{item.author}}</text>
+            </view>
           </view>
         </view>
-        <hr class="item-line" />
       </view>
     </view>
     <err wx:else binderrBtn="errHandler" err="{{myError}}"></err>

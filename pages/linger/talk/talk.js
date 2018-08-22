@@ -28,12 +28,12 @@ Page({
     this.saveToCache();
   },
   init: function() {
-    this.updateFromCache();
     util.setNavigationBarColor();
     this.setData({
       navigateBarColor: util.getNavigationBarColor(),
       talkBgColor: util.getNavigationBarColor().colorRgb()
     })
+    this.updateFromCache();
     session = this.session();
   },
   yourTalk: function() {

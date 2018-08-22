@@ -5,6 +5,25 @@ var app = getApp();
  */
 
 /**
+ * 将对象（key,value）转换成url参数形式：key1=value1&key2=value2
+ */
+
+const formatToParams=(item)=>{
+  if(!item){
+    throw 'lack of object param'
+  }
+  var params = '';
+  for (var key in item) {
+    if (item.hasOwnProperty(key)) {
+      params += key + '=' + item[key];
+    }
+    params += '&';
+  }
+  params = params.substr(0, params.length - 1);
+  return params;
+}
+
+/**
  * 16进制颜色转为rgba格式，默认透明度0.05
  * */
 var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
@@ -123,7 +142,7 @@ const setNavigationBarColor = () => {
       backgroundColor: navigationBarColor
     })
   } else {
-    wx.setStorageSync('navigationBarColor', '#1d7f0a');
+    wx.setStorageSync('navigationBarColor', '#FF4500');
   }
 };
 const getNavigationBarColor = () => {
@@ -398,5 +417,6 @@ module.exports = {
   formatTime,
   setCache,
   getCache,
-  pageJump
+  pageJump,
+  formatToParams
 }

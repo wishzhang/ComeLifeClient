@@ -1,3 +1,4 @@
+/* 导航栏 */
 .row {
   width: 100%;
   display: flex;
@@ -17,15 +18,13 @@
   align-items: center;
 }
 
-/* header item  */
-
 .item-image {
   width: 60rpx;
   height: 60rpx;
   padding-bottom: 15rpx;
 }
 
-/*main  */
+/*主体：句子迷  */
 
 .main {
   width: 100%;
@@ -33,7 +32,7 @@
   display: flex;
   flex-direction: column;
 }
-
+/* 句子迷标题 */
 .subtitle {
   width: 100%;
   height: 90rpx;
@@ -49,7 +48,7 @@
   width: 100%;
   height: 1px;
   box-sizing: border-box;
-   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0),rgba(138, 138, 138, 1));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
 }
 
 .content {
@@ -60,12 +59,31 @@
   background-color: white;
 }
 
-/* item */
+/* 句子迷 */
+
 .content-item {
   padding-left: 27rpx;
-  padding-top: 35rpx;
-  padding-bottom: 20rpx;
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
   padding-right: 27rpx;
+}
+
+/* 句子容器样式 */
+.item-wrap{
+  box-shadow: 2rpx 4rpx 2rpx 5rpx rgba(255,69,0,0.15);
+  border-radius: 8rpx;
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+  padding-left:15rpx;
+  padding-right:15rpx;
+}
+
+.content-sentences {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .item-footer {
@@ -78,5 +96,5 @@
   width: 100%;
   height: 1px;
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
-  margin-left:17rpx;
+  margin-left: 17rpx;
 }

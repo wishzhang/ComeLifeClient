@@ -16,11 +16,11 @@
     "backgroundColor": "#cdcdcd",
     "navigationBarTitleText": "荧幕星光",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "1d7f0a"
+    "navigationBarBackgroundColor": "#FF4500"
   },
   "tabBar": {
     "color": "#cdcdcd",
-    "selectedColor": "#1d7f0a",
+    "selectedColor": "#FF4500",
     "backgroundColor": "#FFF",
     "list": [
       {
