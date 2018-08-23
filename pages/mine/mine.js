@@ -19,10 +19,10 @@ Page({
       name: '我的收藏',
       iconPath: './collection.png'
     }, {
-      name: '我的設置',
+      name: '我的设置',
       iconPath: './setting.png'
     }, {
-      name: '反馈与建议',
+      name: '留言与反馈',
       iconPath: './feedback.png'
     }]
   },

@@ -34,7 +34,7 @@ var instance={
           app.globalData.userInfo = res.data.data[0];
           app.globalData.canuse = true;
           util.setUserID(app.globalData.userInfo._id);
-          fun(1);
+          fun.call(_this,1);
         } else {
           _this.showVisitorToast();
         }

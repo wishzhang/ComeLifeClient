@@ -3,13 +3,13 @@
   <view class="row">
     <view class="col" bindtap='turnToTalkPage'>
       <image class="item-image" src="./talk_entry.png"></image>
-      <text>聊天</text>
+      <text>言语</text>
     </view>
 
-    <view class="col" bindtap='turnToOlivePage'>
+    <!-- <view class="col" bindtap='turnToOlivePage'>
       <image class="item-image" src="./aim_entry.png"></image>
       <text>青果</text>
-    </view>
+    </view> -->
     <!--   <view class="col" bindtap='turnToTrackPage'>
       <image class="item-image" src="./load_entry.png"></image>
       <text>轨迹</text>

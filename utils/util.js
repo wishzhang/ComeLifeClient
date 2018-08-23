@@ -1,10 +1,5 @@
 var app = getApp();
 /**
- * 说明：
- * 1. 面向对象思想
- */
-
-/**
  * 将对象（key,value）转换成url参数形式：key1=value1&key2=value2
  */
 

@@ -11,52 +11,8 @@ Page({
   },
   //登录并获取用户个人信息
   onLoad: function() {
-
-    
-    var _this = this;
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function(res) {
-              app.globalData.userInfo = res.userInfo;
-              var user_id=util.getUserID();
-              if(user_id){
-                app.globalData.userInfo._id=user_id;
-              }
-              wx.myRequest({
-                url: app.globalData.domain + '/oneUserJoke',
-                method: 'POST',
-                data: app.globalData.userInfo,
-                success: function(res) {
-                  if (res.data.code === 0) {
-                    app.globalData.userInfo = res.data.data[0];
-                    app.globalData.canuse = true;
-                    _this.setData({
-                      canuse: true
-                    });
-                    util.setUserID(app.globalData.userInfo._id);
-                  } else {
-                    _this.showVisitorToast();
-                  }
-                },
-                fail: function() {
-                  _this.showVisitorToast();
-                },
-                complete: function() {
-                  console.log('app.globalData:' + JSON.stringify(app.globalData));
-                }
-              })
-            },
-            fail: function() {
-              _this.showVisitorToast();
-            }
-          })
-        }
-      },
-      fail: function() {
-        _this.showVisitorToast();
-      }
+    login.start(function(status){
+      
     })
   },
   showVisitorToast: function() {
