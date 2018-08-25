@@ -16,7 +16,7 @@ Page({
       return;
     }
     wx.myRequest({
-      url:app.globalData.domain+app.globalData.api.feedbackAdd,
+      url:app.url.feedbackAdd,
       data:data,
       method:'POST',
       success:function(res){

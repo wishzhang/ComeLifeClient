@@ -26,7 +26,7 @@ var instance={
       app.globalData.userInfo._id = user_id;
     }
     wx.myRequest({
-      url: app.globalData.domain + app.globalData.api.login,
+      url:  app.url.login,
       method: 'POST',
       data: app.globalData.userInfo,
       success: function (res) {

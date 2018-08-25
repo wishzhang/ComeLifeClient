@@ -28,16 +28,13 @@ Page({
       errSee: false
     })
     wx.myRequest({
-      url: app.globalData.domain + app.globalData.api.lingerSentence,
+      url: app.url.lingerSentence,
       method: 'POST',
       success: function(res) {
         var r = res.data;
         if (r.code === 0) {
           if (r.data.length === 0) {
-            _this.setData({
-              errSee: true,
-              myError: util.errMsg.empty
-            })
+            _this.setEmpty();
             return;
           }
           _this.setData({
@@ -45,18 +42,24 @@ Page({
             errSee: false
           })
         } else {
-          _this.setData({
-            errSee: true,
-            myError: util.errMsg.error
-          })
+          _this.setErr();
         }
       },
       fail: function() {
-        _this.setData({
-          errSee: true,
-          myError: util.errMsg.error
-        })
+        _this.setErr();
       }
+    })
+  },
+  setEmpty(){
+    this.setData({
+      errSee: true,
+      myError: util.errMsg.empty
+    })
+  },
+  setErr(){
+    this.setData({
+      errSee: true,
+      myError: util.errMsg.error
     })
   },
   //事件监听

@@ -171,6 +171,7 @@ wx.myRequest = function (obj) {
   obj.complete = obj.complete || function () { }
   obj.success = obj.success || function () { }
   obj.fail = obj.fail || function () { }
+  obj.method=obj.method||'POST'
   wx.showLoading({
     title: '加载中...'
   })
@@ -178,7 +179,7 @@ wx.myRequest = function (obj) {
   var token = wx.getStorageSync('token')
   console.log('本地存储的token:', token)
   wx.request({
-    url: obj.url,
+    url: app.globalData.domain + obj.url,
     data: obj.data,
     method: obj.method,
     header: {

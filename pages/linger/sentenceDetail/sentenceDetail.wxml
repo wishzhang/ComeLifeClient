@@ -1,8 +1,12 @@
-<view class='container-y container app-content-padding'>
-  <view class='main'>
-    <text>{{sentence.content}}</text>
-  </view>
-  <view class='footer'>
-    <text>-- {{sentence.author}}</text>
+<view class='container-y app-content-padding'>
+  <view class='container-y container'>
+    <image mode='aspectFill'  class='img' 
+    src='{{sentence.picname?"https://www.zhangw.xyz/images/"+sentence.picname:defaultImg}}'></image>
+    <view class='main'>
+      <text>{{sentence.content}}</text>
+    </view>
+    <view class='footer'>
+      <text>-- {{sentence.author}}</text>
+    </view>
   </view>
 </view>

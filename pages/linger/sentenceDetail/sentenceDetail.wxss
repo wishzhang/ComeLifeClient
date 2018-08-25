@@ -1,15 +1,29 @@
 /* pages/linger/sentenceDetail/sentenceDetail.wxss */
-.container{
-  background-color:white;
+page{
+  background-color: white;
 }
 
-.main{
-  min-height: 150rpx;
+.container {
+  background-color: white;
+  box-shadow: 2rpx 4rpx 2rpx 5rpx rgba(255, 69, 0, 0.15);
+  border-radius: 8rpx;
+  padding-top: 15rpx;
+  padding-bottom: 10rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+
+.img{
   width:100%;
-  display: flex;
+  margin-bottom: 20rpx;
 }
 
-.footer{
+.main {
+  min-height: 100rpx;
+  width: 100%;
+}
+
+.footer {
   display: flex;
   justify-content: flex-end;
   height: 50rpx;
