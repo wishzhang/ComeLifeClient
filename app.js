@@ -1,8 +1,11 @@
-
+require('./common/converter/converter.js')
+const convertManager=require('./common/converter/converter-manager.js')
 App({
 
   onLaunch: function () {
-
+    convertManager.handler(convertManager.name.getSentence,'hello',function(data){
+      console.log('converted data:'+data)
+    })
   },
   //一定要先在这里定义了，才能用，否则[object Undefined]
   globalData: {
@@ -26,6 +29,9 @@ App({
     feedbackAdd: '/addFeedback',
     getOlives: '/getOlives',
     editOlive: '/editOlive',
-    addOlive: '/addOlive'
+    addOlive: '/addOlive',
+    addLike: '/addLike',
+    delLike: '/delLike',
+    getMyLikes: '/getMyLikes'
   }
 })

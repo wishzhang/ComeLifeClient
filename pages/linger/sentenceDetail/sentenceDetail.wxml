@@ -1,12 +1,20 @@
 <view class='container-y app-content-padding'>
   <view class='container-y container'>
-    <image mode='aspectFill'  class='img' 
-    src='{{sentence.picname?"https://www.zhangw.xyz/images/"+sentence.picname:defaultImg}}'></image>
-    <view class='main'>
+    <image mode='aspectFill' class='img' src='{{sentence.picname?"https://www.zhangw.xyz/images/"+sentence.picname:defaultImg}}'></image>
+    <view class='main container-y'>
       <text>{{sentence.content}}</text>
+      <text class='sentence-author'>-- {{sentence.author}}</text>
     </view>
     <view class='footer'>
-      <text>-- {{sentence.author}}</text>
+      <image wx:if='{{isLike}}' 
+      class='like-img' 
+      src='/pages/img/favorite_selected.png'
+      bindtap='tapDelLike'
+      ></image>
+       <image wx:else 
+       class='like-img' 
+       src='/pages/img/favorite_unselected.png'
+       bindtap='tapAddLike'></image>
     </view>
   </view>
 </view>

@@ -1,19 +1,7 @@
-<!--pages/linger/linger.wxml-->
 <view class="container-y">
-  <view class="row">
-    <view class="col" bindtap='turnToTalkPage'>
-      <image class="item-image" src="./talk_entry.png"></image>
-      <text>言语</text>
-    </view>
-  </view>
-  <view class='empty-line-gray'></view>
+  <view style='width:100%;height:5rpx;background-color:white;'></view>
   <!-- 句子迷 -->
   <view class="main">
-    <!-- 句子迷标题 -->
-    <view class="subtitle">
-      <text class="app-fontsize-title">句子迷</text>
-    </view>
-    <hr class="title-line" />
     <view wx:if="{{!errSee}}" class="content">
       <!-- 句子迷子项 -->
       <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}'  class='container-y'>

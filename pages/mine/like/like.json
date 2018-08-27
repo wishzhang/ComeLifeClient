@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh":true,
+  "usingComponents":{
+    "err":"../../component/errorRes/errorRes"
+  },
+  "navigationBarTitleText":"我的喜欢"
+}

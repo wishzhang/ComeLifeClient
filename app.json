@@ -6,7 +6,8 @@
     "pages/mine/setting/setting",
     "pages/mine/mine",
     "pages/linger/sentenceDetail/sentenceDetail",
-    "pages/mine/feedback/feedback"
+    "pages/mine/feedback/feedback",
+    "pages/mine/like/like"
   ],
   "window": {
     "backgroundTextStyle": "light",

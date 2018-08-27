@@ -16,7 +16,7 @@ Page({
       name: '我的投稿',
       iconPath: './contribution.png'
     },{
-      name: '我的收藏',
+      name: '我的喜欢',
       iconPath: './collection.png'
     }, {
       name: '我的设置',
@@ -44,7 +44,7 @@ Page({
     }
   },
   bindTapCollection:function(){
-    util.pageJump.toOwnPage('./collection/collection')
+    util.pageJump.toOwnPage('./like/like')
   },
   bindTapToContribution: function () {
     util.pageJump.toOwnPage('./contribution/contribution')

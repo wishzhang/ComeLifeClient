@@ -5,6 +5,7 @@
   height: 200rpx;
   box-sizing: border-box;
   background-color: white;
+  margin-bottom: 27rpx;
 }
 
 .col {
@@ -96,4 +97,10 @@
   height: 1px;
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
   margin-left: 17rpx;
+}
+
+/*view 点击效果 */
+.click-effect2{
+  color:rgba(255,69,0);
+  background-color: #00ff00;
 }

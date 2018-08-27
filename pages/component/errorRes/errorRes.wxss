@@ -1,13 +1,16 @@
 /* pages/component/errorRes/errorRes.wxss */
 
 /*empty 模板 css  */
+page{
+  background-color: white;
+}
 
 .empty-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 250rpx;
+  margin-top: 30%;
 }
 
 .empty-image {

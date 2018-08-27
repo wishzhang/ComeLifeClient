@@ -172,9 +172,9 @@ wx.myRequest = function (obj) {
   obj.success = obj.success || function () { }
   obj.fail = obj.fail || function () { }
   obj.method=obj.method||'POST'
-  wx.showLoading({
-    title: '加载中...'
-  })
+  // wx.showLoading({
+  //   title: '加载中...'
+  // })
   //没应用token
   var token = wx.getStorageSync('token')
   console.log('本地存储的token:', token)

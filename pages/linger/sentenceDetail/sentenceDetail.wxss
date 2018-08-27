@@ -23,9 +23,20 @@ page{
   width: 100%;
 }
 
+.sentence-author{
+  width:100%;
+  margin-top:30rpx;
+  text-align: right;
+}
+
 .footer {
-  display: flex;
-  justify-content: flex-end;
   height: 50rpx;
+  display: flex;
   align-items: center;
+}
+
+.like-img{
+  width:40rpx;
+  height:40rpx;
+  border-radius: 20rpx;
 }

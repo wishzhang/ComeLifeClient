@@ -76,4 +76,25 @@ page{
 /*view 点击效果 */
 .click-effect{
   background:rgba(255,69,0,0.15);
+  color:rgba(255,69,0)
+}
+
+/* 细横线 */
+.item-line {
+  width: 100%;
+  height: 1px;
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
+  margin-left: 17rpx;
+}
+
+.empty-line-gray{
+  width:100%;
+  height:27rpx;
+  background-color: #f4f4f4;
+}
+
+.empty-line{
+  width:100%;
+  height:40rpx;
+  background-color: white;
 }

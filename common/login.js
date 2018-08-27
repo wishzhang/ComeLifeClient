@@ -14,7 +14,7 @@ const util=require('../utils/util.js');
 var instance={
   showVisitorToast: function () {
     wx.showMyToast({
-      title: '您现在是游客身份哦~'
+      title: '登录失败，您现在是游客身份~'
     })
   },
   fetchUserData:function(baseinfo,fun){
