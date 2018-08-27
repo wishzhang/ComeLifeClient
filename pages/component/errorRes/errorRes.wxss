@@ -1,4 +1,28 @@
-/* pages/component/errorRes/errorRes.wxss */
+/* 全局配置 */
+/*默认字体大小  */
+ input,textarea,text{
+  font-size:30rpx;
+}
+
+.app-fontsize-title {
+  font-size: 32rpx;
+}
+
+.app-fontsize-main {
+  font-size: 30rpx;
+}
+
+.app-fontsize-note {
+  font-size: 24rpx;
+}
+
+/*字体颜色  */
+.app-fontcolor-main{
+  color:#2c2c2c
+}
+.app-fontcolor-note{
+  color:#8a8a8a
+}
 
 /*empty 模板 css  */
 page{

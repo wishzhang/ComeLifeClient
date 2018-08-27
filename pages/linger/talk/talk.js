@@ -2,19 +2,21 @@
  * 聊天界面：通过请求图灵机器人API接口实现
  * 
  */
+
 const util = require('../../../utils/util.js');
+const storage=require('../../../common/storage.js')
 const app = getApp();
 //本次是否有进行聊天内容
 let isStart=false; 
 Page({
   data: {
-    talkBgColor: util.getNavigationBarColor().colorRgb(),
+    talkBgColor: storage.getNavigationBarColor().colorRgb(),
     scrollIntoView: 'scrollToHere',
     textAreaFocus: false,
     cursorSpacing: 10,//解决键盘与textarea之间的间隔问题
     value: '', //输入框内容
     talk: [], //对话内容
-    navigateBarColor: util.getNavigationBarColor()
+    navigateBarColor: storage.getNavigationBarColor()
   },
   onLoad: function (options) {
     this.init();
@@ -27,10 +29,10 @@ Page({
     this.saveToCache();
   },
   init: function() {
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.setData({
-      navigateBarColor: util.getNavigationBarColor(),
-      talkBgColor: util.getNavigationBarColor().colorRgb()
+      navigateBarColor: storage.getNavigationBarColor(),
+      talkBgColor: storage.getNavigationBarColor().colorRgb()
     })
     this.updateFromCache();
   },
@@ -107,7 +109,7 @@ Page({
   },
   updateFromCache() {
     let self = this;
-    let talkCache = util.getCache(app.globalData.key.TALK);
+    let talkCache = storage.getTalk();
     //TODO: 提高页面流畅度，最好按需加载显示，这里采取的是只显示talk数组的后15条数据。
     talkCache = talkCache.slice(-10);
     if (talkCache) {
@@ -137,7 +139,7 @@ Page({
   },
   saveToCache() {
     if (isStart) {
-      util.setCache(app.globalData.key.TALK, this.data.talk)
+      storage.setTalk(this.data.talk)
       isStart=false;
     }
   },

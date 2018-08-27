@@ -45,26 +45,7 @@ String.prototype.colorRgb = function (opacity) {
   }
 };
 
-/**
- * 本地存取对象
- */
 
-const setCache = (name, obj) => {
-  try {
-    wx.setStorageSync(name, obj)
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-const getCache = (name) => {
-  try {
-    var obj = wx.getStorageSync(name)
-    return obj
-  } catch (e) {
-    console.log(e)
-  }
-}
 
 /**
  *  管理页面跳转
@@ -116,34 +97,6 @@ wx.showMyToast = function(obj) {
     }, obj.duration)
   }, 0);
 }
-
-
-//存储user_id
-const setUserID = user_id => {
-  wx.setStorageSync('user_id', user_id);
-}
-
-const getUserID = () => {
-  return wx.getStorageSync('user_id');
-}
-/**
- * 设置和获取当前页面的导航栏颜色
- */
-const setNavigationBarColor = () => {
-  var navigationBarColor = wx.getStorageSync('navigationBarColor');
-  if (navigationBarColor) {
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: navigationBarColor
-    })
-  } else {
-    wx.setStorageSync('navigationBarColor', '#FF4500');
-  }
-};
-const getNavigationBarColor = () => {
-  var navigationBarColor = wx.getStorageSync('navigationBarColor');
-  return navigationBarColor;
-};
 
 /**
  * 将Date对象转换成 年-月-日 时-分 字符串的格式
@@ -405,14 +358,8 @@ const errMsg = {
 module.exports = {
   jokesConvertTime,
   request,
-  setNavigationBarColor,
-  getNavigationBarColor,
   errMsg,
-  setUserID,
-  getUserID,
   formatTime,
-  setCache,
-  getCache,
   pageJump,
   formatToParams
 }

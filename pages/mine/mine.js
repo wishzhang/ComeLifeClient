@@ -1,15 +1,17 @@
-var app=getApp();
+const app=getApp();
 const util = require('../../utils/util.js');
 const login=require('../../common/login.js');
+const storage=require('../../common/storage.js')
 Page({
   init:function(){
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.setData({
-      navigationBarColor: util.getNavigationBarColor()
+      navigationBarColor: storage.getNavigationBarColor(),
+      canuse: app.globalData.canuse
     })
   },
   data: {
-    navigationBarColor: util.getNavigationBarColor(),
+    navigationBarColor: storage.getNavigationBarColor(),
     canuse:false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     items: [{
@@ -39,7 +41,7 @@ Page({
       })
     }else{
       wx.showMyToast({
-        title: '没有授权~'
+        title: '授权失败，请检查网络连接~'
       })
     }
   },
@@ -56,9 +58,6 @@ Page({
     util.pageJump.toCommonPage('./feedback/feedback')
   },
   onLoad: function(options) {
-    this.setData({
-      canuse: app.globalData.canuse
-    })
   },
   onShow:function(){
     this.init();

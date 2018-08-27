@@ -1,9 +1,10 @@
 
 const util = require('../../../utils/util.js');
-var app=getApp();
+const storage=require('../../../common/storage.js')
+const app=getApp();
 Page({
   data: {
-    navigateBarColor: util.getNavigationBarColor()
+    navigateBarColor: storage.getNavigationBarColor()
   },
 
   formSubmit:function(e){
@@ -43,9 +44,9 @@ Page({
     })
   },
   onShow: function () {
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.setData({
-      navigateBarColor: util.getNavigationBarColor()
+      navigateBarColor: storage.getNavigationBarColor()
     })
   }
 })

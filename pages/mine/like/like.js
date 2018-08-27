@@ -1,4 +1,5 @@
 const util = require('../../../utils/util.js')
+const storage=require('../../../common/storage.js')
 const app = getApp();
 
 Page({
@@ -11,7 +12,7 @@ Page({
 
   },
   onShow: function() {
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.fetchSentences();
   },
   onPullDownRefresh: function() {
@@ -30,7 +31,7 @@ Page({
     wx.myRequest({
       url: app.url.getMyLikes,
       data:{
-        user_id:util.getUserID()
+        user_id: storage.getUserID()
       },
       success: function(res) {
         var r = res.data;

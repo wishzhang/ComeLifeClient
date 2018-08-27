@@ -1,9 +1,10 @@
 
 const util = require('../../../utils/util.js');
+const storage=require('../../../common/storage.js')
 const app = getApp();
 Page({
   data: {
-    bgColor: util.getNavigationBarColor(),
+    bgColor: storage.getNavigationBarColor(),
     olives: [],
     user_id: '',
     errSee: false,
@@ -11,7 +12,7 @@ Page({
   },
   init: function () {
     this.setData({
-      bgColor: util.getNavigationBarColor()
+      bgColor: storage.getNavigationBarColor()
     })
   },
   errHandler: function() {
@@ -123,7 +124,7 @@ Page({
       user_id: app.globalData.userInfo._id
     })
     this.fetchOlives();
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
   },
   onPullDownRefresh: function() {
     this.fetchOlives();

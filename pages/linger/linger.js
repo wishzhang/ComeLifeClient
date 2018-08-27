@@ -1,6 +1,8 @@
 const util = require('../../utils/util.js')
+const storage=require('../../common/storage.js')
 const app = getApp();
 const login = require('../../common/login.js')
+
 Page({
   data: {
     errSee: false,
@@ -11,7 +13,7 @@ Page({
     login.start();
   },
   onShow: function() {
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.fetchSentences();
   },
   onPullDownRefresh: function() {

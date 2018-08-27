@@ -1,4 +1,5 @@
 const util = require('../../../utils/util.js')
+const storage=require('../../../common/storage.js')
 const app=getApp()
 Page({
   data: {
@@ -7,7 +8,7 @@ Page({
   },
   onLoad: function (options) {
     var self=this;
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
     this.setData({
       defaultImg:'../../img/default.png',
       sentence:options
@@ -28,7 +29,7 @@ Page({
     wx.myRequest({
       url:app.url.getMyLikes,
       data:{
-        user_id:util.getUserID()
+        user_id: storage.getUserID()
       },
       success(res){
         let r=res.data;
@@ -62,7 +63,7 @@ Page({
      wx.myRequest({
        url:app.url.addLike,
        data:{
-         user_id: util.getUserID(),
+         user_id: storage.getUserID(),
          sentence_id:this.data.sentence._id
        },
        success:function(res){
@@ -82,7 +83,7 @@ Page({
     wx.myRequest({
       url: app.url.delLike,
       data: {
-        user_id: util.getUserID(),
+        user_id: storage.getUserID(),
         sentence_id: this.data.sentence._id
       },
       success: function (res) {

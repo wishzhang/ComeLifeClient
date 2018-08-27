@@ -1,6 +1,6 @@
-// pages/mine/setting/setting.js
-const util = require('../../../utils/util.js');
-var app = getApp();
+
+const storage=require('../../../common/storage.js')
+const app = getApp();
 Page({
   data: {
     currentNavigationBarColor: '#303030',
@@ -100,6 +100,6 @@ Page({
     })
   },
   onShow: function() {
-    util.setNavigationBarColor();
+    storage.setNavigationBarColor();
   }
 })
