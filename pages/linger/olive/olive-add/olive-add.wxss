@@ -1,6 +1,6 @@
-/* pages/linger/olive/olive_add/olive_add.wxss */
 
-/*投稿图标  */
+
+/*底部按钮  */
 
 .publish-image {
   width: 90rpx;
@@ -21,12 +21,10 @@
   padding-bottom: 6rpx;
   padding-right: 2rpx;
 }
-
+/* 内容 */
 .olive-content {
   width: 100%;
   min-height: 250rpx;
   box-sizing: border-box;
   background-color: white;
-  word-break: break-all;
-  word-wrap: break-word;
 }

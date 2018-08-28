@@ -30,11 +30,11 @@ page{
 }
 
 .empty-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 30%;
+  padding-top: 30%;
 }
 
 .empty-image {

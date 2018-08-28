@@ -4,19 +4,19 @@ const app=getApp()
 Page({
   data: {
     isLike:false,
-    sentence:{}
+    sentence:{},
+    canuse:false
   },
   onLoad: function (options) {
     var self=this;
     storage.setNavigationBarColor();
     this.setData({
       defaultImg:'../../img/default.png',
-      sentence:options
+      sentence:options,
+      canuse: app.globalData.canuse
     },function(){
       self.getMyLikes()
     })
-
-
   },
   onReady: function () {
   

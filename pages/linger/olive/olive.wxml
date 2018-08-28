@@ -1,17 +1,19 @@
-<!--pages/linger/olive/olive.wxml-->
-
-<view wx:if="{{!errSee}}" class="container">
-  <view class='container' wx:for="{{olives}}" hover-class='click-effect' hover-start-time='{{0}}' >
-    <view  class="item" data-item="{{item}}" data-index='{{index}}' catchtap='turnToOliveEditPage'>
-      <text class="item-content">{{item.content}}</text>
+<view wx:if="{{!errSee}}" class='container-y'>
+  <!-- item -->
+  <view class='container-y' wx:for="{{olives}}">
+    <view hover-class='click-effect' class="item" data-item="{{item}}" data-index='{{index}}' catchtap='turnToOliveEditPage'>
+      <text class="item-content app-fontsize-main">{{item.content}}</text>
       <view class="item-footer">
-        <text class="item-publishTime .app-fontcolor-note">{{item.publishTime}}</text>
+        <text class="app-fontsize-note app-fontcolor-note">{{item.publishTime}}
+        </text>
       </view>
     </view>
-    <hr class="item-line" />
+    <view class="item-line" />
   </view>
 </view>
+<!-- 异常显示页面error -->
 <error wx:else binderrBtn="errHandler" err="{{myError}}"></error>
+<!-- 底部按钮 -->
 <view class="publish-image" style='background-color:{{bgColor}}'>
   <image src="./olive_edit.png" bindtap="turnToOliveAddPage" mode="scaleToFill" class="publish-image-content"></image>
 </view>

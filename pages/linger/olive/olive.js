@@ -6,11 +6,11 @@ Page({
   data: {
     bgColor: storage.getNavigationBarColor(),
     olives: [],
-    user_id: '',
     errSee: false,
     myError: {}
   },
   init: function () {
+    storage.setNavigationBarColor();
     this.setData({
       bgColor: storage.getNavigationBarColor()
     })
@@ -23,7 +23,7 @@ Page({
     var item = dataset.item;
     var olive_id = item._id;
     var oliveContent = item.content;
-    var url = './olive_edit/olive_edit?olive_id=' + olive_id + '&content=' + oliveContent;
+    var url = './olive-edit/olive-edit?olive_id=' + olive_id + '&content=' + oliveContent;
     util.pageJump.toOwnPage(url);
   },
   deleteOlive: function(e) {
@@ -68,11 +68,10 @@ Page({
     })
     var _this = this;
     wx.myRequest({
-      url: app.globalData.domain + app.globalData.api.getOlives,
+      url:app.url.getOlives,
       data: {
-        user_id: this.data.user_id
+        user_id: app.globalData.userInfo._id
       },
-      method: 'POST',
       success: function(res) {
         var r = res.data;
         if (r.code === 0) {
@@ -114,22 +113,20 @@ Page({
   },
 
   turnToOliveAddPage: function() {
-    util.pageJump.toOwnPage('olive_add/olive_add')
+    util.pageJump.toOwnPage('olive-add/olive-add')
   },
   onLoad: function(options) {
     this.init();
   },
   onShow: function() {
-    this.setData({
-      user_id: app.globalData.userInfo._id
-    })
     this.fetchOlives();
-    storage.setNavigationBarColor();
   },
   onPullDownRefresh: function() {
     this.fetchOlives();
   },
   onReachBottom: function() {
-
+    wx.showMyToast({
+      title:'拉到底啦~'
+    })
   }
 })

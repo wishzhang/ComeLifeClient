@@ -5,6 +5,10 @@
       <image class="item-image" src="./talk_entry.png"></image>
       <text>言语</text>
     </view>
+    <view class="col" bindtap='turnToOlivePage'>
+      <image class="item-image" src="./aim_entry.png"></image>
+      <text>快乐清单</text>
+    </view>
   </view>
   <view class='empty-line-gray'></view>
   <!-- 句子迷 -->
@@ -16,7 +20,7 @@
     <hr class="title-line" />
     <view wx:if="{{!errSee}}" class="content">
       <!-- 句子迷子项 -->
-      <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}'  class='container-y'>
+      <view wx:for="{{sentences}}" bindtap='tapToSentenceDetail' data-item='{{item}}' class='container-y'>
         <view class="container-y content-item ">
           <view class='item-wrap' hover-class='click-effect' hover-start-time='{{0}}'>
             <view class="container-y">

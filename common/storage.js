@@ -52,7 +52,9 @@ const getNavigationBarColor = () => {
   var navigationBarColor = getCache(key.navigationBarColor);
   return navigationBarColor;
 };
-
+/**
+ * 存取 言语 页面的聊天记录
+ */
 const setTalk=(obj)=>{
   setCache(key.talk,obj)
 }

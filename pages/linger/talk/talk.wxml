@@ -3,16 +3,16 @@
     >
     <view class='content-box-time container-y' wx:for="{{talk}}" wx:key="{{talk.time}}">
       <view class='time-container'>
-        <text class='app-fontsize-note time'>{{item.time}}</text>
+        <text selectable='{{true}}' class='app-fontsize-note time'>{{item.time}}</text>
       </view>
       <!-- 对话框 -->
       <view class="content-item-box" wx:for='{{item.contents}}' wx:key="{{item.values.text}}">
         <view class="content-item-left-box" wx:if="{{item.roleType==0}}">
           <image class="role-image" src="{{item.iconPath}}"></image>
-          <text class="role-text">{{item.values.text}}</text>
+          <text selectable='{{true}}' class="role-text">{{item.values.text}}</text>
         </view>
         <view class="content-item-right-box" wx:else>
-          <text class="role-text">{{item.values.text}}</text>
+          <text selectable='{{true}}' class="role-text">{{item.values.text}}</text>
           <image class="role-image" src="{{item.iconPath}}"></image>
         </view>
       </view>

@@ -1,15 +1,16 @@
-
 const util = require('../../../../utils/util.js');
+const storage = require('../../../../common/storage.js');
 var app = getApp();
 Page({
   data: {
-    bgColor: util.getNavigationBarColor(),
+    bgColor: storage.getNavigationBarColor(),
     oliveContent: '',
     olive_id: ''
   },
   init: function () {
+    storage.setNavigationBarColor()
     this.setData({
-      bgColor: util.getNavigationBarColor()
+      bgColor: storage.getNavigationBarColor()
     })
   },
   relateData: function(e) {
@@ -23,26 +24,28 @@ Page({
   postData: function() {
     if (!this.data.oliveContent.trim()) {
       wx.showMyToast({
-        title: '请写点啥~'
+        title: '请记录下让你开心的事情^_^'
       })
       return;
     }
     wx.myRequest({
-      url: app.globalData.domain + app.globalData.api.editOlive,
-      data: this.data,
-      method: 'POST',
+      url:  app.url.editOlive,
+      data:{
+        oliveContent: this.data.oliveContent,
+        olive_id: this.data.olive_id
+      },
       success: function(res) {
         if (res.data.code === 0) {
           wx.navigateBack();
         } else if (res.data.code === 1) {
           wx.showMyToast({
-            title: '失败，服务器出错~'
+            title: '添加失败，服务器内部出错~'
           })
         }
       },
       fail: function() {
         wx.showToast({
-          title: '失败，服务器出错~'
+          title: '添加失败，请检查网络连接~'
         })
       }
     })
@@ -53,8 +56,5 @@ Page({
       olive_id: options.olive_id,
       oliveContent: options.content
     })
-  },
-  onShow: function() {
-    util.setNavigationBarColor();
   }
 })

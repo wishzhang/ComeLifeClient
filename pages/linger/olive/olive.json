@@ -3,5 +3,5 @@
   "usingComponents": {
     "error": "../../component/errorRes/errorRes"
   },
-  "navigationBarTitleText": "青果"
+  "navigationBarTitleText": "快乐清单"
 }

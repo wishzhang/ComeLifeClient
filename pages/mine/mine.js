@@ -41,7 +41,7 @@ Page({
       })
     }else{
       wx.showMyToast({
-        title: '授权失败，请检查网络连接~'
+        title: '授权失败~'
       })
     }
   },

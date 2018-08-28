@@ -1,12 +1,3 @@
-/* pages/linger/olive/olive.wxss */
-
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-}
 
 .item {
   width: 100%;
@@ -17,11 +8,18 @@
   padding-left: 27rpx;
   padding-right: 27rpx;
   padding-bottom: 15rpx;
-  background-color: white;
 }
 
 .item-content {
-  padding: 25rpx 0;
+  width:100%;
+  margin-bottom: 25rpx;
+  box-sizing: border-box;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .item-footer{
@@ -35,7 +33,7 @@
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgba(138, 138, 138, 1));
 }
 
-/*投稿图标  */
+/*底部按钮  */
 .publish-image {
   width: 90rpx;
   height: 90rpx;
