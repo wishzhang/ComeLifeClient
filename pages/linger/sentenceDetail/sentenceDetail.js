@@ -8,6 +8,7 @@ Page({
     canuse:false
   },
   onLoad: function (options) {
+    this.showShareMenu();
     var self=this;
     storage.setNavigationBarColor();
     this.setData({
@@ -22,7 +23,12 @@ Page({
   
   },
   onShow: function () {
-  
+
+  },
+  showShareMenu(){
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
   getMyLikes(){
     var self=this;
@@ -96,6 +102,12 @@ Page({
           })
         }
       }
+    })
+  },
+  bindError(e){
+    console.log(e)
+    wx.showMyToast({
+      title:'转发失败，请检查网络连接~'
     })
   }
 })

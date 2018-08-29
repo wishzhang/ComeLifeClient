@@ -1,6 +1,6 @@
 <view class="container-col">
   <textarea class="olive-content app-content-padding" value="{{oliveContent}}" placeholder="记录下开心的事情^_^" maxlength='{{2000}}' auto-focus="{{true}}" auto-height="{{true}}" bindinput="relateData" bindconfirm="postData"></textarea>
-  <view  class="publish-image" style='background-color:{{bgColor}}'>
-    <image class="publish-image-content"  src="./oliveEdit_success.png" bindtap="fetchData" ></image>
+  <view  class="publish-image" style='background-color:{{bgColor}}' bindtap="fetchData">
+    <image class="publish-image-content"  src="./oliveEdit_success.png"  ></image>
   </view>
 </view>

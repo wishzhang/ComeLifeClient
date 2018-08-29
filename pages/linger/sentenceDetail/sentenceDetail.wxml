@@ -5,17 +5,18 @@
       <text selectable='{{true}}'>{{sentence.content}}</text>
       <text selectable='{{true}}' class='sentence-author'>-- {{sentence.author}}</text>
     </view>
-    <!-- 图片‘心’ -->
-    <view class='footer' wx:if='{{canuse}}'>
-      <image wx:if='{{isLike}}' 
-      class='like-img' 
-      src='/pages/img/favorite_selected.png'
-      bindtap='tapDelLike'
-      ></image>
-       <image wx:else 
-       class='like-img' 
-       src='/pages/img/favorite_unselected.png'
-       bindtap='tapAddLike'></image>
+    <!-- footer -->
+    <view class='footer'>
+      <!-- 喜欢 -->
+      <block wx:if='{{canuse}}'>
+        <image wx:if='{{isLike}}' class='footer-img' src='/pages/img/favorite_selected.png' bindtap='tapDelLike'></image>
+        <image wx:else class='footer-img' src='/pages/img/favorite_unselected.png' bindtap='tapAddLike'></image>
+      </block>
+      <!-- 转发 -->
+      <button hover-class='transmit-hoverclass' class='transmit-btn' open-type="share"
+      binderror='bindError'>
+        <image class='transmit-img' src='/pages/img/transmit.png'></image>
+      </button>
     </view>
   </view>
 </view>

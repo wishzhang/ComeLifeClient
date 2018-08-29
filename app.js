@@ -10,6 +10,9 @@ App({
         console.log(res.limitSize+'KB')
       }
     })
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
   onShow:function(){
   },
