@@ -60,22 +60,19 @@ Page({
   },
   updateYourTalk:function () {
     let that=this;
-    wx.myRequest({
-      url: app.url.talk,
-      data: {
-        text: this.data.value
-      },
-      method:'POST',
-      success: function (res) {
-        let r = res.data;
-        if (r.code === 0) {
-          let value = r.data.results[0].values.text;
-          that.setYourTalk(value);
-        } else if (r.code === 1) {
-          wx.showMyToast({
-            title: '服务器内部出错'
-          })
-        }
+    app.req.getTalk({
+      text: this.data.value
+    },function(err,r){
+      if(err){
+        return;
+      }
+      if (r.code === 0) {
+        let value = r.data.results[0].values.text;
+        that.setYourTalk(value);
+      } else if (r.code === 1) {
+        wx.showMyToast({
+          title: '服务器内部出错'
+        })
       }
     })
   },

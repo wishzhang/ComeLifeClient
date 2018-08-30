@@ -117,45 +117,6 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-/**
- * 优先使用wx.myRequest，而不是wx.request
- */
-wx.myRequest = function (obj) {
-  obj.complete = obj.complete || function () { }
-  obj.success = obj.success || function () { }
-  obj.fail = obj.fail || function () { }
-  obj.method=obj.method||'POST'
-  // wx.showLoading({
-  //   title: '加载中...'
-  // })
-  //没应用token
-  var token = wx.getStorageSync('token')
-  console.log('本地存储的token:', token)
-  wx.request({
-    url: app.globalData.domain + obj.url,
-    data: obj.data,
-    method: obj.method,
-    header: {
-      token: token
-    },
-    success: function (res) {
-      wx.setStorageSync('token', res.header.token)
-      obj.success(res)
-    },
-    fail: function () {
-      wx.showMyToast({
-        title: '连接服务器出错~'
-      })
-      obj.fail()
-    },
-    complete: function () {
-      wx.hideLoading()
-      wx.stopPullDownRefresh()
-      obj.complete()
-    }
-  })
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**

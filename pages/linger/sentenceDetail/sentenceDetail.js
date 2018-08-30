@@ -16,7 +16,7 @@ Page({
       sentence:options,
       canuse: app.globalData.canuse
     },function(){
-      self.getMyLikes()
+      self.initLike()
     })
   },
   onReady: function () {
@@ -30,22 +30,20 @@ Page({
       withShareTicket: true
     })
   },
-  getMyLikes(){
+  initLike(){
     var self=this;
-    wx.myRequest({
-      url:app.url.getMyLikes,
-      data:{
-        user_id: storage.getUserID()
-      },
-      success(res){
-        let r=res.data;
-        if(r.code===0){
-          let likes=r.data.likes;
-          let isLike = self.hasValueOfKey(likes, '_id', self.data.sentence._id)
-          self.setData({
-            isLike:isLike
-          })
-        }
+    app.req.getLike({
+      user_id: storage.getUserID()
+    },function(err,r){
+      if(err){
+        return;
+      }
+      if (r.code === 0) {
+        let likes = r.data.likes;
+        let isLike = self.hasValueOfKey(likes, '_id', self.data.sentence._id)
+        self.setData({
+          isLike: isLike
+        })
       }
     })
   },
@@ -66,41 +64,34 @@ Page({
   //监听事件
   tapAddLike(e){
     let self=this;
-     wx.myRequest({
-       url:app.url.addLike,
-       data:{
-         user_id: storage.getUserID(),
-         sentence_id:this.data.sentence._id
-       },
-       success:function(res){
-         let r=res.data;
-         if(r.code===0){
-           self.switchIsLike();
-         }else{
-           wx.showMyToast({
-             title:'添加出错'
-           })
-         }
-       }
-     })
+    app.req.addLike({
+      user_id: storage.getUserID(),
+      sentence_id: this.data.sentence._id
+    },function(err,r){
+      if(err){
+        return;
+      }
+      if (r.code === 0) {
+        self.switchIsLike();
+      } else {
+        wx.showMyToast({
+          title: '添加出错'
+        })
+      }
+    })
   },
   tapDelLike(){
     let self=this;
-    wx.myRequest({
-      url: app.url.delLike,
-      data: {
-        user_id: storage.getUserID(),
-        sentence_id: this.data.sentence._id
-      },
-      success: function (res) {
-        let r = res.data;
-        if (r.code === 0) {
-          self.switchIsLike();
-        }else{
-          wx.showMyToast({
-            title: '删除出错'
-          })
-        }
+    app.req.delLike({
+      user_id: storage.getUserID(),
+      sentence_id: this.data.sentence._id
+    },function(err,r){
+      if (r.code === 0) {
+        self.switchIsLike();
+      } else {
+        wx.showMyToast({
+          title: '删除出错'
+        })
       }
     })
   },

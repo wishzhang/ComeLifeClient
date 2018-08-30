@@ -67,35 +67,32 @@ Page({
       errSee: false
     })
     var _this = this;
-    wx.myRequest({
-      url:app.url.getOlives,
-      data: {
-        user_id: app.globalData.userInfo._id
-      },
-      success: function(res) {
-        var r = res.data;
-        if (r.code === 0) {
-          if (r.data.length === 0) {
-            _this.setData({
-              errSee: true,
-              myError: util.errMsg.empty
-            })
-            return;
-          }
-          _this.dataHandler(r.data);
-          r.data = util.jokesConvertTime(r.data);
-          _this.setData({
-            errSee: false,
-            olives: r.data
-          })
-        } else if (r.code === 1) {
+
+    app.req.getOlive({
+      user_id: app.globalData.userInfo._id
+    },function(err,r){
+      if(err){
+        _this.setData({
+          errSee: true,
+          myError: util.errMsg.error
+        })
+        return;
+      }
+      if (r.code === 0) {
+        if (r.data.length === 0) {
           _this.setData({
             errSee: true,
-            myError: util.errMsg.error
+            myError: util.errMsg.empty
           })
+          return;
         }
-      },
-      fail: function() {
+        _this.dataHandler(r.data);
+        r.data = util.jokesConvertTime(r.data);
+        _this.setData({
+          errSee: false,
+          olives: r.data
+        })
+      } else if (r.code === 1) {
         _this.setData({
           errSee: true,
           myError: util.errMsg.error

@@ -29,25 +29,21 @@ Page({
     _this.setData({
       errSee: false
     })
-    wx.myRequest({
-      url: app.url.lingerSentence,
-      method: 'POST',
-      success: function(res) {
-        var r = res.data;
-        if (r.code === 0) {
-          if (r.data.length === 0) {
-            _this.setEmpty();
-            return;
-          }
-          _this.setData({
-            sentences: r.data,
-            errSee: false
-          })
-        } else {
-          _this.setErr();
+    app.req.getLingerSentence({},function(err,r){
+      if(err){
+        _this.setErr()
+        return
+      }
+      if (r.code === 0) {
+        if (r.data.length === 0) {
+          _this.setEmpty();
+          return;
         }
-      },
-      fail: function() {
+        _this.setData({
+          sentences: r.data,
+          errSee: false
+        })
+      } else {
         _this.setErr();
       }
     })

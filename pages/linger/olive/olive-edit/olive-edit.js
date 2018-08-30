@@ -28,24 +28,22 @@ Page({
       })
       return;
     }
-    wx.myRequest({
-      url:  app.url.editOlive,
-      data:{
-        oliveContent: this.data.oliveContent,
-        olive_id: this.data.olive_id
-      },
-      success: function(res) {
-        if (res.data.code === 0) {
-          wx.navigateBack();
-        } else if (res.data.code === 1) {
-          wx.showMyToast({
-            title: '添加失败，服务器内部出错~'
-          })
-        }
-      },
-      fail: function() {
-        wx.showToast({
+
+    app.req.editOlive({
+      oliveContent: this.data.oliveContent,
+      olive_id: this.data.olive_id
+    },function(err,r){
+      if(err){
+        wx.showMyToast({
           title: '添加失败，请检查网络连接~'
+        })
+        return;
+      }
+      if (r.code === 0) {
+        wx.navigateBack();
+      } else if (r.code === 1) {
+        wx.showMyToast({
+          title: '添加失败，服务器内部出错~'
         })
       }
     })

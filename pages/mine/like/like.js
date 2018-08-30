@@ -1,5 +1,5 @@
 const util = require('../../../utils/util.js')
-const storage=require('../../../common/storage.js')
+const storage = require('../../../common/storage.js')
 const app = getApp();
 
 Page({
@@ -28,38 +28,35 @@ Page({
     _this.setData({
       errSee: false
     })
-    wx.myRequest({
-      url: app.url.getMyLikes,
-      data:{
-        user_id: storage.getUserID()
-      },
-      success: function(res) {
-        var r = res.data;
-        if (r.code === 0) {
-          if (r.data.likes.length === 0) {
-            _this.setEmpty();
-            return;
-          }
-          _this.setData({
-            sentences: r.data.likes,
-            errSee: false
-          })
-        } else {
-          _this.setErr();
+
+    app.req.getLike({
+      user_id: storage.getUserID()
+    }, function(err, r) {
+      if (err) {
+        _this.setErr();
+        return;
+      }
+      if (r.code === 0) {
+        if (r.data.likes.length === 0) {
+          _this.setEmpty();
+          return;
         }
-      },
-      fail: function() {
+        _this.setData({
+          sentences: r.data.likes,
+          errSee: false
+        })
+      } else {
         _this.setErr();
       }
     })
   },
-  setEmpty(){
+  setEmpty() {
     this.setData({
       errSee: true,
       myError: util.errMsg.empty
     })
   },
-  setErr(){
+  setErr() {
     this.setData({
       errSee: true,
       myError: util.errMsg.error

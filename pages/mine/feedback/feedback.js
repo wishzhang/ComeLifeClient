@@ -16,30 +16,23 @@ Page({
       })
       return;
     }
-    wx.myRequest({
-      url:app.url.feedbackAdd,
-      data:data,
-      method:'POST',
-      success:function(res){
-        var r=res.data;
-        if(r.code===0){
-          wx.showMyToast({
-            title:'提交成功',
-            icon:'success'
-          })
-        }else if(r.code===1){
-          wx.showToast({
-            title: '提交失败~'
-          })
-        }
-      },
-      fail:function(){
+
+    app.req.addFeedback(data,function(err,r){
+      if(err){
         wx.showMyToast({
           title: '提交失败~'
         })
-      },
-      complete:function(){
-
+        return;
+      }
+      if (r.code === 0) {
+        wx.showMyToast({
+          title: '提交成功',
+          icon: 'success'
+        })
+      } else if (r.code === 1) {
+        wx.showMyToast({
+          title: '提交失败~'
+        })
       }
     })
   },
