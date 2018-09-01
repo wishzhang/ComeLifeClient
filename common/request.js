@@ -9,6 +9,8 @@
  *    console.dir(res)
  * })
  */
+const convertManager = require('./converter/converter-manager.js')
+
 const host ='https://www.zhangw.xyz'
 const url = {
   talk: '/talk',
@@ -32,7 +34,7 @@ wx.myRequest = function (obj) {
   //   title: '加载中...'
   // })
   //没应用token
-  var token = wx.getStorageSync('token')
+  let token = wx.getStorageSync('token')
   console.log('本地存储的token:', token)
   wx.request({
     url: host + obj.url,
@@ -82,12 +84,14 @@ const login=function(data,fun){
 /**
  * 句子迷
  */
-const getLingerSentence=function(data,fun){
+const getLingerSentence=function(data={},fun){
   wx.myRequest({
     url: url.lingerSentence,
-    data:data||{},
+    data:data,
     success: function (res) {
-      fun(null,res.data);
+      convertManager.handler(convertManager.name.getSentence, res.data, function (data) {
+        fun(null, data);
+      })
     },
     fail:function(res){
       fun(res,null)

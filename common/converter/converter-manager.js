@@ -1,14 +1,16 @@
 /**
  * 
- * 使转换器和处理器解耦
+ * 使转换器和处理器解耦:
  * 
+ * const convertManager=require('./converter-manager.js')
+ *
  * 添加转换器
- * ConverterManager.addConverter('name',function(data){
+ * convertManager.addConverter('name',function(data){
  *  //处理原data
  * })
  * 
  * 调用处理器（处理转换后的数据）
- * ConverterManager.handler('name',preData,function(data){
+ * convertManager.handler('name',preData,function(data){
  * 
  * })
  */
