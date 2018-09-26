@@ -47,11 +47,12 @@ wx.myRequest = function (obj) {
       wx.setStorageSync('token', res.header.token)
       obj.success(res)
     },
-    fail: function () {
+    fail: function (res) {
+      console.log('fail:' + JSON.stringify(res))
       wx.showMyToast({
         title: '连接服务器出错~'
       })
-      obj.fail()
+      obj.fail(res)
     },
     complete: function () {
       wx.hideLoading()

@@ -1,7 +1,0 @@
-<!--pages/mine/jokeAdd/jokeAdd.wxml-->
-<view class="container-col app-content-padding">
-  <textarea class="joke-content" value="{{jokeContent}}" placeholder="分享你的啥,300字以内哈" maxlength="300" auto-focus="true" auto-height="true" bindinput="relateData" bindconfirm="postData"></textarea>
-  <view  class="publish-image" >
-    <image class="publish-image-content"  src="./jokeAdd_success.png" bindtap="fetchData" ></image>
-  </view>
-</view>

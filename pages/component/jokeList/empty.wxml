@@ -1,6 +1,0 @@
-<template name="empty">
-  <view class="empty-container">
-    <image class="empty-image" src="../../img/sorry.png" mode="aspectFit"></image>
-    <text class="app-fontcolor-main app-fontsize-main">{{warn.warnMsg}}</text>
-  </view>
-</template>

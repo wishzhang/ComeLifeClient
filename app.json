@@ -7,10 +7,7 @@
     "pages/mine/mine",
     "pages/linger/sentenceDetail/sentenceDetail",
     "pages/mine/feedback/feedback",
-    "pages/mine/like/like",
-    "pages/linger/olive/olive",
-    "pages/linger/olive/olive-add/olive-add",
-    "pages/linger/olive/olive-edit/olive-edit"
+    "pages/mine/like/like"
   ],
   "window": {
     "backgroundTextStyle": "light",

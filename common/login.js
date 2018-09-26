@@ -31,6 +31,7 @@ let instance = {
 
     app.req.login(app.globalData.userInfo, function(err, r) {
       if (err) {
+        console.log('error:'+err)
         that.showVisitorToast();
         return;
       }
@@ -38,7 +39,7 @@ let instance = {
         app.globalData.userInfo = r.data[0];
         app.globalData.canuse = true;
         storage.setUserID(app.globalData.userInfo._id);
-        fun.call(that, 1);
+        fun.call(that, r);
       } else {
         that.showVisitorToast();
       }

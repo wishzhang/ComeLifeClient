@@ -1,6 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "joke": "../../component/jokeList/jokeList"
-  }
-}
