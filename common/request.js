@@ -11,7 +11,8 @@
  */
 const convertManager = require('./converter/converter-manager.js')
 
-const host ='https://www.zhangw.xyz'
+//const host ='https://www.zhangw.xyz'
+const host = 'http://localhost:3000'
 const url = {
   talk: '/talk',
   login: '/oneUserJoke',
