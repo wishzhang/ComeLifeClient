@@ -1,0 +1,96 @@
+/* 白色容器 */
+.container {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 50rpx 45rpx 80rpx;
+  background-clip: content-box;
+}
+
+/* 容器内边缘 */
+.container-wrapper{
+  position: relative;
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+  padding: 20rpx 27rpx 30rpx 35rpx;
+  border-radius: 10rpx;
+  background-color: white;
+  box-shadow: 4rpx 5rpx 3rpx 7rpx rgba(255,69,0,0.3);
+}
+/* 笑话容器 */
+.container-main {
+  width:100%;
+  height:calc(100% - 80rpx);
+  padding-bottom: 20rpx;
+  overflow: auto;
+  line-height: 1.3em;
+  transition:all 2s;
+}
+/* 笑话文本 */
+.content{
+  opacity:1;
+  transition:all 2s;
+}
+
+/* 底部 */
+.container-footer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 30rpx;
+  width: calc(100% - 62rpx);
+  height:80rpx;
+}
+
+.container-footer .next-button {
+  margin: 0;
+  background-color: rgb(253, 73, 7);
+  color:white;
+  font-weight: bold;
+  border: none;
+  transition: all 0.8s;
+}
+
+button[size=mini] {
+  padding: 0 30rpx;
+}
+
+.next-button-hover-class{
+  background-color: rgba(255,69,0,0.3) !important;
+  font-weight: formal !important;
+}
+
+/* 转发按钮 */
+.transmit-btn{
+  width:45rpx;
+  height:45rpx;
+  box-sizing: content-box;
+  display: flex;
+  text-align: left;
+  line-height: 45rpx;
+  padding-left: 0;
+  padding-right: 40rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  margin: 0;
+  border-radius: 0;
+  font-size:30rpx;
+  background-color: white;
+  color:white;
+}
+
+.transmit-btn::after {
+  border: 0; 
+}
+
+.transmit-img{
+  width:45rpx;
+  height:45rpx;
+}
+
+
+

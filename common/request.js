@@ -26,10 +26,10 @@ const url = {
   getMyLikes: '/getMyLikes'
 }
 //统一网络请求接口
-wx.myRequest = function (obj) {
-  obj.complete = obj.complete || function () { }
-  obj.success = obj.success || function () { }
-  obj.fail = obj.fail || function () { }
+wx.myRequest = function(obj) {
+  obj.complete = obj.complete || function() {}
+  obj.success = obj.success || function() {}
+  obj.fail = obj.fail || function() {}
   obj.method = obj.method || 'POST'
   // wx.showLoading({
   //   title: '加载中...'
@@ -44,18 +44,18 @@ wx.myRequest = function (obj) {
     header: {
       token: token
     },
-    success: function (res) {
+    success: function(res) {
       wx.setStorageSync('token', res.header.token)
       obj.success(res)
     },
-    fail: function (res) {
+    fail: function(res) {
       console.log('fail:' + JSON.stringify(res))
       wx.showMyToast({
         title: '连接服务器出错~'
       })
       obj.fail(res)
     },
-    complete: function () {
+    complete: function() {
       wx.hideLoading()
       wx.stopPullDownRefresh()
       obj.complete()
@@ -66,17 +66,17 @@ wx.myRequest = function (obj) {
 /**
  * 登录
  */
-const login=function(data,fun){
+const login = function(data, fun) {
   wx.myRequest({
-    url:url.login,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
+    url: url.login,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     },
-    complete: function () {
+    complete: function() {
       const app = getApp();
       console.log('user data:' + JSON.stringify(app.globalData.userInfo));
     }
@@ -86,17 +86,17 @@ const login=function(data,fun){
 /**
  * 句子迷
  */
-const getLingerSentence=function(data={},fun){
+const getLingerSentence = function(data = {}, fun) {
   wx.myRequest({
     url: url.lingerSentence,
-    data:data,
-    success: function (res) {
-      convertManager.handler(convertManager.name.getSentence, res.data, function (data) {
+    data: data,
+    success: function(res) {
+      convertManager.handler(convertManager.name.getSentence, res.data, function(data) {
         fun(null, data);
       })
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     }
   })
 }
@@ -105,15 +105,15 @@ const getLingerSentence=function(data={},fun){
  * 言语
  */
 
-const getTalk=function(data,fun){
+const getTalk = function(data, fun) {
   wx.myRequest({
     url: url.talk,
-    data:data,
-    success: function (res) {
-      fun(null,res.data)
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     }
   })
 }
@@ -121,40 +121,40 @@ const getTalk=function(data,fun){
 /**
  * 快乐清单
  */
-const getOlive=function(data,fun){
+const getOlive = function(data, fun) {
   wx.myRequest({
     url: url.getOlives,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
-    },
-    fail:function(res){
-      fun(res,null)
-    }
-  })
-}
-
-const addOlive = function (data, fun) {
-  wx.myRequest({
-    url: url.addOlive,
     data: data,
-    success: function (res) {
+    success: function(res) {
       fun(null, res.data)
     },
-    fail: function (res) {
+    fail: function(res) {
       fun(res, null)
     }
   })
 }
 
-const editOlive = function (data, fun) {
+const addOlive = function(data, fun) {
+  wx.myRequest({
+    url: url.addOlive,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
+    },
+    fail: function(res) {
+      fun(res, null)
+    }
+  })
+}
+
+const editOlive = function(data, fun) {
   wx.myRequest({
     url: url.editOlive,
     data: data,
-    success: function (res) {
+    success: function(res) {
       fun(null, res.data)
     },
-    fail: function (res) {
+    fail: function(res) {
       fun(res, null)
     }
   })
@@ -163,41 +163,41 @@ const editOlive = function (data, fun) {
 /**
  * 我的喜欢
  */
-const getLike=function(data,fun){
+const getLike = function(data, fun) {
   wx.myRequest({
-    url:url.getMyLikes,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
+    url: url.getMyLikes,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     }
   })
 }
 
-const addLike=function(data,fun){
+const addLike = function(data, fun) {
   wx.myRequest({
-    url:url.addLike,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
+    url: url.addLike,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     }
   })
 }
 
-const delLike=function(data,fun){
+const delLike = function(data, fun) {
   wx.myRequest({
-    url:url.delLike,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
+    url: url.delLike,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
     }
   })
 }
@@ -205,21 +205,51 @@ const delLike=function(data,fun){
 /**
  * 留言与反馈
  */
-const addFeedback=function(data,fun){
+const addFeedback = function(data, fun) {
   wx.myRequest({
-    url:url.feedbackAdd,
-    data:data,
-    success:function(res){
-      fun(null,res.data)
+    url: url.feedbackAdd,
+    data: data,
+    success: function(res) {
+      fun(null, res.data)
     },
-    fail:function(res){
-      fun(res,null)
+    fail: function(res) {
+      fun(res, null)
+    }
+  })
+}
+
+/**
+ * 聚合数据笑话大全
+ * data url:
+ * page=2&pagesize=10&sort=asc&time=1418745237
+ */
+const getJoke = function(data, fun) {
+  wx.showLoading({
+    title: '  笑一笑 (^_^) '
+  })
+  wx.request({
+    url:'https://v.juhe.cn/joke/content/list.php?key=c34dc142be52df15f0a32b2b1cc50597&',
+    data: data,
+    method: 'GET',
+    success: function(res) {
+      fun(null, res.data)
+    },
+    fail: function(res) {
+      console.log('fail:' + JSON.stringify(res))
+      wx.showMyToast({
+        title: '连接服务器出错~'
+      })
+      fun(res.data, null)
+    },
+    complete: function() {
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
     }
   })
 }
 
 
-module.exports={
+module.exports = {
   login,
   getLingerSentence,
   getTalk,
@@ -229,6 +259,6 @@ module.exports={
   getLike,
   addLike,
   delLike,
-  addFeedback
+  addFeedback,
+  getJoke
 }
-

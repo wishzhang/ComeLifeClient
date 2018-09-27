@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/joke/joke",
     "pages/linger/linger",
     "pages/linger/talk/talk",
     "pages/component/errorRes/errorRes",
